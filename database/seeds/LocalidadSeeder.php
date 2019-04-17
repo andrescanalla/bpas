@@ -77,17 +77,17 @@ class LocalidadSeeder extends Seeder
         factory(App\Localidad::class)->create([
             'nombre' => 'Armstrong',
             'departamento_id' => 3,
-            'municipalidad' => true
+            'municipio' => true
         ]);
         factory(App\Localidad::class)->create([
             'nombre' => 'Las Parejas',
             'departamento_id' => 3,
-            'municipalidad' => true
+            'municipio' => true
         ]);
         factory(App\Localidad::class)->create([
             'nombre' => 'Las Rosas',
             'departamento_id' => 3,
-            'municipalidad' => true
+            'municipio' => true
         ]);
         factory(App\Localidad::class)->create([
             'nombre' => 'Bouquet',
