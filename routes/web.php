@@ -17,6 +17,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('dashboard','DashboardController');
     Route::resource('visitas','VisitaController');
     Route::resource('localidades','LocalidadController');
+    Route::resource('departamentos','DepartamentoController');
 });
 
 Auth::routes();

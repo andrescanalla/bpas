@@ -112,7 +112,9 @@ class DashboardController extends Controller
 
      
      $today=Carbon::now();    
-     $todo=Visita::Todo( Carbon::now()->subDays(15), Carbon::now()->addDays(15) )->get();
+     $todo=Visita::Todo(15, 20)->get();
+     $actualizacion=$this->importEvent(Carbon::now()->subDays(20), Carbon::now()->addDays(20));
+     
      
      return view("dashboard.index", compact('chartjs1','chartjs2'), [
         "presentacion"=>$presentacion, 
@@ -129,14 +131,18 @@ class DashboardController extends Controller
     
     }
 
-    public function importEvent()
+    public function importEvent($desde, $hasta)
     {  
-        $start=new Carbon('01-10-2018');        
-        $end=new Carbon('13-04-2019');
+        $start=new Carbon($desde);        
+        $end=new Carbon($hasta);
         $events=Event::get($start, $end);
         $count=0;
+        $ac=0;
         foreach ($events as $event) {
             $queryEvent=Visita::FindByCalendarId($event->id)->first();
+            $eventUpdate=new Carbon($event->updated);
+            $eventUpdate=$eventUpdate->toDateTimeString();
+            
             if(!$queryEvent){
                           
                 $visita=new Visita;
@@ -192,7 +198,8 @@ class DashboardController extends Controller
                     $visita->localidad_id=1;                             
                 }
                 $visita->fecha=$event->start->date;
-                $visita->comentarios = $event->summary;    
+                $visita->comentarios = $event->description;
+                $visita->calendar_update = $eventUpdate;    
                 $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
                 if(!$queryTipoVisita) {
                     $visita->tipo_visita_id=5;
@@ -205,6 +212,75 @@ class DashboardController extends Controller
                 $count=++$count;
                 
                 
+            }
+            else{
+                $queryUpdate=Visita::FindByCalendarId($event->id)->where('calendar_update', $eventUpdate)->first();
+                if (!$queryUpdate) {
+                    $visita=$queryEvent;
+                    $calendarSummary=explode('-',trim($event->summary));                
+                    $calendarImplementadorSummary=trim($calendarSummary[0]);
+                    if(count($calendarSummary)>1){
+                        $calendarTipoSummary=trim($calendarSummary[1]);
+                    }
+                    else{
+                        $calendarTipoSummary='nada';             
+                    }                
+                    if(count($calendarSummary)>2){
+                    $calendarLocalidadSummary=trim($calendarSummary[2]);
+                    }
+                    else{
+                        $calendarLocalidadSummary='nada';
+                    }                
+                    $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();
+                    
+                    
+                    if($queryImplementador){
+                        $visita->implementador_id=$queryImplementador->id;
+                        $queryLocalidadSummary=Localidad::FindByNombre($calendarLocalidadSummary)->first();
+                        if(!$queryLocalidadSummary && !$event->location){                        
+                            $localidad=new Localidad;
+                            $localidad->departamento_id=$queryImplementador->departamento_id;
+                            $localidad->nombre=$calendarLocalidadSummary;
+                            $localidad->save();
+                            $visita->localidad_id=$localidad->id;
+                        }
+                        if(!$queryLocalidadSummary && $event->location){  
+                            $calendarLocalidad=explode(',' , $event->location)[0];                          
+                            $queryLocalidad=Localidad::FindByNombre($calendarLocalidad)->first();
+                            if(!$queryLocalidad){
+                                $localidad=new Localidad;
+                                $localidad->departamento_id=$queryImplementador->departamento_id;
+                                $localidad->nombre=$calendarLocalidad;
+                                $localidad->save();
+                                $visita->localidad_id=$localidad->id;
+                            }                    
+                            else{
+                            $visita->localidad_id=$queryLocalidad->id;
+                            }
+                        }
+                        if($queryLocalidadSummary){
+                            $visita->localidad_id=$queryLocalidadSummary->id;
+                        }
+
+                    }
+                    else{
+                        $visita->implementador_id=1; 
+                        $visita->localidad_id=1;                             
+                    }
+                    $visita->fecha=$event->start->date;
+                    $visita->comentarios = $event->description;
+                    $visita->calendar_update = $eventUpdate;    
+                    $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
+                    if(!$queryTipoVisita) {
+                        $visita->tipo_visita_id=5;
+                    }
+                    else{
+                        $visita->tipo_visita_id=$queryTipoVisita->id;
+                    }               
+                     
+                    $visita->save();
+                    $ac=++$ac;
+                }
             }
 
 

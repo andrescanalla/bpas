@@ -21,7 +21,8 @@ class Visita extends Model
       'localidad_id',
       'tipo_visita_id',
       'fecha',
-      'comentarios',      
+      'comentarios',
+      'calendar_update'      
     ];
 
     protected $guarded = [];
@@ -66,8 +67,9 @@ class Visita extends Model
         ->leftjoin('localidades','visitas.localidad_id','=','localidades.id')
         ->leftjoin('tipo_visitas','visitas.tipo_visita_id','=','tipo_visitas.id')
         ->select('visitas.id','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'implementadores.id as idImplementador', 'implementadores.nombre as nombreImplementador', 'tipo_visitas.id as idTipoVisita' , 'tipo_visitas.nombre as nombreTipoVisita' , 'fecha', 'comentarios')        
-        ->where('fecha','>',$desde)
-        ->where('fecha','<',$hasta);
+        ->where('fecha','>',Carbon::now()->subDays($desde))
+        ->where('fecha','<',Carbon::now()->addDays($hasta))
+        ->orderBy('fecha','desc');
         
         
 

@@ -24,6 +24,7 @@ class CreateVisitasTable extends Migration
             $table->foreign('tipo_visita_id')->references('id')->on('tipo_visitas');            
             $table->date('fecha');
             $table->text('comentarios')->nullable();
+            $table->date('calendar_update')->nullable();
             $table->timestamps();
         });
     }
