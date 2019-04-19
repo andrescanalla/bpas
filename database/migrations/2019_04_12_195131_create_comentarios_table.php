@@ -16,6 +16,13 @@ class CreateComentariosTable extends Migration
         Schema::create('comentarios', function (Blueprint $table) {
             $table->increments('id');
             $table->text('comentarios');
+            $table->date('fecha');
+            $table->boolean('inicial')->default(false);
+            $table->boolean('ordenanza')->default(false);
+            $table->boolean('veedor')->default(false);
+            $table->boolean('problema')->default(false);            
+            $table->integer('sin_apliccion')->default(0);         
+            $table->integer('apliccion_controlada')->default(0);
             $table->unsignedInteger('localidad_id');
             $table->foreign('localidad_id')->references('id')->on('localidades');
             $table->timestamps();
