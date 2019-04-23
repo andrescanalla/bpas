@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Localidad;
 use App\Departamento;
+use App\Visita;
+use Carbon\Carbon;
+use App\Comentario;
+
 
 class LocalidadController extends Controller
 {
@@ -18,11 +22,24 @@ class LocalidadController extends Controller
         if ($request)
        {
            $query=trim($request->get('searchText'));
-           $localidades=Localidad::SearchText($query)->paginate(12); 
-           $departamentos=Departamento::get();          
+           $localidades=Localidad::SearchText($query)->first();            
+           if(!$localidades){
+               $localidades=new Localidad;
+               $localidades->nombreLocalidad="La localidad $query no existe";
+           };
+           $visitas=Visita::SearchText($localidades->nombreLocalidad)->get();
+          
+           $info=Comentario::FindByLocalidad($localidades->nombreLocalidad)->first();
+           if(!$info) {
+               $info=new Comentario;
+           }
+              
+           $today=Carbon::now();
+             
+           
            
             
-            return view('localidades.index',["localidades"=>$localidades,"departamentos"=>$departamentos,"searchText"=>$query]);
+            return view('localidades.index',["info"=>$info,"localidades"=>$localidades,"visitas"=>$visitas,"searchText"=>$query,'today'=>$today]);
         }
     }
 

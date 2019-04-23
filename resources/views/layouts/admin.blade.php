@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}"> 
 
+    <link rel="icon" href="{{asset('img/logo.png')}}">
+
     <!-- Datatable -->
     <!-- <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}"> -->
     
@@ -49,7 +51,7 @@
         <!-- Logo -->
         <a href="./dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><img src="./img/cor.png" style="margin-top:-5px ;width: 25px; height: 30px"></span>
+          <span class="logo-mini"><img src="./img/logo.png" style="margin-top:-5px ;width: 25px; height: 20px"></span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg">Programa<b> Bpas</b></span>
         </a>

@@ -57,8 +57,9 @@ class Localidad extends Model
     }
     public function scopeSearchText($query, $nombre){
       
-        return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')         
-          ->select('localidades.id','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'departamentos.id as idDepartamento',  'municipio', 'presentacion','entrevista','informe')        
+        return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
+          ->leftjoin('implementadores','departamentos.id','=','implementadores.departamento_id')               
+          ->select('localidades.id','implementadores.nombre as nombreImplementador','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'departamentos.id as idDepartamento',  'municipio', 'presentacion','entrevista','informe')        
           ->where('departamentos.nombre','LIKE','%'.$nombre.'%')
           ->orwhere('localidades.nombre','LIKE','%'.$nombre.'%');
           

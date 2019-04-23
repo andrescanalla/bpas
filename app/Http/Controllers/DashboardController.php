@@ -19,116 +19,113 @@ use App\TipoVisita;
 
 class DashboardController extends Controller
 {
-   public function index(Request $request)
-   {
-     $presentacion=Localidad::CountTotal('presentacion')->count();
-     $belgrano=Localidad::CountDepartamento('Belgrano','presentacion')->count();
-     $constitucion=Localidad::CountDepartamento('Constitucion','presentacion')->count();
-     $lopez=Localidad::CountDepartamento('General Lopez','presentacion')->count();
-     $rosario=Localidad::CountDepartamento('Rosario','presentacion')->count();
-     $san=Localidad::CountDepartamento('San Lorenzo','presentacion')->count();
-     $iriondo=Localidad::CountDepartamento('Iriondo','presentacion')->count();
-     $caseros=Localidad::CountDepartamento('Caseros','presentacion')->count();
-    
-     $chartjs1 = app()->chartjs
-        ->name('lineChartTest')
-        ->type('line')
-        ->size(['width' => 400, 'height' => 266])
-        ->labels(Dashboard::mesLabel())
-        ->datasets([            
-            [
-                "label" => "Presentacion",
-                'backgroundColor' => 'rgba(255, 206, 86, 0.2)',
-                'borderColor' => "rgba(255, 206, 86, 0.2)",
-                "pointBorderColor" => "rgba(255, 206, 86, 0.2)",
-                "pointBackgroundColor" => "rgba(255, 206, 86, 0.2)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => Dashboard::CountTipoVisitaTotal('presentacion programa'),
-            ],
-            [
-                "label" => "Entrevista.",     
-                'backgroundColor' => 'rgba(255, 206, 86, 0.5)',
-                'borderColor' => "rgba(255, 206, 86, 0.5)",
-                "pointBorderColor" => "rgba(255, 206, 86, 0.5)",
-                "pointBackgroundColor" => "rgba(255, 206, 86, 0.5)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",           
-                'data' => Dashboard::CountTipoVisitaTotal('entrevista'),
-            ],
-            [
-                "label" => "Informe", 
-                'backgroundColor' => 'rgba(255, 206, 86, 0.8)',
-                'borderColor' => "rgba(255, 206, 86, 0.8)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",               
-                'data' => Dashboard::CountTipoVisitaTotal('informe'),
-            ]            
-        ])
-        ->options(["title"=>["display"=>true,"text"=>"Acumulado"],"legend"=>["position"=>"bottom"]]);       
+    public function index(Request $request){
+        $actualizacion=$this->importEvent(Carbon::now()->subDays(20), Carbon::now()->addDays(20));
+        $presentacion=Localidad::CountTotal('presentacion')->count();
+        $belgrano=Localidad::CountDepartamento('Belgrano','presentacion')->count();
+        $constitucion=Localidad::CountDepartamento('Constitucion','presentacion')->count();
+        $lopez=Localidad::CountDepartamento('General Lopez','presentacion')->count();
+        $rosario=Localidad::CountDepartamento('Rosario','presentacion')->count();
+        $san=Localidad::CountDepartamento('San Lorenzo','presentacion')->count();
+        $iriondo=Localidad::CountDepartamento('Iriondo','presentacion')->count();
+        $caseros=Localidad::CountDepartamento('Caseros','presentacion')->count();
+        
+        $chartjs1 = app()->chartjs
+            ->name('lineChartTest')
+            ->type('line')
+            ->size(['width' => 400, 'height' => 266])
+            ->labels(Dashboard::mesLabel())
+            ->datasets([            
+                [
+                    "label" => "Presentaciones",
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.2)',
+                    'borderColor' => "rgba(255, 206, 86, 0.2)",
+                    "pointBorderColor" => "rgba(255, 206, 86, 0.2)",
+                    "pointBackgroundColor" => "rgba(255, 206, 86, 0.2)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => Dashboard::CountTipoVisitaTotal('presentacion programa'),
+                ],
+                [
+                    "label" => "Entrevistas",     
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.5)',
+                    'borderColor' => "rgba(255, 206, 86, 0.5)",
+                    "pointBorderColor" => "rgba(255, 206, 86, 0.5)",
+                    "pointBackgroundColor" => "rgba(255, 206, 86, 0.5)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",           
+                    'data' => Dashboard::CountTipoVisitaTotal('entrevista'),
+                ],
+                [
+                    "label" => "Informes", 
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.8)',
+                    'borderColor' => "rgba(255, 206, 86, 0.8)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",               
+                    'data' => Dashboard::CountTipoVisitaTotal('informe'),
+                ]            
+            ])
+            ->options(["title"=>["display"=>true,"text"=>"Acumulado"],"legend"=>["position"=>"bottom"]]);       
 
-     $chartjs2 = app()->chartjs
-         ->name('barChartTest')
-         ->type('bar')
-         ->size(['width' => 400, 'height' => 286])
-         ->labels(Dashboard::mesLabel())
-         ->datasets([  
-            [
-                "label" => "Pres.",
-                'backgroundColor' => 'rgba(255, 206, 86, 0.2)',                 
-                'data' => Dashboard::CountTipoVisita('presentacion programa'),
-                'borderColor'=> 'rgba(255, 206, 86, 1)',
-                'borderWidth'=> 1
-            ], 
-            [
-                "label" => "Entrev.",
-                'backgroundColor' => 'rgba(255, 206, 86, 0.5)',
-                'data' => Dashboard::CountTipoVisita('entrevista'),
-                'borderColor'=> 'rgba(255, 206, 86, 1)',
-                'borderWidth'=> 1
+        $chartjs2 = app()->chartjs
+            ->name('barChartTest')
+            ->type('bar')
+            ->size(['width' => 400, 'height' => 286])
+            ->labels(Dashboard::mesLabel())
+            ->datasets([  
+                [
+                    "label" => "Pres.",
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.2)',                 
+                    'data' => Dashboard::CountTipoVisita('presentacion programa'),
+                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderWidth'=> 1
+                ], 
+                [
+                    "label" => "Entrev.",
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.5)',
+                    'data' => Dashboard::CountTipoVisita('entrevista'),
+                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderWidth'=> 1
 
-             ],
-             [
-                "label" => "Inf.",
-                'backgroundColor' =>"rgba(255, 206, 86, 0.8)",
-                'data' => Dashboard::CountTipoVisita('informe'),
-                'borderColor'=> 'rgba(255, 206, 86, 1)',
-                'borderWidth'=> 1
+                ],
+                [
+                    "label" => "Inf.",
+                    'backgroundColor' =>"rgba(255, 206, 86, 0.8)",
+                    'data' => Dashboard::CountTipoVisita('informe'),
+                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderWidth'=> 1
 
-             ],        
-             [
-                 "label" => "Otro",
-                 'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                 'data' => Dashboard::CountTipoVisita('otro'),
-                 'borderColor'=> 'rgba(255, 206, 86, 1)',
-                 'borderWidth'=> 1
+                ],        
+                [
+                    "label" => "Otro",
+                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                    'data' => Dashboard::CountTipoVisita('otro'),
+                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderWidth'=> 1
 
-             ]             
-             
-         ])
-         ->options(["title"=>["display"=>true,"text"=>"Mensual"],"legend"=>["position"=>"bottom"]]);
+                ]             
+                
+            ])
+            ->options(["title"=>["display"=>true,"text"=>"Mensual"],"legend"=>["position"=>"bottom"]]);
 
-     
-     $today=Carbon::now();    
-     $todo=Visita::Todo(15, 20)->get();
-     $actualizacion=$this->importEvent(Carbon::now()->subDays(20), Carbon::now()->addDays(20));
-     
-     
-     return view("dashboard.index", compact('chartjs1','chartjs2'), [
-        "presentacion"=>$presentacion, 
-        'belgrano'=>$belgrano,
-        'constitucion'=>$constitucion,
-        'lopez'=>$lopez,
-        'rosario'=>$rosario,
-        'san'=>$san,
-        'caseros'=>$caseros,
-        'iriondo'=>$iriondo,
-        'todo'=>$todo,
-        'today'=>$today
-    ]);
-    
+        
+        $today=Carbon::now();    
+        $todo=Visita::Todo(15, 20)->get();     
+        
+        return view("dashboard.index", compact('chartjs1','chartjs2'), [
+            "presentacion"=>$presentacion, 
+            'belgrano'=>$belgrano,
+            'constitucion'=>$constitucion,
+            'lopez'=>$lopez,
+            'rosario'=>$rosario,
+            'san'=>$san,
+            'caseros'=>$caseros,
+            'iriondo'=>$iriondo,
+            'todo'=>$todo,
+            'today'=>$today
+            ]);    
     }
 
     public function importEvent($desde, $hasta)
