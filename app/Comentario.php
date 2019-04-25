@@ -16,13 +16,7 @@ class Comentario extends Model
     protected $fillable = [
       'comentarios',  
       'localidad_id',  
-      'fecha',
-      'inicial',
-      'ordenanza',
-      'veedor',
-      'problema',            
-      'sin_apliccion',         
-      'apliccion_controlada',             
+      'fecha_comentario',                
     ];
 
     protected $guarded = [];
@@ -33,9 +27,9 @@ class Comentario extends Model
       
     }
 
-    public function scopeFindByLocalidad($query, $localidad){
+    public function scopeFindByIdLocalidad($query, $id){
       return $query->leftjoin('localidades','comentarios.localidad_id','=','localidades.id')         
-          ->where("localidades.nombre", $localidad);
+          ->where("localidad_id", $id);
           
           
   }

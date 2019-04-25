@@ -30,4 +30,8 @@ class Departamento extends Model
         return $this->hasMany(Implementador::class);
     }
 
+    public function scopeFindDepartamentos($query){
+        return $this;
+    }
+
 }

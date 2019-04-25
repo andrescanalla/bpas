@@ -36,9 +36,9 @@
                 @php $nx++;@endphp
                 @if ($to->idTipoVisita=="1")                 
                   @if($to->fecha < $today) 
-                  <tr class="danger text-muted">
+                  <tr class="success text-muted">
                   @else
-                  <tr class="danger">
+                  <tr class="success">
                   @endif 
                   
                 @elseif ($to->idTipoVisita=="2"||$to->idTipoVisita=="3") 
@@ -62,7 +62,7 @@
                   @endif
                   
                 @endif            
-                  <td class="container-fluid">{{\app\Dashboard::fechain($to->fecha)}}</td>
+                  <td class="container-fluid">{{$to->fecha->format('d/m/y')}}</td>
                   <td> {{$to->nombreImplementador}} - {{$to->nombreLocalidad}} - {{$to->nombreTipoVisita}} </td>                  
                   <td><button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i></td>
                 </tr>

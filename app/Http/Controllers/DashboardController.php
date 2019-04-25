@@ -124,6 +124,7 @@ class DashboardController extends Controller
             'caseros'=>$caseros,
             'iriondo'=>$iriondo,
             'todo'=>$todo,
+            'searchText'=>'',
             'today'=>$today
             ]);    
     }

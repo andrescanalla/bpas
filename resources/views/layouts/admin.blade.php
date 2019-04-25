@@ -49,9 +49,9 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="./dashboard" class="logo">
+        <a href="/bpas/public/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><img src="./img/logo.png" style="margin-top:-5px ;width: 25px; height: 20px"></span>
+          <span class="logo-mini"><img src="/bpas/public/img/logo.png" style="margin-top:-5px ;width: 25px; height: 20px"></span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg">Programa<b> Bpas</b></span>
         </a>
@@ -83,23 +83,23 @@
           <ul class="sidebar-menu" >            
               <li class="treeview">
                   <a href="./visitas">
-                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i> <span>Visitas</span>
+                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i> <span>Listado</span>
                     <i class="fa fa-angle-left pull-right"></i>
                   </a>     
                   <ul class="treeview-menu">
-                      <li><a href="./visitas"><i class="fa fa-circle-o"></i> Listado de Visitas</a></li>  
-                      <li><a href="./localidades/"><i class="fa fa-circle-o"></i> Buscar Localidad</a></li>                  
+                      <li><a href="/bpas/public/visitas"><i class="fa fa-circle-o"></i>Visitas</a></li>  
+                      <li><a href="/bpas/public/localidades"><i class="fa fa-circle-o"></i> Localidades</a></li>                  
                     </ul>         
                 </li>
     
             <li class="treeview">
-              <a href="/stock/stock">
+              <a href="/bpas/public/departamentos">
                 <i class="fa fa-globe" aria-hidden="true"></i>
-                <span>Departamentos</span>                
+                <span>Departamentos</span>   </a>             
                 <i class="fa fa-angle-left pull-right"></i>
                 
                 
-              </a>
+              
               <ul class="treeview-menu">
                  <li><a href="/departamentos/belgrano"><i class="fa fa-circle-o"></i> Belgrano</a></li>
                 <li><a href="/departamentos/caseros"><i class="fa fa-circle-o"></i> Caseros</a></li>

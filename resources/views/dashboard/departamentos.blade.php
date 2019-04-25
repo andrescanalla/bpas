@@ -1,16 +1,14 @@
 <div class="row">
-    <div class="panel panel-info" style="min-height:100px;margin-bottom:15px;">
+    <div class="panel panel-default" style="min-height:100px;margin-bottom:15px;">
           <div class="panel-heading">
-            <div class="row">
-                <a href="/stock/stock">
+            <div class="row">                
                   <div class="col-lg-10 col-md-4 col-sm-4 col-xs-12">
                       Presentacion Progrma 
                       <i class="fa fa-tag pull-right" style="padding-top:4px; padding-right:35px"></i>
                   </div>
                   <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
                       <span class="badge pull-right">{{$presentacion}}/121 Localidades</span>
-                  </div>
-                </a>
+                  </div>               
               </div>
           </div>
           <div class="panel-body">

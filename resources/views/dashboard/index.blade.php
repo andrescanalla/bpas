@@ -5,24 +5,15 @@
 
 @endpush
 @section ('titulo')  
-<div class="col-lg-6 col-md-4 col-sm-4 col-xs-12" style="margin-top: -3px">
-<span>Dashboard</span>
- </div>  
- 
- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 " style="margin-top: -3px">
-   <span class="pull-right" style="font-size: 22px">Facebook</span>
-</div>
-
-<h4>
- <div class="col-lg-1 col-md-4 col-sm-4 col-xs-12 " style="margin-top: 4px">
-   <span style="margin-left: 20px"><i class="fa fa-envelope-o"></i>        </span>
-   <span class="badge" style="margin-top: -3px; margin-left: 8px" id="mensajes">{{number_format(0,0,',','.')}}</span>
+<div class="col-lg-9 col-md-4 col-sm-4 col-xs-12">
+Dashboard
 </div>  
-<div class="col-lg-1 col-md-4 col-sm-4 col-xs-12 " style="margin-top: 4px">
-  <span><i class="fa fa-thumbs-up"></i></span> 
-  <span class="pull-right" id="likes">{{number_format(0,0,',','.')}}</span>           
- </div>
- </h4>
+
+<div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-top:5px">        
+    @include('dashboard.search')      
+</div>
+ 
+ 
 @endsection
 @section ('contenido')
 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -30,7 +21,7 @@
 </div>    
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
   <div class="row">
-    <div class="panel panel-success" style="margin-left:15px;margin-bottom:0px">
+    <div class="panel panel-default" style="margin-left:15px;margin-bottom:0px">
       <div class="panel-heading">Visitas Localidades<i class="fa fa-bar-chart pull-right" style="padding-top:4px"></i></div>
       <div class="panel-body"> 
        {!! $chartjs1->render() !!} 
@@ -350,7 +341,7 @@ $(document).ready(function() {
         height: "parent",
         googleCalendarApiKey:'AIzaSyDIqw1eIQ6AxMukLC2PNp8tVKL8XmRdiPQ',
         header: {
-           left: 'entrega,retira,myCustomButton prev,next',
+           left: ' prev,next',
            center: 'title',
            right: 'month,agendaWeek,agendaDay'
          },
@@ -381,6 +372,8 @@ $(document).ready(function() {
             googleCalendarId: 'a-w-a.com.ar_mcfdvpi4cj4733b5ka5bh3eiss@group.calendar.google.com',
             className: 'nice-event',        
             editable: true,
+            color: '#d9edf7',
+            textColor: '#31708f',
             startEditable: true,
             endEditable: true,
             durationEditable: true,
@@ -388,7 +381,7 @@ $(document).ready(function() {
             {
             googleCalendarId: 'pasquinelli@a-w-a.com.ar', 
             className: 'nice-event', 
-            color: 'green',
+            color: '#fcf8e3',
             textColor:'black',
             editable: true,
             startEditable: true,

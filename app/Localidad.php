@@ -59,9 +59,19 @@ class Localidad extends Model
       
         return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
           ->leftjoin('implementadores','departamentos.id','=','implementadores.departamento_id')               
-          ->select('localidades.id','implementadores.nombre as nombreImplementador','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'departamentos.id as idDepartamento',  'municipio', 'presentacion','entrevista','informe')        
+          ->select('localidades.id','implementadores.nombre as nombreImplementador','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'departamentos.id as idDepartamento',  'municipio', 'presentacion','entrevista','informe', 'ordenanza','fecha_info','veedor','problema','sin_aplicacion','aplicacion_controlada')        
           ->where('departamentos.nombre','LIKE','%'.$nombre.'%')
           ->orwhere('localidades.nombre','LIKE','%'.$nombre.'%');
+          
+          
+  
+      }
+      public function scopeFindById($query, $id){
+      
+        return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
+          ->leftjoin('implementadores','departamentos.id','=','implementadores.departamento_id')               
+          ->select('localidades.id','implementadores.nombre as nombreImplementador','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'departamentos.id as idDepartamento',  'municipio', 'presentacion','entrevista','informe', 'ordenanza','fecha_info','veedor','problema','sin_aplicacion','aplicacion_controlada')                  
+          ->where('localidades.id',$id);
           
           
   

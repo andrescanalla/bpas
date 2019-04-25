@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Localidad;
 use App\Departamento;
@@ -22,24 +23,10 @@ class LocalidadController extends Controller
         if ($request)
        {
            $query=trim($request->get('searchText'));
-           $localidades=Localidad::SearchText($query)->first();            
-           if(!$localidades){
-               $localidades=new Localidad;
-               $localidades->nombreLocalidad="La localidad $query no existe";
-           };
-           $visitas=Visita::SearchText($localidades->nombreLocalidad)->get();
-          
-           $info=Comentario::FindByLocalidad($localidades->nombreLocalidad)->first();
-           if(!$info) {
-               $info=new Comentario;
-           }
-              
-           $today=Carbon::now();
-             
-           
+           $localidades=Localidad::SearchText($query)->get();   
            
             
-            return view('localidades.index',["info"=>$info,"localidades"=>$localidades,"visitas"=>$visitas,"searchText"=>$query,'today'=>$today]);
+            return view('localidades.index',["localidades"=>$localidades,"searchText"=>$query]);
         }
     }
 
@@ -70,9 +57,45 @@ class LocalidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        //
+        if ($request)
+        {
+            $query=trim($request->get('searchText'));
+            if(!empty($query)){
+                $localidad=Localidad::SearchText($query)->first();            
+                if(!$localidad){
+                    $localidad=new Localidad;
+                    $localidad->nombreLocalidad="La localidad $query no existe";
+                };
+                
+            }
+            else{
+                $localidad=Localidad::FindById($id)->first();
+            }
+           
+            $visitas=Visita::FindByIdLocalidad($localidad->id)->get(); 
+            if($visitas->count()==0) {
+                $visita=new Visita;                               
+                $visita->fecha=Carbon::now();
+                $visita->nombreTipoVisita='Sin Visitas';             
+                $visitas=collect([$visita]);
+            }           
+            $comentarios=Comentario::FindByIdLocalidad($localidad->id)->get();
+            if($comentarios->count()==0) {
+                $comentario=new Comentario;                
+                $comentario->comentarios='Sin Comentarios';
+                $comentario->fecha_comentario=Carbon::now()->format('d/m/y');
+                $comentarios=collect([$comentario]);
+            }
+               
+            $today=Carbon::now();
+              
+           
+          
+             
+             return view('localidades.show',["comentarios"=>$comentarios,"localidad"=>$localidad,"visitas"=>$visitas,"searchText"=>$query,'today'=>$today]);
+         }
     }
 
     /**
