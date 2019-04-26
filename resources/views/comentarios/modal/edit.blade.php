@@ -1,0 +1,37 @@
+<div class="modal fade" id="modal-edit{{$ne}}" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    {!!Form::open(['method'=>'PATCH','action'=>['ComentarioController@update', $comentario->id],'autocomplete'=>'off'])!!}
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#F3EA5D">          
+          <h3 class="modal-title" style="text-align: center">Editar Comentario en {{$localidad->nombreLocalidad}}</h3>
+        </div>      
+        <div class="modal-body">       
+          <div class="row">
+            <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
+              <div class="form-group">
+                <label>Fecha:</label>
+                <input type="text" name="fecha_comentario" required  value="{{$comentario->fecha_comentario->format('d/m/Y')}}" class="form-control" placeholder="Fecha ...">
+                <input type="hidden" name="searchText" value="{{$searchText}}" class="form-control">
+                <input type="hidden" name="id" value="{{$localidad->id}}" class="form-control">                                                                 
+              </div>
+            </div>
+            
+            
+           
+          
+            </div>
+            <div class="row">
+            <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
+            <label>Comentarios</label>
+                <textarea type="text" name="comentarios" class="form-control" placeholder="cometarios ...">{{$comentario->comentarios}}</textarea>                                                        
+            </div>
+            </div>
+        </div>
+        <div class="modal-footer" >                                
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>               
+      </div>
+    {!!Form::close()!!}    
+  </div>
+</div>

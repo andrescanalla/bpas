@@ -33,7 +33,7 @@
         @php $n++;@endphp        
         <tr>
           <td>{{$visita->id}}
-          <td>{{$visita->fecha}}</td>
+          <td>{{$visita->fecha->format('d/m/Y')}}</td>
           <td>{{$visita->nombreDepartamento}}</td>
           <td>{{$visita->nombreImplementador}}</td>
           <td>{{$visita->nombreLocalidad}}</td>

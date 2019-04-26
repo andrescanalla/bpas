@@ -158,10 +158,17 @@ class DashboardController extends Controller
                 }
                 else{
                     $calendarLocalidadSummary='nada';
-                }                
-                $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();
+                }
                 
-                
+                $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
+                if(!$queryTipoVisita) {
+                    $visita->tipo_visita_id=5;
+                }
+                else{
+                    $visita->tipo_visita_id=$queryTipoVisita->id;
+                }  
+
+                $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();                
                 if($queryImplementador){
                     $visita->implementador_id=$queryImplementador->id;
                     $queryLocalidadSummary=Localidad::FindByNombre($calendarLocalidadSummary)->first();
@@ -169,6 +176,18 @@ class DashboardController extends Controller
                         $localidad=new Localidad;
                         $localidad->departamento_id=$queryImplementador->departamento_id;
                         $localidad->nombre=$calendarLocalidadSummary;
+                        if($visita->tipo_visita_id==1){
+                            $localidad->presentacion=1;
+                        }
+                        if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                            $localidad->presentacion=1;
+                            $localidad->entrevista=1;
+                        }
+                        if($visita->tipo_visita_id==4){
+                            $localidad->presentacion=1;
+                            $localidad->entrevista=1;
+                            $localidad->informe=1;
+                        }
                         $localidad->save();
                         $visita->localidad_id=$localidad->id;
                     }
@@ -179,15 +198,57 @@ class DashboardController extends Controller
                             $localidad=new Localidad;
                             $localidad->departamento_id=$queryImplementador->departamento_id;
                             $localidad->nombre=$calendarLocalidad;
+                            if($visita->tipo_visita_id==1){
+                                $localidad->presentacion=1;
+                            }
+                            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                                $localidad->presentacion=1;
+                                $localidad->entrevista=1;
+                            }
+                            if($visita->tipo_visita_id==4){
+                                $localidad->presentacion=1;
+                                $localidad->entrevista=1;
+                                $localidad->informe=1;
+                            }
                             $localidad->save();
                             $visita->localidad_id=$localidad->id;
                         }                    
                         else{
-                        $visita->localidad_id=$queryLocalidad->id;
+                            $visita->localidad_id=$queryLocalidad->id;
+                            if($visita->tipo_visita_id==1){
+                                $queryLocalidad->presentacion=1;
+                                $queryLocalidad->save();
+                            }
+                            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                                $queryLocalidad->presentacion=1;
+                                $queryLocalidad->entrevista=1;
+                                $queryLocalidad->save();
+                            }
+                            if($visita->tipo_visita_id==4){
+                                $queryLocalidad->presentacion=1;
+                                $queryLocalidad->entrevista=1;
+                                $queryLocalidad->informe=1;
+                                $queryLocalidad->save();
+                            }
                         }
                     }
                     if($queryLocalidadSummary){
                         $visita->localidad_id=$queryLocalidadSummary->id;
+                        if($visita->tipo_visita_id==1){
+                            $queryLocalidadSummary->presentacion=1;
+                            $queryLocalidadSummary->save();
+                        }
+                        if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                            $queryLocalidadSummary->presentacion=1;
+                            $queryLocalidadSummary->entrevista=1;
+                            $queryLocalidadSummary->save();
+                        }
+                        if($visita->tipo_visita_id==4){
+                            $queryLocalidadSummary->presentacion=1;
+                            $queryLocalidadSummary->entrevista=1;
+                            $queryLocalidadSummary->informe=1;
+                            $queryLocalidadSummary->save();
+                        }
                     }
 
                 }
@@ -198,13 +259,7 @@ class DashboardController extends Controller
                 $visita->fecha=$event->start->date;
                 $visita->comentarios = $event->description;
                 $visita->calendar_update = $eventUpdate;    
-                $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
-                if(!$queryTipoVisita) {
-                    $visita->tipo_visita_id=5;
-                }
-                else{
-                    $visita->tipo_visita_id=$queryTipoVisita->id;
-                }               
+                             
                                                       
                 $visita->save();
                 $count=++$count;
@@ -228,17 +283,38 @@ class DashboardController extends Controller
                     }
                     else{
                         $calendarLocalidadSummary='nada';
-                    }                
-                    $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();
-                    
-                    
+                    }
+
+                    $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
+                    if(!$queryTipoVisita) {
+                        $visita->tipo_visita_id=5;
+                    }
+                    else{
+                        $visita->tipo_visita_id=$queryTipoVisita->id;
+                    } 
+
+                    $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();                    
                     if($queryImplementador){
                         $visita->implementador_id=$queryImplementador->id;
+
                         $queryLocalidadSummary=Localidad::FindByNombre($calendarLocalidadSummary)->first();
                         if(!$queryLocalidadSummary && !$event->location){                        
                             $localidad=new Localidad;
                             $localidad->departamento_id=$queryImplementador->departamento_id;
                             $localidad->nombre=$calendarLocalidadSummary;
+                            $localidad->save();
+                            if($visita->tipo_visita_id==1){
+                                $localidad->presentacion=1;
+                            }
+                            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                                $localidad->presentacion=1;
+                                $localidad->entrevista=1;
+                            }
+                            if($visita->tipo_visita_id==4){
+                                $localidad->presentacion=1;
+                                $localidad->entrevista=1;
+                                $localidad->informe=1;
+                            }
                             $localidad->save();
                             $visita->localidad_id=$localidad->id;
                         }
@@ -250,14 +326,57 @@ class DashboardController extends Controller
                                 $localidad->departamento_id=$queryImplementador->departamento_id;
                                 $localidad->nombre=$calendarLocalidad;
                                 $localidad->save();
+                                if($visita->tipo_visita_id==1){
+                                    $localidad->presentacion=1;
+                                }
+                                if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                                    $localidad->presentacion=1;
+                                    $localidad->entrevista=1;
+                                }
+                                if($visita->tipo_visita_id==4){
+                                    $localidad->presentacion=1;
+                                    $localidad->entrevista=1;
+                                    $localidad->informe=1;
+                                }
+                                $localidad->save();
                                 $visita->localidad_id=$localidad->id;
                             }                    
                             else{
-                            $visita->localidad_id=$queryLocalidad->id;
+                                $visita->localidad_id=$queryLocalidad->id;
+                                if($visita->tipo_visita_id==1){
+                                    $queryLocalidad->presentacion=1;
+                                    $queryLocalidad->save();
+                                }
+                                if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                                    $queryLocalidad->presentacion=1;
+                                    $queryLocalidad->entrevista=1;
+                                    $queryLocalidad->save();
+                                }
+                                if($visita->tipo_visita_id==4){
+                                    $queryLocalidad->presentacion=1;
+                                    $queryLocalidad->entrevista=1;
+                                    $queryLocalidad->informe=1;
+                                    $queryLocalidad->save();
+                                }
                             }
                         }
                         if($queryLocalidadSummary){
                             $visita->localidad_id=$queryLocalidadSummary->id;
+                            if($visita->tipo_visita_id==1){
+                                $queryLocalidadSummary->presentacion=1;
+                                $queryLocalidadSummary->save();
+                            }
+                            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                                $queryLocalidadSummary->presentacion=1;
+                                $queryLocalidadSummary->entrevista=1;
+                                $queryLocalidadSummary->save();
+                            }
+                            if($visita->tipo_visita_id==4){
+                                $queryLocalidadSummary->presentacion=1;
+                                $queryLocalidadSummary->entrevista=1;
+                                $queryLocalidadSummary->informe=1;
+                                $queryLocalidadSummary->save();
+                            }
                         }
 
                     }
@@ -268,13 +387,7 @@ class DashboardController extends Controller
                     $visita->fecha=$event->start->date;
                     $visita->comentarios = $event->description;
                     $visita->calendar_update = $eventUpdate;    
-                    $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
-                    if(!$queryTipoVisita) {
-                        $visita->tipo_visita_id=5;
-                    }
-                    else{
-                        $visita->tipo_visita_id=$queryTipoVisita->id;
-                    }               
+                             
                      
                     $visita->save();
                     $ac=++$ac;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Localidad;
 use App\Departamento;
@@ -85,14 +86,14 @@ class LocalidadController extends Controller
             if($comentarios->count()==0) {
                 $comentario=new Comentario;                
                 $comentario->comentarios='Sin Comentarios';
-                $comentario->fecha_comentario=Carbon::now()->format('d/m/y');
+                $comentario->fecha_comentario=Carbon::now();
                 $comentarios=collect([$comentario]);
             }
                
             $today=Carbon::now();
               
-           
           
+            
              
              return view('localidades.show',["comentarios"=>$comentarios,"localidad"=>$localidad,"visitas"=>$visitas,"searchText"=>$query,'today'=>$today]);
          }
@@ -118,7 +119,18 @@ class LocalidadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $localidad=Localidad::findOrfail($id);
+        $searchText=$request->get('searchText');
+        $localidad->fecha_info=Carbon::createFromFormat('d/m/Y', $request->get('fecha_info'));
+        $localidad->ordenanza=$request->get('ordenanza');
+        $localidad->veedor=$request->get('veedor');
+        $localidad->problema=$request->get('problema');
+        $localidad->sin_aplicacion=$request->get('sin_aplicacion');
+        $localidad->aplicacion_controlada=$request->get('aplicacion_controlada');
+        $localidad->save();
+        $url="localidades/$id?searchText=$searchText";
+        
+    	return Redirect::to($url);
     }
 
     /**

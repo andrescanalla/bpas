@@ -20,9 +20,17 @@ class Localidad extends Model
       'presentacion',
       'entrevista',
       'informe',
+      'fecha_info',
+      'veedor',
+      'ordenanza',
+      'problema',
+      'sin_aplicacion',
+      'aplicacion_controlada'
     ];
 
     protected $guarded = [];
+
+    protected $dates = ['created_at', 'updated_at', 'fecha_info'];
 
     public function departamento() {
 

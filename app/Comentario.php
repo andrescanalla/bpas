@@ -21,6 +21,8 @@ class Comentario extends Model
 
     protected $guarded = [];
 
+    protected $dates = ['created_at', 'updated_at', 'fecha_comentario'];
+
     public function localidad() {
 
       return $this->belongsTo(Localidad::class);
@@ -28,7 +30,8 @@ class Comentario extends Model
     }
 
     public function scopeFindByIdLocalidad($query, $id){
-      return $query->leftjoin('localidades','comentarios.localidad_id','=','localidades.id')         
+      return $query->leftjoin('localidades','comentarios.localidad_id','=','localidades.id')
+          ->select('comentarios.id', 'comentarios', 'fecha_comentario', 'localidad_id')         
           ->where("localidad_id", $id);
           
           

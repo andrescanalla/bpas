@@ -18,6 +18,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('visitas','VisitaController');
     Route::resource('localidades','LocalidadController');
     Route::resource('departamentos','DepartamentoController');
+    Route::resource('comentarios','ComentarioController');
 });
 
 Auth::routes();

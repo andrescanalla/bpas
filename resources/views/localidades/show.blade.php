@@ -14,7 +14,14 @@
 
 @endsection
 
-@section ('contenido')   
+@section ('contenido') 
+<!-- Start modal Edit localidad --> 
+@include('localidades.modal.edit') 
+<!-- End modal Edit localidad-->
+
+<!-- Start modal Create comentarios-->
+@include('comentarios.modal.create') 
+<!-- End modal create comentarios-->
 <div class="row">
   <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
     <div class="row">
@@ -22,8 +29,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                 Informacion Localidad
-                <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
-                <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal" style="padding-top:0;padding-bottom:0"><i class="fa fa-address-book" aria-hidden="true"></i>
+                <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
+                <button class="btn btn-link pull-right" data-toggle="modal" data-target="#Modal" style="padding-top:0;padding-bottom:0"><i class="fa fa-address-book" aria-hidden="true"></i>
                 </div>
                 <div class="panel-body">
                 <div class="row" style="margin-bottom:10px">
@@ -39,7 +46,11 @@
                 <div class="row" style="margin-bottom:10px">
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                       <label>Fecha Info:</label>
+                      @if(is_null($localidad->fecha_info))
                         {{$localidad->fecha_info}}
+                      @else
+                        {{$localidad->fecha_info->format('d/m/y')}}
+                      @endif
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                       <div class="form-check form-check-inline">                    
@@ -61,7 +72,11 @@
                 <div class="row" style="margin-bottom:10px">
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <label>Sin Aplicacion:</label>
-                      {{$localidad->sin_aplicacion}} metros                      
+                      @if(is_null($localidad->sin_aplicacion))
+                      S/D  
+                      @else                     
+                      {{$localidad->sin_aplicacion}} metros
+                      @endif                   
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                       <div class="form-check form-check-inline">                    
@@ -83,7 +98,12 @@
                 <div class="row" style="margin-bottom:10px">
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                         <label>Aplicacion Controlada:</label>
-                          {{$localidad->aplicacion_controlada}} metros
+                          @if(is_null($localidad->aplicacion_controlada))
+                          S/D
+                          @else                         
+                          {{$localidad->aplicacion_controlada}} metros  
+                          @endif
+                         
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                       <div class="form-check form-check-inline">                    
@@ -109,22 +129,27 @@
                                 <thead>
                                   <th>Fecha</th>                          
                                   <th>Comentarios</th>
-                                  <th> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#btnModal" style="padding-top:0;padding-bottom:0"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
+                                  <th> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-create" style="padding-top:0;padding-bottom:0"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
                                 </thead>
-                                @php $nx=0;@endphp                
+                                @php $ne=0;@endphp                
                                 @foreach ($comentarios as $comentario)
-                                @php $nx++;@endphp                     
+                                @php $ne++;@endphp                     
                                
                                   <tr>
-                                  <td >{{$comentario->fecha_comentario}}</td>                                  
+                                  <td >{{$comentario->fecha_comentario->format('d/m/y')}}</td>                                  
                                   <td> {{$comentario->comentarios}} </td>                                                  
-                                  <td>
-                                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>
-                                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                  <td style="min-width: 85px;">
+                                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-delete{{$ne}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>
+                                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit{{$ne}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
                                     
                                   </td>
                                 </tr>
-                                
+                                <!-- Start modal Edit comentarios-->
+                                @include('comentarios.modal.edit') 
+                                <!-- End modal Edit comentarios-->
+                                <!-- Start modal delete comentarios-->
+                                @include('comentarios.modal.delete') 
+                                <!-- End modal delete comentarios-->
                                 @endforeach
                                 
                               </table>
