@@ -87,13 +87,13 @@
                     <i class="fa fa-angle-left pull-right"></i>
                   </a>     
                   <ul class="treeview-menu">
-                      <li><a href="/bpas/public/visitas"><i class="fa fa-circle-o"></i>Visitas</a></li>  
-                      <li><a href="/bpas/public/localidades"><i class="fa fa-circle-o"></i> Localidades</a></li>                  
+                      <li><a href="/visitas"><i class="fa fa-circle-o"></i>Visitas</a></li>  
+                      <li><a href="/localidades"><i class="fa fa-circle-o"></i> Localidades</a></li>                  
                     </ul>         
                 </li>
     
             <li class="treeview">
-              <a href="/bpas/public/departamentos">
+              <a href="/departamentos">
                 <i class="fa fa-globe" aria-hidden="true"></i>
                 <span>Departamentos</span>   </a>             
                 <i class="fa fa-angle-left pull-right"></i>
