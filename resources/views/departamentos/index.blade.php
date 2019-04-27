@@ -90,40 +90,31 @@
       var infowindow;
 
       function initMap() {
-        var sydney = new google.maps.LatLng(-32.962671, -61.058544);
-        var localidad = '';
-        console.log("loc:", localidad);
-
+        var sydney = new google.maps.LatLng(-32.962671, -61.058544);        
         infowindow = new google.maps.InfoWindow();
-
+        var georssLayer = new google.maps.KmlLayer({
+            url: 'https://bpas.herokuapp.com/zona_sur.kml'
+          });
         map = new google.maps.Map(
-            document.getElementById('map'), {
-              center: sydney, 
-              zoom: 6,              
+            document.getElementById('map'), {              
+              zoom: 8,                             
               streetViewControl: false,
               rotateControl: false,
+              mapTypeControl: true,         
               fullscreenControl:false              
-              });
-          var ctaLayer = new google.maps.KmlLayer({
-            url: 'http://localhost/bpas/public/rosario.kml',
-            map: map
-          });          
+              });            
+              georssLayer.setMap(map);
+              setTimeout(function() {
+                map.setZoom(8);
+              map.set;
+}, 300);
+              
+              
+             
+            
 
-        var request = {
-          query: localidad+', santa fe, argentina',
-          fields: ['name', 'geometry', 'formatted_address','type'],
-        };
 
-        service = new google.maps.places.PlacesService(map);
-
-        service.findPlaceFromQuery(request, function(results, status) {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            console.log('resultados:', results);
-
-            map.setCenter(results[0].geometry.location);
-            map.set
-          }
-        });
+        
         
       }
 
