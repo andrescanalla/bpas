@@ -14,6 +14,7 @@ use App\Implementador;
 use App\Visita;
 use App\Localidad;
 use App\TipoVisita;
+use App\Comentario;
 
 
 
@@ -35,37 +36,39 @@ class DashboardController extends Controller
             ->type('line')
             ->size(['width' => 400, 'height' => 266])
             ->labels(Dashboard::mesLabel())
-            ->datasets([            
+            ->datasets([  
                 [
-                    "label" => "Presentaciones",
-                    'backgroundColor' => 'rgba(255, 206, 86, 0.2)',
-                    'borderColor' => "rgba(255, 206, 86, 0.2)",
-                    "pointBorderColor" => "rgba(255, 206, 86, 0.2)",
-                    "pointBackgroundColor" => "rgba(255, 206, 86, 0.2)",
+                    "label" => "Informes", 
+                    'backgroundColor' => '#d9edf7d1',
+                    'borderColor' => "#31708f",
+                    "pointBorderColor" => "#31708f",
+                    "pointBackgroundColor" => "#d9edf7",
                     "pointHoverBackgroundColor" => "#fff",
-                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => Dashboard::CountTipoVisitaTotal('presentacion programa'),
-                ],
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",               
+                    'data' => Dashboard::CountTipoVisitaTotal('informe'),
+                ],          
+               
                 [
                     "label" => "Entrevistas",     
                     'backgroundColor' => 'rgba(255, 206, 86, 0.5)',
-                    'borderColor' => "rgba(255, 206, 86, 0.5)",
-                    "pointBorderColor" => "rgba(255, 206, 86, 0.5)",
-                    "pointBackgroundColor" => "rgba(255, 206, 86, 0.5)",
+                    'borderColor' => "rgba(255, 206, 86, 1)",
+                    "pointBorderColor" => "rgba(255, 206, 86, 1)",
+                    "pointBackgroundColor" => "#fcf8e3",
                     "pointHoverBackgroundColor" => "#fff",
                     "pointHoverBorderColor" => "rgba(220,220,220,1)",           
                     'data' => Dashboard::CountTipoVisitaTotal('entrevista'),
                 ],
+                
                 [
-                    "label" => "Informes", 
-                    'backgroundColor' => 'rgba(255, 206, 86, 0.8)',
-                    'borderColor' => "rgba(255, 206, 86, 0.8)",
-                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "label" => "Presentaciones",
+                    'backgroundColor' => '#dff0d8',
+                    'borderColor' => "#2e8631",
+                    "pointBorderColor" => "#2e8631",
+                    "pointBackgroundColor" => "#dff0d8",
                     "pointHoverBackgroundColor" => "#fff",
-                    "pointHoverBorderColor" => "rgba(220,220,220,1)",               
-                    'data' => Dashboard::CountTipoVisitaTotal('informe'),
-                ]            
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => Dashboard::CountTipoVisitaTotal('presentacion programa'),
+                ],            
             ])
             ->options(["title"=>["display"=>true,"text"=>"Acumulado"],"legend"=>["position"=>"bottom"]]);       
 
@@ -77,14 +80,14 @@ class DashboardController extends Controller
             ->datasets([  
                 [
                     "label" => "Pres.",
-                    'backgroundColor' => 'rgba(255, 206, 86, 0.2)',                 
+                    'backgroundColor' => '#dff0d8',                 
                     'data' => Dashboard::CountTipoVisita('presentacion programa'),
-                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderColor'=> '#2e8631',
                     'borderWidth'=> 1
                 ], 
                 [
                     "label" => "Entrev.",
-                    'backgroundColor' => 'rgba(255, 206, 86, 0.5)',
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.3)',
                     'data' => Dashboard::CountTipoVisita('entrevista'),
                     'borderColor'=> 'rgba(255, 206, 86, 1)',
                     'borderWidth'=> 1
@@ -92,17 +95,17 @@ class DashboardController extends Controller
                 ],
                 [
                     "label" => "Inf.",
-                    'backgroundColor' =>"rgba(255, 206, 86, 0.8)",
+                    'backgroundColor' =>"#d9edf7",
                     'data' => Dashboard::CountTipoVisita('informe'),
-                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderColor'=> '#31708f',
                     'borderWidth'=> 1
 
                 ],        
                 [
                     "label" => "Otro",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                    'backgroundColor' => "#ddd",
                     'data' => Dashboard::CountTipoVisita('otro'),
-                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderColor'=> '#777',
                     'borderWidth'=> 1
 
                 ]             
@@ -112,7 +115,7 @@ class DashboardController extends Controller
 
         
         $today=Carbon::now();    
-        $todo=Visita::Todo(15, 20)->get();     
+        $todo=Visita::Todo(20, 20)->get();     
         
         return view("dashboard.index", compact('chartjs1','chartjs2'), [
             "presentacion"=>$presentacion, 
@@ -128,23 +131,80 @@ class DashboardController extends Controller
             'today'=>$today
             ]);    
     }
-
+    public function setLocalidad($fecha ,$tipo_visita_id, $localidad){
+        $n=0;
+        if(Carbon::now()>$fecha){
+            if($tipo_visita_id==1){
+                $localidad->presentacion=1;
+            }
+            if($tipo_visita_id==2||$tipo_visita_id==3){
+                $localidad->presentacion=1;
+                $localidad->entrevista=1;
+            }
+            if($tipo_visita_id==4){
+                $localidad->presentacion=1;
+                $localidad->entrevista=1;
+                $localidad->informe=1;
+            }           
+            $n=0;
+        }
+        $localidad->save();
+        return $n;
+    }
     public function importEvent($desde, $hasta)
     {  
         $start=new Carbon($desde);        
         $end=new Carbon($hasta);
-        $events=Event::get($start, $end);
+        $events=Event::get($start, $end, ['showDeleted'=>true]);
+       
+        
+       
         $count=0;
+        $set=0;
         $ac=0;
+       
+       
         foreach ($events as $event) {
-            $queryEvent=Visita::FindByCalendarId($event->id)->first();
-            $eventUpdate=new Carbon($event->updated);
-            $eventUpdate=$eventUpdate->toDateTimeString();
-            
-            if(!$queryEvent){
-                          
-                $visita=new Visita;
-                $visita->calendar_id= $event->id;  
+            if($event->status=="cancelled"){
+                
+                $visita=Visita::where('calendar_id',$event->id)->first();    
+                if($visita){
+                    $comentarios=Comentario::where('localidad_id',$visita->localidad_id)->get();
+                    if($comentarios){
+                        foreach ($comentarios as $comentario){
+                            $comentario->delete();
+                        }
+                    }
+                    if ($visita->tipo_visita_id==1){
+                        $localidad=Localidad::findOrFail($visita->localidad_id);
+                        $localidad->presentacion=0;
+                        $localidad->save();
+                    }
+                    if ($visita->tipo_visita_id==2){
+                        $localidad=Localidad::findOrFail($visita->localidad_id);
+                        $localidad->entrevista=0;
+                        $localidad->save();
+                    }
+                    if ($visita->tipo_visita_id==3){
+                        $localidad=Localidad::findOrFail($visita->localidad_id);
+                        $localidad->presentacion=0;
+                        $localidad->entrevista=0;
+                        $localidad->save();
+                    }
+                    if ($visita->tipo_visita_id==4){
+                        $localidad=Localidad::findOrFail($visita->localidad_id);
+                        $localidad->informe=0;
+                        $localidad->save();
+                    }        
+                    $visita->delete();
+                }
+            }
+            else{
+                $queryEvent=Visita::FindByCalendarId($event->id)->first();            
+                $eventUpdate=new Carbon($event->updated);
+                $eventUpdate=$eventUpdate->toDateTimeString();
+                $queryUpdate=Visita::FindByCalendarId($event->id)->where('calendar_update', $eventUpdate)->first();
+                /******* */
                 $calendarSummary=explode('-',trim($event->summary));                
                 $calendarImplementadorSummary=trim($calendarSummary[0]);
                 if(count($calendarSummary)>1){
@@ -158,284 +218,146 @@ class DashboardController extends Controller
                 }
                 else{
                     $calendarLocalidadSummary='nada';
-                }
+                }   
                 
+                /****** */  
+
+                // ***no Existe la visita***
+                if(!$queryEvent){                          
+                    $visita=new Visita;
+                    $visita->fecha=$event->start->date;
+                    $visita->comentarios = $event->description;
+                    $visita->calendar_update = $eventUpdate;
+                    $visita->calendar_id= $event->id;     
+                
+
+                    
+                    $count=++$count;
+                    
+                    
+                }
+                // ***Existe la visita***
+                else{                
+                    
+                    if (!$queryUpdate) {
+                    
+                        $visita=$queryEvent;                  
+                        $visita->fecha=$event->start->date;
+                        $visita->comentarios = $event->description;
+                        $visita->calendar_update = $eventUpdate;    
+                                
+                        
+                    
+                        $ac=++$ac;
+                    }
+                    else{
+
+                    }
+                }
+            
+                if(!$queryUpdate||!$queryEvent){
                 $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
                 if(!$queryTipoVisita) {
                     $visita->tipo_visita_id=5;
                 }
                 else{
+                
                     $visita->tipo_visita_id=$queryTipoVisita->id;
-                }  
+                } 
 
-                $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();                
+                $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();
+                /*Existe el Implementador */                
                 if($queryImplementador){
                     $visita->implementador_id=$queryImplementador->id;
-                    $queryLocalidadSummary=Localidad::FindByNombre($calendarLocalidadSummary)->first();
+                    $queryLocalidadSummary=Localidad::FindByNombre($calendarLocalidadSummary)->first();                    
+                    /* No Existe resultado de Localidad en la busqueda de la BD por summary ni hay localidad en Location*/
                     if(!$queryLocalidadSummary && !$event->location){                        
-                        $localidad=new Localidad;
+                        $localidad=new Localidad;                      
                         $localidad->departamento_id=$queryImplementador->departamento_id;
                         $localidad->nombre=$calendarLocalidadSummary;
-                        if($visita->tipo_visita_id==1){
-                            $localidad->presentacion=1;
-                        }
-                        if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
-                            $localidad->presentacion=1;
-                            $localidad->entrevista=1;
-                        }
-                        if($visita->tipo_visita_id==4){
-                            $localidad->presentacion=1;
-                            $localidad->entrevista=1;
-                            $localidad->informe=1;
-                        }
-                        $localidad->save();
-                        $visita->localidad_id=$localidad->id;
+                        $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $localidad);
+                        $visita->localidad_id=$localidad->id;                       
                     }
+                    /* No Existe resultado de  Localidad en la busqueda de la BD por summary y hay localidad Location */
                     if(!$queryLocalidadSummary && $event->location){  
                         $calendarLocalidad=explode(',' , $event->location)[0];                          
                         $queryLocalidad=Localidad::FindByNombre($calendarLocalidad)->first();
+                        /* No existe la localidad en la BD*/
                         if(!$queryLocalidad){
                             $localidad=new Localidad;
                             $localidad->departamento_id=$queryImplementador->departamento_id;
                             $localidad->nombre=$calendarLocalidad;
-                            if($visita->tipo_visita_id==1){
-                                $localidad->presentacion=1;
-                            }
-                            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
-                                $localidad->presentacion=1;
-                                $localidad->entrevista=1;
-                            }
-                            if($visita->tipo_visita_id==4){
-                                $localidad->presentacion=1;
-                                $localidad->entrevista=1;
-                                $localidad->informe=1;
-                            }
-                            $localidad->save();
+                            $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $localidad);
                             $visita->localidad_id=$localidad->id;
-                        }                    
+                        } 
+                        /* Existe la localidad en la BD*/                   
                         else{
                             $visita->localidad_id=$queryLocalidad->id;
-                            if($visita->tipo_visita_id==1){
-                                $queryLocalidad->presentacion=1;
-                                $queryLocalidad->save();
-                            }
-                            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
-                                $queryLocalidad->presentacion=1;
-                                $queryLocalidad->entrevista=1;
-                                $queryLocalidad->save();
-                            }
-                            if($visita->tipo_visita_id==4){
-                                $queryLocalidad->presentacion=1;
-                                $queryLocalidad->entrevista=1;
-                                $queryLocalidad->informe=1;
-                                $queryLocalidad->save();
-                            }
+                            $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $queryLocalidad);                            
                         }
                     }
+                    /* Existe resultado de  Localidad en la busqueda de la BD por summary */
                     if($queryLocalidadSummary){
                         $visita->localidad_id=$queryLocalidadSummary->id;
-                        if($visita->tipo_visita_id==1){
-                            $queryLocalidadSummary->presentacion=1;
-                            $queryLocalidadSummary->save();
-                        }
-                        if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
-                            $queryLocalidadSummary->presentacion=1;
-                            $queryLocalidadSummary->entrevista=1;
-                            $queryLocalidadSummary->save();
-                        }
-                        if($visita->tipo_visita_id==4){
-                            $queryLocalidadSummary->presentacion=1;
-                            $queryLocalidadSummary->entrevista=1;
-                            $queryLocalidadSummary->informe=1;
-                            $queryLocalidadSummary->save();
-                        }
+                        $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $queryLocalidadSummary);                          
                     }
 
                 }
+                /*No Existe el Implementador (es una visita de todo el equipo) */ 
                 else{
                     $visita->implementador_id=1; 
-                    $visita->localidad_id=1;                             
+                    $visita->localidad_id=1;
+                    $visita->tipo_visita_id=5;
                 }
-                $visita->fecha=$event->start->date;
-                $visita->comentarios = $event->description;
-                $visita->calendar_update = $eventUpdate;    
-                             
-                                                      
+                                                                    
                 $visita->save();
-                $count=++$count;
-                
-                
             }
-            else{
-                $queryUpdate=Visita::FindByCalendarId($event->id)->where('calendar_update', $eventUpdate)->first();
-                if (!$queryUpdate) {
-                    $visita=$queryEvent;
-                    $calendarSummary=explode('-',trim($event->summary));                
-                    $calendarImplementadorSummary=trim($calendarSummary[0]);
-                    if(count($calendarSummary)>1){
-                        $calendarTipoSummary=trim($calendarSummary[1]);
-                    }
-                    else{
-                        $calendarTipoSummary='nada';             
-                    }                
-                    if(count($calendarSummary)>2){
-                    $calendarLocalidadSummary=trim($calendarSummary[2]);
-                    }
-                    else{
-                        $calendarLocalidadSummary='nada';
-                    }
 
-                    $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
-                    if(!$queryTipoVisita) {
-                        $visita->tipo_visita_id=5;
-                    }
-                    else{
-                        $visita->tipo_visita_id=$queryTipoVisita->id;
-                    } 
+            
+            }
+        
+            
+        }
+        return Response::json($count);
+        }
 
-                    $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();                    
-                    if($queryImplementador){
-                        $visita->implementador_id=$queryImplementador->id;
-
-                        $queryLocalidadSummary=Localidad::FindByNombre($calendarLocalidadSummary)->first();
-                        if(!$queryLocalidadSummary && !$event->location){                        
-                            $localidad=new Localidad;
-                            $localidad->departamento_id=$queryImplementador->departamento_id;
-                            $localidad->nombre=$calendarLocalidadSummary;
-                            $localidad->save();
-                            if($visita->tipo_visita_id==1){
-                                $localidad->presentacion=1;
-                            }
-                            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
-                                $localidad->presentacion=1;
-                                $localidad->entrevista=1;
-                            }
-                            if($visita->tipo_visita_id==4){
-                                $localidad->presentacion=1;
-                                $localidad->entrevista=1;
-                                $localidad->informe=1;
-                            }
-                            $localidad->save();
-                            $visita->localidad_id=$localidad->id;
-                        }
-                        if(!$queryLocalidadSummary && $event->location){  
-                            $calendarLocalidad=explode(',' , $event->location)[0];                          
-                            $queryLocalidad=Localidad::FindByNombre($calendarLocalidad)->first();
-                            if(!$queryLocalidad){
-                                $localidad=new Localidad;
-                                $localidad->departamento_id=$queryImplementador->departamento_id;
-                                $localidad->nombre=$calendarLocalidad;
-                                $localidad->save();
-                                if($visita->tipo_visita_id==1){
-                                    $localidad->presentacion=1;
-                                }
-                                if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
-                                    $localidad->presentacion=1;
-                                    $localidad->entrevista=1;
-                                }
-                                if($visita->tipo_visita_id==4){
-                                    $localidad->presentacion=1;
-                                    $localidad->entrevista=1;
-                                    $localidad->informe=1;
-                                }
-                                $localidad->save();
-                                $visita->localidad_id=$localidad->id;
-                            }                    
-                            else{
-                                $visita->localidad_id=$queryLocalidad->id;
-                                if($visita->tipo_visita_id==1){
-                                    $queryLocalidad->presentacion=1;
-                                    $queryLocalidad->save();
-                                }
-                                if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
-                                    $queryLocalidad->presentacion=1;
-                                    $queryLocalidad->entrevista=1;
-                                    $queryLocalidad->save();
-                                }
-                                if($visita->tipo_visita_id==4){
-                                    $queryLocalidad->presentacion=1;
-                                    $queryLocalidad->entrevista=1;
-                                    $queryLocalidad->informe=1;
-                                    $queryLocalidad->save();
-                                }
-                            }
-                        }
-                        if($queryLocalidadSummary){
-                            $visita->localidad_id=$queryLocalidadSummary->id;
-                            if($visita->tipo_visita_id==1){
-                                $queryLocalidadSummary->presentacion=1;
-                                $queryLocalidadSummary->save();
-                            }
-                            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
-                                $queryLocalidadSummary->presentacion=1;
-                                $queryLocalidadSummary->entrevista=1;
-                                $queryLocalidadSummary->save();
-                            }
-                            if($visita->tipo_visita_id==4){
-                                $queryLocalidadSummary->presentacion=1;
-                                $queryLocalidadSummary->entrevista=1;
-                                $queryLocalidadSummary->informe=1;
-                                $queryLocalidadSummary->save();
-                            }
-                        }
-
-                    }
-                    else{
-                        $visita->implementador_id=1; 
-                        $visita->localidad_id=1;                             
-                    }
-                    $visita->fecha=$event->start->date;
-                    $visita->comentarios = $event->description;
-                    $visita->calendar_update = $eventUpdate;    
-                             
-                     
-                    $visita->save();
-                    $ac=++$ac;
+        public function settingLocalidades(){
+            $visitas= Visita::get();
+            $count=0;
+            foreach ($visitas as $visita) {
+            if($visita->localidad_id!==1){
+                if($visita->tipo_visita_id==1){
+                    $localidad=Localidad::findOrFail($visita->localidad_id);
+                    $localidad->presentacion=true;
+                    $localidad->save();
+                    
                 }
+                if($visita->tipo_visita_id==2){
+                    $localidad=Localidad::findOrFail($visita->localidad_id);
+                    $localidad->entrevista=true;
+                    $localidad->save();
+                
+                }
+                if($visita->tipo_visita_id==3){
+                    $localidad=Localidad::findOrFail($visita->localidad_id);
+                    $localidad->entrevista=true;
+                    $localidad->presentacion=true;
+                    $localidad->save();
+                
+                }
+                if($visita->tipo_visita_id==4){
+                    $localidad=Localidad::findOrFail($visita->localidad_id);
+                    $localidad->informe=true;
+                    $localidad->save();
+                    
+                }  
+                # dd($visita , $visita->localidad_id);
+                $count=++$count;
             }
-
-
-        }
-       
-        return Response::json($count);
-    }
-
-    public function settingLocalidades(){
-        $visitas= Visita::get();
-        $count=0;
-        foreach ($visitas as $visita) {
-           if($visita->localidad_id!==1){
-             if($visita->tipo_visita_id==1){
-                $localidad=Localidad::findOrFail($visita->localidad_id);
-                $localidad->presentacion=true;
-                $localidad->save();
-                
-             }
-             if($visita->tipo_visita_id==2){
-                $localidad=Localidad::findOrFail($visita->localidad_id);
-                $localidad->entrevista=true;
-                $localidad->save();
-               
-             }
-             if($visita->tipo_visita_id==3){
-                $localidad=Localidad::findOrFail($visita->localidad_id);
-                $localidad->entrevista=true;
-                $localidad->presentacion=true;
-                $localidad->save();
-               
-             }
-             if($visita->tipo_visita_id==4){
-                $localidad=Localidad::findOrFail($visita->localidad_id);
-                $localidad->informe=true;
-                $localidad->save();
-                
-             }  
-            # dd($visita , $visita->localidad_id);
-            $count=++$count;
-           }
-           
-        }
-        return Response::json($count);
+            
+            }
+            return Response::json($count);
+            
         
 
     }

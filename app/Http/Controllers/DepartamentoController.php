@@ -14,7 +14,8 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        $departamentos=Departamento::FindDepartamentos()->get();            
+        $departamentos=Departamento::FindDepartamentos()->get(); 
+                
         return view('departamentos.index',["departamentos"=>$departamentos]);
     }
 

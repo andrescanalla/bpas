@@ -261,7 +261,13 @@
                                   <td class="container-fluid">{{$to->fecha->format('d/m/y')}}</td>
                                   
                                   <td> {{$to->nombreTipoVisita}} </td> 
-                                  <td> {{$to->comentarios}} </td>                  
+                                  <td>
+                                  @if($to->fecha > $today)
+                                   {{$to->comentarios}} <b> Visita programada</b>
+                                  @else
+                                  {{$to->comentarios}}
+                                  @endif
+                                   </td>                  
                                   <td>
                                     <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>
                                     <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
@@ -287,7 +293,7 @@
       </div>
   </div>
 </div>
-@push ('script')
+@push ('scripts')
 <script>
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
@@ -298,7 +304,7 @@
       var infowindow;
 
       function initMap() {
-        var sydney = new google.maps.LatLng(-32.947, -60.675);
+        var sydney = new google.maps.LatLng(-32.962671, -61.058544);
         var localidad = document.getElementById("nombre").textContent;
         console.log("loc:", localidad);
 
@@ -345,9 +351,9 @@
       }
     </script>
 @endpush
-@push ('scripts')
+@push ('script')
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogC7YQOSHhhUyPif_s64K8HMH9zxZYpU&libraries=places&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogC7YQOSHhhUyPif_s64K8HMH9zxZYpU&libraries=places&callback=initMap" sync defer></script>
     
 <!-- <script>
 

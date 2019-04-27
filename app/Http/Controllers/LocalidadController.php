@@ -64,7 +64,7 @@ class LocalidadController extends Controller
         {
             $query=trim($request->get('searchText'));
             if(!empty($query)){
-                $localidad=Localidad::SearchText($query)->first();            
+                $localidad=Localidad::FindByNombreLocalidad($query)->first();            
                 if(!$localidad){
                     $localidad=new Localidad;
                     $localidad->nombreLocalidad="La localidad $query no existe";

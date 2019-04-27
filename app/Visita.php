@@ -89,6 +89,15 @@ class Visita extends Model
         
 
     }
+    public function scopeAct($query, $desde, $hasta){
+      
+      return $query
+        ->where('fecha','>',$desde)
+        ->where('fecha','<',$hasta)
+        ->orderBy('fecha','desc');
+        
+
+    }
 
 	
 }

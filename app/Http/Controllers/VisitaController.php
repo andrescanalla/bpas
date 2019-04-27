@@ -8,6 +8,9 @@ use App\Visita;
 use App\Implementador;
 use App\TipoVisita;
 use App\Localidad;
+use Spatie\GoogleCalendar\Event;
+use App\Comentario;
+
 
 
 class VisitaController extends Controller
@@ -113,8 +116,49 @@ class VisitaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Request $request, $id)
+    {   
+       
+
+        $visita=Visita::findOrFail($id);
+         /*eliminar del calendar */
+         $event = Event::find($visita->calendar_id);         
+         $event->delete();
+         /*****/
+        $page=$request->get('page');
+        $searchText=$request->get('searchText');
+        $comentarios=Comentario::where('localidad_id',$visita->localidad_id)->get();
+        if($comentarios){
+            foreach ($comentarios as $comentario){
+                $comentario->delete();
+            }
+        }
+        if ($visita->tipo_visita_id==1){
+            $localidad=Localidad::findOrFail($visita->localidad_id);
+            $localidad->presentacion=0;
+            $localidad->save();
+        }
+        if ($visita->tipo_visita_id==2){
+            $localidad=Localidad::findOrFail($visita->localidad_id);
+            $localidad->entrevista=0;
+            $localidad->save();
+        }
+        if ($visita->tipo_visita_id==3){
+            $localidad=Localidad::findOrFail($visita->localidad_id);
+            $localidad->presentacion=0;
+            $localidad->entrevista=0;
+            $localidad->save();
+        }
+        if ($visita->tipo_visita_id==4){
+            $localidad=Localidad::findOrFail($visita->localidad_id);
+            $localidad->informe=0;
+            $localidad->save();
+        }        
+        $visita->delete();
+        
+
+        $url="visitas?searchText=$searchText&page=$page";
+        return Redirect::to($url);
+
     }
 }
