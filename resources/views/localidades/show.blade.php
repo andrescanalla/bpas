@@ -355,27 +355,7 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogC7YQOSHhhUyPif_s64K8HMH9zxZYpU&libraries=places&callback=initMap" sync defer></script>
     
-<!-- <script>
 
-$(document).ready(function() {
-  $('#table').DataTable( {
-    "paging":   false,
-     "info":   false,
-    "searching": false,
-    "order": [[ 0, "asc" ]],
-    "columnDefs": [ 
-            
-            {
-                "targets": [ 7 ],
-                "orderable": false,
-            }    
-        ]
-    } );
-} );
-
-
-
-</script> -->
 @endpush
 
 @endsection

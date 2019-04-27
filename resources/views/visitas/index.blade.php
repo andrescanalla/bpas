@@ -16,9 +16,9 @@
 @section ('contenido')   
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="table-responsive">
-      <table class="table table-striped table-condensed table-hover" id="table">
-        <thead style="background-color:#A9D0F5">         
+    <div >
+      <table class="table table-borderless" id="table">
+        <thead  style="background-color:#f5f5f5">         
           <th>Nº</th>
           <th>Fecha</th>
           <th>Departamento</th>
@@ -53,30 +53,6 @@
     {{$visitas->appends(Request::only(['searchText']))->render()}}
   </div>
 </div>
-@push ('script')
 
-
-<!-- <script>
-
-$(document).ready(function() {
-  $('#table').DataTable( {
-    "paging":   false,
-     "info":   false,
-    "searching": false,
-    "order": [[ 0, "asc" ]],
-    "columnDefs": [ 
-            
-            {
-                "targets": [ 7 ],
-                "orderable": false,
-            }    
-        ]
-    } );
-} );
-
-
-
-</script> -->
-@endpush
 
 @endsection

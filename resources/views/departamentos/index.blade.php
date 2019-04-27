@@ -17,9 +17,10 @@
 @section ('contenido')   
 <div class="row">
   <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+  <div class="panel panel-default">
     <div class="table-responsive">
       <table class="table table-condensed table-hover" id="table" style="margin-bottom:0px">
-        <thead style="background-color:#A9D0F5">
+        <thead style="background-color:#f5f5f5">
           <th>id</th>  
           <th>Departamento</th>
           <th>Implementador</th>  
@@ -70,9 +71,82 @@
       </table>
     </div>
   </div>
+  </div>
   <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+  <div class="panel panel-default" id="map" style="height: 80vh">
+  </div>
+
   </div>
 </div>
+
+@push ('scripts')
+<script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var map;
+      var service;
+      var infowindow;
+
+      function initMap() {
+        var sydney = new google.maps.LatLng(-32.962671, -61.058544);
+        var localidad = '';
+        console.log("loc:", localidad);
+
+        infowindow = new google.maps.InfoWindow();
+
+        map = new google.maps.Map(
+            document.getElementById('map'), {
+              center: sydney, 
+              zoom: 6,              
+              streetViewControl: false,
+              rotateControl: false,
+              fullscreenControl:false              
+              });
+          var ctaLayer = new google.maps.KmlLayer({
+            url: 'http://localhost/bpas/public/rosario.kml',
+            map: map
+          });          
+
+        var request = {
+          query: localidad+', santa fe, argentina',
+          fields: ['name', 'geometry', 'formatted_address','type'],
+        };
+
+        service = new google.maps.places.PlacesService(map);
+
+        service.findPlaceFromQuery(request, function(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            console.log('resultados:', results);
+
+            map.setCenter(results[0].geometry.location);
+            map.set
+          }
+        });
+        
+      }
+
+      function createMarker(place) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+        console.log('as:',place);
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+    </script>
+@endpush
+@push ('script')
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogC7YQOSHhhUyPif_s64K8HMH9zxZYpU&libraries=places&callback=initMap" sync defer></script>
+    
+
+@endpush
   
 
 

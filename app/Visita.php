@@ -57,6 +57,7 @@ class Visita extends Model
         ->select('visitas.id','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'implementadores.id as idImplementador', 'implementadores.nombre as nombreImplementador', 'tipo_visitas.id as idTipoVisita' , 'tipo_visitas.nombre as nombreTipoVisita' , 'fecha', 'comentarios')        
         ->where('implementadores.nombre','LIKE','%'.$nombre.'%')
         ->orwhere('localidades.nombre','LIKE','%'.$nombre.'%')
+        ->orwhere('departamentos.nombre','LIKE','%'.$nombre.'%')
         ->orderBy('fecha','desc');
         
 
