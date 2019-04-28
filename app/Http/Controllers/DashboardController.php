@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests;
 use Carbon\Carbon;
 use Spatie\GoogleCalendar\Event;
@@ -21,6 +22,7 @@ use App\Comentario;
 class DashboardController extends Controller
 {
     public function index(Request $request){
+        $this->credentials();
         $actualizacion=$this->importEvent(Carbon::now()->subDays(20), Carbon::now()->addDays(20));
         $presentacion=Localidad::CountTotal('presentacion')->count();
         $belgrano=Localidad::CountDepartamento('Belgrano','presentacion')->count();
@@ -360,6 +362,12 @@ class DashboardController extends Controller
             
         
 
+    }
+    public function credentials(){
+        $cred =  getenv('GOOGLE_CALENDAR_SAC');
+        if ($cred !== false && Storage::exists('service-account-credentials.json')==false) {
+            Storage::put('service-account-credentials.json', $cred);            
+        }
     }
 
     public function todo(Request $request)
