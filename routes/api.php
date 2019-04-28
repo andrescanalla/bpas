@@ -17,5 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/calendarios/importar', 'DashboardController@importEvent');
-Route::get('/calendarios/settinglocalidades', 'DashboardController@settingLocalidades');
+
