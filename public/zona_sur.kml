@@ -3,9 +3,7 @@
 <Document>
 	<name>zona_sur.kml</name>
 	<open>1</open>
-	<Style id="sh_ylw-pushpin">
-		<BalloonStyle>
-		</BalloonStyle>
+	<Style id="sh_ylw-pushpin1">
 		<LineStyle>
 			<color>ff666666</color>
 		</LineStyle>
@@ -14,9 +12,10 @@
 			<colorMode>random</colorMode>
 		</PolyStyle>
 	</Style>
-	<Style id="sh_ylw-pushpin0">
-		<BalloonStyle>
-		</BalloonStyle>
+	<Style id="sn_ylw-pushpin1">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
 		<LineStyle>
 			<color>ff666666</color>
 		</LineStyle>
@@ -25,11 +24,61 @@
 			<colorMode>random</colorMode>
 		</PolyStyle>
 	</Style>
+	<StyleMap id="Style10-polygon-1-map">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#Style10-polygon-1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#Style10-polygon-1-hover</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin0">
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>99ff0000</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin0">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>990099ff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+	</Style>
 	<Style id="sn_ylw-pushpin">
 		<LabelStyle>
 			<scale>0</scale>
 		</LabelStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>990099ff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin">
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>990099ff</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+	</Style>
+	<Style id="Style10-polygon-1-hover">
 		<BalloonStyle>
+			<text>$[description]</text>
 		</BalloonStyle>
 		<LineStyle>
 			<color>ff666666</color>
@@ -54,52 +103,6 @@
 			<colorMode>random</colorMode>
 		</PolyStyle>
 	</Style>
-	<StyleMap id="msn_ylw-pushpin">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#sn_ylw-pushpin0</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#sh_ylw-pushpin</styleUrl>
-		</Pair>
-	</StyleMap>
-	<Style id="Style10-polygon-1-hover">
-		<BalloonStyle>
-			<text>$[description]</text>
-		</BalloonStyle>
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>990099ff</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
-	<Style id="sn_ylw-pushpin0">
-		<LabelStyle>
-			<scale>0</scale>
-		</LabelStyle>
-		<BalloonStyle>
-		</BalloonStyle>
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>990099ff</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
-	<StyleMap id="Style10-polygon-1-map">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#Style10-polygon-1</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#Style10-polygon-1-hover</styleUrl>
-		</Pair>
-	</StyleMap>
 	<StyleMap id="msn_ylw-pushpin0">
 		<Pair>
 			<key>normal</key>
@@ -108,6 +111,16 @@
 		<Pair>
 			<key>highlight</key>
 			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin</styleUrl>
 		</Pair>
 	</StyleMap>
 	<StyleMap id="msn_ylw-pushpin1">
@@ -120,31 +133,6 @@
 			<styleUrl>#sh_ylw-pushpin1</styleUrl>
 		</Pair>
 	</StyleMap>
-	<Style id="sn_ylw-pushpin1">
-		<LabelStyle>
-			<scale>0</scale>
-		</LabelStyle>
-		<BalloonStyle>
-		</BalloonStyle>
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>99ff0000</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
-	<Style id="sh_ylw-pushpin1">
-		<BalloonStyle>
-		</BalloonStyle>
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>990099ff</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
 	<Placemark>
 		<name>GENERAL LOPEZ</name>
 		<snippet></snippet>
