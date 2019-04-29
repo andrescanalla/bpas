@@ -63,6 +63,11 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li>
+                                        <a href="/register">                                            
+                                            Register
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         @endguest
