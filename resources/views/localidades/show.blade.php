@@ -353,7 +353,7 @@
 @endpush
 @push ('script')
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogC7YQOSHhhUyPif_s64K8HMH9zxZYpU&libraries=places&callback=initMap" sync defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3q64KPI7g7xjoc_vC-w9k4U_OFCtKNek&libraries=places&callback=initMap" sync defer></script>
     
 
 @endpush

@@ -294,7 +294,7 @@ $(document).ready(function() {
                     
                 }
             },
-          retira: {
+            retira: {
                 text: 'R',
                 click: function(event) {
                     var title = 'R - Nuevo';
@@ -315,9 +315,8 @@ $(document).ready(function() {
                     
                 }
             },
-           entrega: {
+            entrega: {
                 text: 'E',
-
                 click: function(event) {
                     var title = 'E - Nueva';
                     $.ajax({
@@ -325,8 +324,7 @@ $(document).ready(function() {
                       data: 'type=new&title='+title,
                       type: 'GET',
                       dataType: 'json',
-                      success: function(response){
-                        
+                      success: function(response){                        
                         $('#calendar').fullCalendar('refetchEventSources',{ url: 'dashboard/cale'});
                       },
                       error: function(e){
@@ -341,7 +339,7 @@ $(document).ready(function() {
         height: "parent",
         googleCalendarApiKey:'AIzaSyDIqw1eIQ6AxMukLC2PNp8tVKL8XmRdiPQ',
         header: {
-           left: ' prev,next',
+           left: ' prev,next, today',
            center: 'title',
            right: 'month,agendaWeek,agendaDay'
          },

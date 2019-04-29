@@ -134,7 +134,7 @@
 @endpush
 @push ('script')
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogC7YQOSHhhUyPif_s64K8HMH9zxZYpU&libraries=places&callback=initMap" sync defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5yelEdpNJh8mu-yZYfeBXWpVlVPckLEs&libraries=places&callback=initMap" sync defer></script>
     
 
 @endpush
