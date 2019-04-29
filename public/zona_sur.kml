@@ -3,15 +3,6 @@
 <Document>
 	<name>zona_sur.kml</name>
 	<open>1</open>
-	<Style id="sh_ylw-pushpin1">
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>990099ff</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
 	<Style id="sn_ylw-pushpin1">
 		<LabelStyle>
 			<scale>0</scale>
@@ -20,38 +11,7 @@
 			<color>ff666666</color>
 		</LineStyle>
 		<PolyStyle>
-			<color>99ff0000</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
-	<StyleMap id="Style10-polygon-1-map">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#Style10-polygon-1</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#Style10-polygon-1-hover</styleUrl>
-		</Pair>
-	</StyleMap>
-	<Style id="sh_ylw-pushpin0">
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>99ff0000</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
-	<Style id="sn_ylw-pushpin0">
-		<LabelStyle>
-			<scale>0</scale>
-		</LabelStyle>
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>990099ff</color>
+			<color>80ff0000</color>
 			<colorMode>random</colorMode>
 		</PolyStyle>
 	</Style>
@@ -59,61 +19,59 @@
 		<LabelStyle>
 			<scale>0</scale>
 		</LabelStyle>
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>990099ff</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
-	<Style id="sh_ylw-pushpin">
-		<LineStyle>
-			<color>ff666666</color>
-		</LineStyle>
-		<PolyStyle>
-			<color>990099ff</color>
-			<colorMode>random</colorMode>
-		</PolyStyle>
-	</Style>
-	<Style id="Style10-polygon-1-hover">
 		<BalloonStyle>
-			<text>$[description]</text>
 		</BalloonStyle>
 		<LineStyle>
 			<color>ff666666</color>
 		</LineStyle>
 		<PolyStyle>
-			<color>990099ff</color>
-			<colorMode>random</colorMode>
+			<color>80ff00ff</color>
 		</PolyStyle>
 	</Style>
-	<Style id="Style10-polygon-1">
+	<Style id="sh_ylw-pushpin">
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>800099ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin0">
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>8000ffaa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin0">
 		<LabelStyle>
 			<scale>0</scale>
 		</LabelStyle>
 		<BalloonStyle>
-			<text>$[description]</text>
 		</BalloonStyle>
 		<LineStyle>
 			<color>ff666666</color>
 		</LineStyle>
 		<PolyStyle>
-			<color>990099ff</color>
-			<colorMode>random</colorMode>
+			<color>800099ff</color>
 		</PolyStyle>
 	</Style>
-	<StyleMap id="msn_ylw-pushpin0">
+	<StyleMap id="msn_ylw-pushpin">
 		<Pair>
 			<key>normal</key>
-			<styleUrl>#sn_ylw-pushpin1</styleUrl>
+			<styleUrl>#sn_ylw-pushpin3</styleUrl>
 		</Pair>
 		<Pair>
 			<key>highlight</key>
-			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+			<styleUrl>#sh_ylw-pushpin3</styleUrl>
 		</Pair>
 	</StyleMap>
-	<StyleMap id="msn_ylw-pushpin">
+	<StyleMap id="msn_ylw-pushpin0">
 		<Pair>
 			<key>normal</key>
 			<styleUrl>#sn_ylw-pushpin0</styleUrl>
@@ -123,14 +81,155 @@
 			<styleUrl>#sh_ylw-pushpin</styleUrl>
 		</Pair>
 	</StyleMap>
+	<Style id="sn_ylw-pushpin2">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>8000aa00</color>
+		</PolyStyle>
+	</Style>
 	<StyleMap id="msn_ylw-pushpin1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin4</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin00">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin00</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin1">
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ffaaaa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin00">
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff0000</color>
+			<colorMode>random</colorMode>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin2">
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>8000aa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin2">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin5</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin3">
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>8000ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin4">
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin3">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>8000ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin4">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ffaaaa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin5">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff666666</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>8000ffaa</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin3">
 		<Pair>
 			<key>normal</key>
 			<styleUrl>#sn_ylw-pushpin</styleUrl>
 		</Pair>
 		<Pair>
 			<key>highlight</key>
-			<styleUrl>#sh_ylw-pushpin1</styleUrl>
+			<styleUrl>#sh_ylw-pushpin4</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin4">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin2</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin2</styleUrl>
 		</Pair>
 	</StyleMap>
 	<Placemark>
@@ -140,7 +239,7 @@
 <b>Departamento:</b> GENERAL LOPEZ<br>
 <b>Provincia:</b> SANTA FE
 </div>]]></description>
-		<styleUrl>#Style10-polygon-1-map</styleUrl>
+		<styleUrl>#msn_ylw-pushpin0</styleUrl>
 		<ExtendedData>
 			<Data name="Departamento">
 				<value>GENERAL LOPEZ</value>
@@ -171,7 +270,7 @@
 <b>Departamento:</b> BELGRANO<br>
 <b>Provincia:</b> SANTA FE
 </div>]]></description>
-		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<styleUrl>#msn_ylw-pushpin2</styleUrl>
 		<ExtendedData>
 			<Data name="Departamento">
 				<value>BELGRANO</value>
@@ -202,7 +301,7 @@
 <b>Departamento:</b> IRIONDO<br>
 <b>Provincia:</b> SANTA FE
 </div>]]></description>
-		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<styleUrl>#msn_ylw-pushpin3</styleUrl>
 		<ExtendedData>
 			<Data name="Departamento">
 				<value>IRIONDO</value>
@@ -233,7 +332,7 @@
 <b>Departamento:</b> CASEROS<br>
 <b>Provincia:</b> SANTA FE
 </div>]]></description>
-		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<styleUrl>#msn_ylw-pushpin4</styleUrl>
 		<ExtendedData>
 			<Data name="Departamento">
 				<value>CASEROS</value>
@@ -264,7 +363,7 @@
 <b>Departamento:</b> CONSTITUCION<br>
 <b>Provincia:</b> SANTA FE
 </div>]]></description>
-		<styleUrl>#msn_ylw-pushpin0</styleUrl>
+		<styleUrl>#msn_ylw-pushpin00</styleUrl>
 		<ExtendedData>
 			<Data name="Departamento">
 				<value>CONSTITUCION</value>
@@ -295,7 +394,7 @@
 <b>Departamento:</b> SAN LORENZO<br>
 <b>Provincia:</b> SANTA FE
 </div>]]></description>
-		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<styleUrl>#msn_ylw-pushpin1</styleUrl>
 		<ExtendedData>
 			<Data name="Departamento">
 				<value>SAN LORENZO</value>
@@ -326,7 +425,7 @@
 <b>Departamento:</b> ROSARIO<br>
 <b>Provincia:</b> SANTA FE
 </div>]]></description>
-		<styleUrl>#msn_ylw-pushpin1</styleUrl>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
 		<ExtendedData>
 			<Data name="Departamento">
 				<value>ROSARIO</value>
