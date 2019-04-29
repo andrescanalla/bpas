@@ -263,7 +263,7 @@
                                   <td> {{$to->nombreTipoVisita}} </td> 
                                   <td>
                                   @if($to->fecha > $today)
-                                   {{$to->comentarios}} <b> Visita programada</b>
+                                  <span class="label label-info">Visita programada</span> {{$to->comentarios}} 
                                   @else
                                   {{$to->comentarios}}
                                   @endif
