@@ -363,6 +363,7 @@ $(document).ready(function() {
         },
         droppable: true,
         displayEventTime: false,
+        eventLimit:2,
         businessHours:{dow:[0,1,2,3,4,5,6],start:'08:30',end:'22:00'},
         fixedWeekCount: false,        
         eventSources: [
