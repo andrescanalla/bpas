@@ -364,7 +364,7 @@ $(document).ready(function() {
         droppable: true,
         displayEventTime: false,
         businessHours:{dow:[0,1,2,3,4,5,6],start:'08:30',end:'22:00'},
-        
+        fixedWeekCount: false,        
         eventSources: [
            {
             googleCalendarId: 'a-w-a.com.ar_mcfdvpi4cj4733b5ka5bh3eiss@group.calendar.google.com',
