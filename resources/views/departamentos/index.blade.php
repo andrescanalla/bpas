@@ -93,7 +93,7 @@
         var sydney = new google.maps.LatLng(-32.962671, -61.058544);        
         infowindow = new google.maps.InfoWindow();
         var georssLayer = new google.maps.KmlLayer({
-            url: 'https://bpas.herokuapp.com/zona_sur.kml'
+            url: 'https://bpas.herokuapp.com/zona_sur2.kml'
           });
         map = new google.maps.Map(
             document.getElementById('map'), {              
