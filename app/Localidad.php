@@ -58,7 +58,7 @@ class Localidad extends Model
     }
     public function scopeCountDepartamento($query, $departamento, $filtro){
         return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
-            ->select('departamentos.nombre as nombreDepartamento', 'municipio', 'presentacion','entrevista','informe')
+            ->select('localidades.nombre as nombreLocalidad','departamentos.nombre as nombreDepartamento', 'municipio', 'presentacion','entrevista','informe')
             ->where("departamentos.nombre", $departamento)
             ->where("localidades.$filtro",1);
             

@@ -64,7 +64,7 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <a href="/register">                                            
+                                        <a href="{{ route('register') }}">                                            
                                             Register
                                         </a>
                                     </li>

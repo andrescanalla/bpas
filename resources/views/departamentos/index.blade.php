@@ -32,7 +32,7 @@
         @foreach ($departamentos as $departamento)
         @php $nx++;@endphp
         
-        <tr>
+        <tr id="{{$departamento->nombreDepartamento}}" name="no">
           <td>{{$departamento->id}}</td>                
           <td>{{$departamento->nombreDepartamento}}</td>
           <td>{{$departamento->nombreImplementador}} {{$departamento->apellido}}</td>
@@ -92,9 +92,13 @@
       function initMap() {
         var sydney = new google.maps.LatLng(-32.962671, -61.058544);        
         infowindow = new google.maps.InfoWindow();
-        var georssLayer = new google.maps.KmlLayer({
+        var zona = new google.maps.KmlLayer({
             url: 'https://bpas.herokuapp.com/zona_sur2.kml'
-          });
+          });   
+        var rosario = new google.maps.KmlLayer({
+            url: 'https://bpas.herokuapp.com/rosario.kml'
+          });  
+          rosario.setMap(null);    
         map = new google.maps.Map(
             document.getElementById('map'), {              
               zoom: 8,                             
@@ -102,29 +106,62 @@
               rotateControl: false,
               mapTypeControl: true,         
               fullscreenControl:false              
-              });            
-              georssLayer.setMap(map);
+            }
+        );            
+        zona.setMap(map);
+        setTimeout(function() {
+          map.setZoom(8);
+          map.set;
+          },
+        300); 
+        ros=document.getElementById("Rosario")
+        ros.addEventListener("click", myFunction); 
+        
+          
+
+        function myFunction() {
+          console.log('ros', rosario.getMap());
+            if(rosario.getMap()!==null){
+              console.log('zona not null');             
+              rosario.setMap(null);
+              zona.setMap(map);
               setTimeout(function() {
-                map.setZoom(8);
-              map.set;
-}, 300);
-              
-              
-             
+          map.setZoom(8);
+          map.set;
+          },
+        300); 
+            }
+            else{            
+            zona.setMap(null);           
+            rosario.setMap(map);
+            mark('rosario','informe');
+          }
             
 
-
-        
+        }
         
       }
+      
+      function mark(departamento, filtro){
+        url='https://bpas.herokuapp/api/localidades'
+        $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                data: {departamento:departamento,filtro:filtro}
+              })
+              .done(function(data) {
+                console.log('id despues ajax:'+ data);               
+                
+              })
+      }
+      
 
       function createMarker(place) {
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location
         });
-        console.log('as:',place);
-
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent(place.name);
           infowindow.open(map, this);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Localidad;
 use App\Departamento;
@@ -142,5 +143,13 @@ class LocalidadController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function detalleDepartamento(Request $request){
+        
+        $detalle=Localidad::CountDepartamento($request->get('departamento'), $request->get('filtro'))->get();
+
+        return Response::json($detalle); 
+        
     }
 }
