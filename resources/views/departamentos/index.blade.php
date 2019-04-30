@@ -143,7 +143,7 @@
       }
       
       function mark(departamento, filtro){
-        url='https://bpas.herokuapp/api/localidades'
+        url='https://bpas.herokuapp.com/api/localidades'
         $.ajax({
                 url: url,
                 type: 'GET',
