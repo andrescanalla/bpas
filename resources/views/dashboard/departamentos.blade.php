@@ -11,7 +11,7 @@
                   </div>               
               </div>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" style="font-size:13px">
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding-left:0;padding-right:7px"> 
                 <ul class="list-group" style="margin-bottom:0">
                   <a href="/stock/stock?talle=&tipo=&cat=&est=&marca=&estado=Comprado">
