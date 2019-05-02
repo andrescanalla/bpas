@@ -92,9 +92,30 @@ class VisitaController extends Controller
     	$visita->fecha=$request->get('fecha');
         $visita->implementador_id=$request->get('implementador_id');
         $visita->tipo_visita_id=$request->get('tipo_visita_id');
-        $queryLocalidad=Localidad::FindByNombreLikeId($request->get('localidad'))->first();        
+        $queryLocalidad=Localidad::FindByNombreLikeId($request->get('localidad'))->first();  
+        
         if($queryLocalidad){
-            $visita->localidad_id=$queryLocalidad->id;            
+            $visita->localidad_id=$queryLocalidad->id; 
+            if($visita->tipo_visita_id==1){
+                $queryLocalidad->presentacion=1;
+                $queryLocalidad->entrevista=0;
+                $queryLocalidad->informe=0;
+                $queryLocalidad->save();
+                      
+            }
+            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+                $queryLocalidad->presentacion=1;
+                $queryLocalidad->entrevista=1;
+                $queryLocalidad->informe=0;
+                $queryLocalidad->save();
+                
+            } 
+            if($visita->tipo_visita_id==4){
+                $queryLocalidad->presentacion=1;
+                $queryLocalidad->entrevista=1;
+                $queryLocalidad->informe=1;
+                $queryLocalidad->save();
+            }              
         }
         else{
             $localidad=new Localidad;
