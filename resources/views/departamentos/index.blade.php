@@ -130,7 +130,7 @@
             url: 'https://bpas.herokuapp.com/constitucion.kml'
           }); 
         constitucion.setMap(null)
-        zonas.push(caseros);    
+        zonas.push(constitucion);    
 
         var markers = [];   
         map = new google.maps.Map(
@@ -199,11 +199,7 @@
             mark(string,'informe');  
             mark(string,'entrevista');                    
             depto.setMap(map);
-            setTimeout(function() {
-              map.setZoom(10);
-              map.set;
-              },
-            300); 
+            
            
           }
         }
