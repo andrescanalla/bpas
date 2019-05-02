@@ -147,7 +147,7 @@ class LocalidadController extends Controller
 
     public function detalleDepartamento(Request $request){
         
-        $detalle=Localidad::CountDepartamento($request->get('departamento'), $request->get('filtro'))->get();
+        $detalle=Localidad::FiltroDepartamento($request->get('departamento'), $request->get('filtro'))->get();
 
         return Response::json($detalle); 
         

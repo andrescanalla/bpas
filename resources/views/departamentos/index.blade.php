@@ -88,17 +88,31 @@
       var map;
       var service;
       var infowindow;
+      var zonas=[];
 
       function initMap() {
         var sydney = new google.maps.LatLng(-32.962671, -61.058544);        
         infowindow = new google.maps.InfoWindow();
         var zona = new google.maps.KmlLayer({
-            url: 'https://bpas.herokuapp.com/zona_sur2.kml'
+            url: 'https://bpas.herokuapp.com/zona_sur.kml'
           });   
         var rosario = new google.maps.KmlLayer({
             url: 'https://bpas.herokuapp.com/rosario.kml'
+          }); 
+        rosario.setMap(null)
+        zonas.push(rosario);         
+        var san_lorenzo = new google.maps.KmlLayer({
+            url: 'https://bpas.herokuapp.com/san_lorenzo.kml'
           });  
-          rosario.setMap(null);    
+        san_lorenzo.setMap(null);
+        zonas.push(san_lorenzo);
+        var belgrano = new google.maps.KmlLayer({
+            url: 'https://bpas.herokuapp.com/belgrano.kml'
+          }); 
+        belgrano.setMap(null)
+        zonas.push(belgrano);   
+
+        var markers = [];   
         map = new google.maps.Map(
             document.getElementById('map'), {              
               zoom: 8,                             
@@ -115,15 +129,25 @@
           },
         300); 
         ros=document.getElementById("Rosario")
-        ros.addEventListener("click", myFunction); 
+        ros.addEventListener("click", function() {myFunction(rosario, ros.id.toLowerCase())}); 
+        console.log('ros', ros.id.toLowerCase());
+
+        bel=document.getElementById("Belgrano")
+        bel.addEventListener("click", function() {myFunction(belgrano, bel.id.toLowerCase())}); 
+        console.log('bel', bel.id.toLowerCase());
+
+        san=document.getElementById("San Lorenzo")
+        san.addEventListener("click", function() {myFunction(san_lorenzo, san.id.toLowerCase())}); 
+        console.log('san', san.id.toLowerCase());
         
           
 
-        function myFunction() {
-          console.log('ros', rosario.getMap());
-            if(rosario.getMap()!==null){
-              console.log('zona not null');             
-              rosario.setMap(null);
+        function myFunction(depto, string) {
+          
+            if(depto.getMap()!==null){
+              console.log('zona not null'); 
+              clearMarkers();            
+              clearDepartamentos();
               zona.setMap(map);
               setTimeout(function() {
           map.setZoom(8);
@@ -131,42 +155,106 @@
           },
         300); 
             }
-            else{            
-            zona.setMap(null);           
-            rosario.setMap(map);
-            mark('rosario','informe');
+            else{  
+              clearMarkers();            
+              clearDepartamentos();
+              zona.setMap(null);          
+            mark(string,'presentacion');
+            mark(string,'informe');  
+            mark(string,'entrevista');                    
+            depto.setMap(map);
+            setTimeout(function() {
+              map.setZoom(10);
+              map.set;
+              },
+            300); 
+           
           }
-            
-
         }
-        
-      }
-      
-      function mark(departamento, filtro){
-        url='https://bpas.herokuapp.com/api/localidades'
-        $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'json',
-                data: {departamento:departamento,filtro:filtro}
-              })
-              .done(function(data) {
-                console.log('id despues ajax:'+ data);               
-                
-              })
-      }
-      
 
-      function createMarker(place) {
+        
+
+        function mark(departamento, filtro){
+            url='http://bpas.herokuapp.com/api/localidades'
+            $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {departamento:departamento,filtro:filtro}
+                  })
+                  .done(function(data) {
+                    data.forEach( function(valor, indice, array) {                     
+                      var request = {
+                        query: valor.nombreLocalidad+', santa fe, argentina',
+                        fields: ['name', 'geometry', 'formatted_address','type'],
+                      };
+                      service = new google.maps.places.PlacesService(map);
+                      service.findPlaceFromQuery(request, function(results, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                          for (var i = 0; i < results.length; i++) {
+                            createMarker(results[i],filtro);
+                          }
+                          
+                        }
+                      });
+                    });                           
+                    
+                  })
+            
+        }
+
+        function createMarker(place, filtro) {
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location
         });
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
+          infowindow.setContent(place.name+' - '+filtro);
           infowindow.open(map, this);
         });
+        markers.push(marker);
       }
+       // Sets the map on all markers in the array.
+       function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
+      // Sets the map on all markers in the array.
+      function setMapOnAllDeptos(map) {
+        for (var i = 0; i < zonas.length; i++) {
+          zonas[i].setMap(map);
+        }
+      }
+      // Removes the markers from the map, but keeps them in the array.
+      function clearMarkers() {
+        setMapOnAll(null);
+      }
+
+      // Removes the deptos from the map, but keeps them in the array.
+      function clearDepartamentos() {
+        setMapOnAllDeptos(null);
+      }
+
+      // Shows any markers currently in the array.
+      function showMarkers() {
+        setMapOnAll(map);
+      }
+
+      // Deletes all markers in the array by removing references to them.
+      function deleteMarkers() {
+        clearMarkers();
+        markers = [];
+      }
+
+        
+        
+      }
+      
+      
+      
+
+      
     </script>
 @endpush
 @push ('script')
