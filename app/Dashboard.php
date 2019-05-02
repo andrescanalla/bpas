@@ -75,12 +75,12 @@ class Dashboard extends Model
             $visita=DB::table('visitas as vi')
                 ->join('tipo_visitas as tipo','vi.tipo_visita_id','=','tipo.id')       
                 ->select('vi.id','fecha','nombre', 'tipo_visita_id')           
-                ->where('fecha','>',$desde)
-                ->where('fecha','<',$hasta) 
+                ->where('fecha','>=',$desde)
+                ->where('fecha','<=',$hasta) 
                 ->where('nombre', $filtro)                
                 ->orwhere('nombre',"Presentacion y Entrevista")
-                ->where('fecha','>',$desde)
-                ->where('fecha','<',$hasta)       
+                ->where('fecha','>=',$desde)
+                ->where('fecha','<=',$hasta)       
                 ->count();
             
         }
@@ -88,8 +88,8 @@ class Dashboard extends Model
             $visita=DB::table('visitas as vi')
             ->join('tipo_visitas as tipo','vi.tipo_visita_id','=','tipo.id')       
             ->select('vi.id','fecha','nombre')           
-            ->where('fecha','>',$desde)
-            ->where('fecha','<',$hasta) 
+            ->where('fecha','>=',$desde)
+            ->where('fecha','<=',$hasta) 
             ->where('nombre',$filtro)               
             ->count();   
         }
