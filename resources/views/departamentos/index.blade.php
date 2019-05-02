@@ -106,11 +106,31 @@
           });  
         san_lorenzo.setMap(null);
         zonas.push(san_lorenzo);
+        var general_lopez = new google.maps.KmlLayer({
+            url: 'https://bpas.herokuapp.com/general_lopez.kml'
+          }); 
+        general_lopez.setMap(null)
+        zonas.push(general_lopez);
         var belgrano = new google.maps.KmlLayer({
             url: 'https://bpas.herokuapp.com/belgrano.kml'
           }); 
         belgrano.setMap(null)
-        zonas.push(belgrano);   
+        zonas.push(belgrano);
+        var iriondo = new google.maps.KmlLayer({
+            url: 'https://bpas.herokuapp.com/iriondo.kml'
+          }); 
+        iriondo.setMap(null)
+        zonas.push(iriondo);
+        var caseros = new google.maps.KmlLayer({
+            url: 'https://bpas.herokuapp.com/caseros.kml'
+          }); 
+        caseros.setMap(null)
+        zonas.push(caseros);
+        var constitucion = new google.maps.KmlLayer({
+            url: 'https://bpas.herokuapp.com/constitucion.kml'
+          }); 
+        constitucion.setMap(null)
+        zonas.push(caseros);    
 
         var markers = [];   
         map = new google.maps.Map(
@@ -139,6 +159,22 @@
         san=document.getElementById("San Lorenzo")
         san.addEventListener("click", function() {myFunction(san_lorenzo, san.id.toLowerCase())}); 
         console.log('san', san.id.toLowerCase());
+
+        cas=document.getElementById("Caseros")
+        cas.addEventListener("click", function() {myFunction(caseros, cas.id.toLowerCase())}); 
+        console.log('cas', cas.id.toLowerCase());
+
+        gen=document.getElementById("General Lopez")
+        gen.addEventListener("click", function() {myFunction(general_lopez, gen.id.toLowerCase())}); 
+        console.log('gen', gen.id.toLowerCase());
+
+        ir=document.getElementById("Iriondo")
+        ir.addEventListener("click", function() {myFunction(iriondo, ir.id.toLowerCase())}); 
+        console.log('ir', ir.id.toLowerCase());
+
+        con=document.getElementById("Constitucion")
+        con.addEventListener("click", function() {myFunction(constitucion, con.id.toLowerCase())}); 
+        console.log('con', con.id.toLowerCase());
         
           
 
