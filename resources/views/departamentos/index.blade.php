@@ -236,10 +236,34 @@
         }
 
         function createMarker(place, filtro) {
-        var marker = new google.maps.Marker({
-          map: map,
-          position: place.geometry.location
-        });
+        if(filtro=='presentacion'){
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location,
+              icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+              }          
+            });
+        }
+        if(filtro=='entrevista'){
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location,
+              icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+              }          
+            });
+        }
+        if(filtro=='informe'){
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location,
+              icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+              }          
+            });
+        }
+        
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent(place.name+' - '+filtro);
           infowindow.open(map, this);
