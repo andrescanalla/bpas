@@ -268,7 +268,7 @@
                                   {{$to->comentarios}}
                                   @endif
                                    </td>                  
-                                  <td>
+                                  <td style="min-width: 85px;">
                                     <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>
                                     <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
                                     

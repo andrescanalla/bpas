@@ -39,7 +39,7 @@
           <td>{{$visita->nombreLocalidad}}</td>
           <td>{{$visita->nombreTipoVisita}}</td>
           <td>{{$visita->comentarios}}</td>         
-          <td>          
+          <td style="min-width: 85px;">          
             <a href="" data-target="#modal-edit-{{$visita->id}}" data-toggle="modal"><button class="btn btn-info btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>             
             <a href="" data-target="#modal-delete-{{$visita->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
           </td>
