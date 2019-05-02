@@ -74,10 +74,10 @@ class Dashboard extends Model
         if($filtro=='presentacion programa' || $filtro=='entrevista' ){
             $visita=DB::table('visitas as vi')
                 ->join('tipo_visitas as tipo','vi.tipo_visita_id','=','tipo.id')       
-                ->select('vi.id','fecha','nombre')           
+                ->select('vi.id','fecha','nombre', 'tipo_visita_id')           
                 ->where('fecha','>',$desde)
                 ->where('fecha','<',$hasta) 
-                ->where('nombre',"$filtro")                
+                ->where('nombre', $filtro)                
                 ->orwhere('nombre',"Presentacion y Entrevista")
                 ->where('fecha','>',$desde)
                 ->where('fecha','<',$hasta)       
@@ -90,7 +90,7 @@ class Dashboard extends Model
             ->select('vi.id','fecha','nombre')           
             ->where('fecha','>',$desde)
             ->where('fecha','<',$hasta) 
-            ->where('nombre',"$filtro")               
+            ->where('nombre',$filtro)               
             ->count();   
         }
        
