@@ -195,9 +195,9 @@
               clearMarkers();            
               clearDepartamentos();
               zona.setMap(null);          
-              setTimeout(function() {mark(string,'presentacion'},300);
-              setTimeout(function() {mark(string,'informe'},300);
-              setTimeout(function() {mark(string,'entrevista'},300);                 
+              setTimeout(function() {mark(string,'presentacion')},300);
+              setTimeout(function() {mark(string,'informe')},300);
+              setTimeout(function() {mark(string,'entrevista')},300);                 
             depto.setMap(map);
             
            
