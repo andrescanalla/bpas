@@ -195,9 +195,9 @@
               clearMarkers();            
               clearDepartamentos();
               zona.setMap(null);          
-            mark(string,'presentacion');
-            mark(string,'informe');  
-            mark(string,'entrevista');                    
+              setTimeout(function() {mark(string,'presentacion'},300);
+              setTimeout(function() {mark(string,'informe'},300);
+              setTimeout(function() {mark(string,'entrevista'},300);                 
             depto.setMap(map);
             
            
@@ -215,7 +215,6 @@
                     data: {departamento:departamento,filtro:filtro}
                   })
                   .done(function(data) {
-                    setTimeout(console.log('1'),300);
                     data.forEach( function(valor, indice, array) {                     
                       var request = {
                         query: valor.nombreLocalidad+', santa fe, argentina',
