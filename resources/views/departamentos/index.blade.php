@@ -224,8 +224,8 @@
                         fields: ['name', 'geometry'],
                       };
                       service = new google.maps.places.PlacesService(map);
-                      setTimeout(function() {service.findPlaceFromQuery(request, function(results, status) {
-                        console.log('status', status);
+                      service.findPlaceFromQuery(request, function(results, status) {
+                        console.log('status', status,  results.length);
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                           for (var i = 0; i < results.length; i++) {
                             createMarker(results[i],filtro);
@@ -233,7 +233,8 @@
                           }
                           
                         }
-                      })},3000);
+                        
+                      });
                     });                           
                     
                   })
