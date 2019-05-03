@@ -227,7 +227,7 @@
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                           for (var i = 0; i < results.length; i++) {
                             createMarker(results[i],filtro);
-                            console.log(results[i].name, results[i].geometry.location)
+                            console.log(results[i].name, filtro)
                           }
                           
                         }
