@@ -220,7 +220,7 @@
                     data.forEach( function(valor, indice, array) {                     
                       var request = {
                         query: valor.nombreLocalidad+', santa fe, argentina',
-                        fields: ['name', 'geometry', 'formatted_address','type'],
+                        fields: ['geometry'],
                       };
                       service = new google.maps.places.PlacesService(map);
                       service.findPlaceFromQuery(request, function(results, status) {
