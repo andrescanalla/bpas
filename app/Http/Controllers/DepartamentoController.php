@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Departamento;
+use App\Dashboard;
 
 class DepartamentoController extends Controller
 {
@@ -15,8 +16,60 @@ class DepartamentoController extends Controller
     public function index()
     {
         $departamentos=Departamento::FindDepartamentos()->get(); 
+        $chartjs = app()->chartjs
+            ->name('barChartTest')
+            ->type('bar')            
+            ->labels(Dashboard::mesLabel())
+            ->datasets([  
+                [
+                    "label" => "Pres.",
+                    'backgroundColor' => '#dff0d8',                 
+                    'data' => Dashboard::CountTipoVisita('presentacion programa'),
+                    'borderColor'=> '#2e8631',
+                    'borderWidth'=> 1
+                ], 
+                [
+                    "label" => "Entrev.",
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.3)',
+                    'data' => Dashboard::CountTipoVisita('entrevista'),
+                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderWidth'=> 1
+
+                ],
+                [
+                    "label" => "Inf.",
+                    'backgroundColor' =>"#d9edf7",
+                    'data' => Dashboard::CountTipoVisita('informe'),
+                    'borderColor'=> '#31708f',
+                    'borderWidth'=> 1
+
+                ],        
+                [
+                    "label" => "Otro",
+                    'backgroundColor' => "#ddd",
+                    'data' => Dashboard::CountTipoVisita('otro'),
+                    'borderColor'=> '#777',
+                    'borderWidth'=> 1
+
+                ]             
                 
-        return view('departamentos.index',["departamentos"=>$departamentos]);
+            ])
+            ->optionsRaw("{
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                },
+                legend: { position: 'bottom' },
+                title: { display: true, text: 'Mensual' }
+                
+            }");
+            
+                
+        return view('departamentos.index', compact('chartjs'),["departamentos"=>$departamentos]);
     }
 
     /**

@@ -1,5 +1,9 @@
 @extends ('layouts.admin')
+@push ('script')
 
+<script src="{{asset('js/Chart.bundle.min.js')}}"></script>
+
+@endpush
 
 @section ('titulo') 
 <div class="row">
@@ -76,6 +80,16 @@
   <div class="panel panel-default" id="map" style="height: 80vh">
   </div>
 
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-3 col-sm-5 col-xs-5" >     
+    <div class="panel panel-default">
+      <div class="panel-heading">Visitas por Departamento<i class="fa fa-bar-chart pull-right" style="padding-top:4px"></i></div>
+      <div class="panel-body"> 
+       {!! $chartjs->render() !!}        
+      </div>
+      </div>
   </div>
 </div>
 

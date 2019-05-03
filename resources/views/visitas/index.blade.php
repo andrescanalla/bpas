@@ -20,11 +20,11 @@
       <table class="table table-borderless" id="table">
         <thead  style="background-color:#f5f5f5">         
           <th>Nº</th>
+          <th>Localidad</th>
+          <th>Tipo de Visita</th>
           <th>Fecha</th>
           <th>Departamento</th>
-          <th>Implementador</th>
-          <th>Localidad</th>
-          <th>Tipo de Visita</th>          
+          <th>Implementador</th>                    
           <th>Comentarios</th>                    
           <th>Opciones</th>
         </thead>
@@ -33,11 +33,11 @@
         @php $n++;@endphp        
         <tr>
           <td>{{$visita->id}}
-          <td>{{$visita->fecha->format('d/m/Y')}}</td>
-          <td>{{$visita->nombreDepartamento}}</td>
-          <td>{{$visita->nombreImplementador}}</td>
           <td>{{$visita->nombreLocalidad}}</td>
           <td>{{$visita->nombreTipoVisita}}</td>
+          <td>{{$visita->fecha->format('d/m/Y')}}</td>
+          <td>{{$visita->nombreDepartamento}}</td>
+          <td>{{$visita->nombreImplementador}}</td>          
           <td>{{$visita->comentarios}}</td>         
           <td style="min-width: 85px;">          
             <a href="" data-target="#modal-edit-{{$visita->id}}" data-toggle="modal"><button class="btn btn-info btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>             

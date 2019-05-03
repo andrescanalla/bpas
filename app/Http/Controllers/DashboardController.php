@@ -91,7 +91,7 @@ class DashboardController extends Controller
                     "label" => "Entrev.",
                     'backgroundColor' => 'rgba(255, 206, 86, 0.3)',
                     'data' => Dashboard::CountTipoVisita('entrevista'),
-                    'borderColor'=> 'rgba(255, 206, 86, 1)',
+                    'borderColor'=> '#ff8300',
                     'borderWidth'=> 1
 
                 ],
@@ -113,7 +113,19 @@ class DashboardController extends Controller
                 ]             
                 
             ])
-            ->options(["title"=>["display"=>true,"text"=>"Mensual"],"legend"=>["position"=>"bottom"]]);
+            ->optionsRaw("{
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                },
+                legend: { position: 'bottom' },
+                title: { display: true, text: 'Mensual' }
+                
+            }");
 
         
         $today=Carbon::now();    
