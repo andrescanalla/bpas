@@ -217,6 +217,7 @@
                     data: {departamento:departamento,filtro:filtro}
                   })
                   .done(function(data) {
+                    console.log('data:',data.count, filtro);
                     data.forEach( function(valor, indice, array) {                     
                       var request = {
                         query: valor.nombreLocalidad+', santa fe, argentina',
