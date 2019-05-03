@@ -212,6 +212,7 @@
                     url: url,
                     type: 'GET',
                     dataType: 'json',
+                    async: false, 
                     data: {departamento:departamento,filtro:filtro}
                   })
                   .done(function(data) {
@@ -250,7 +251,7 @@
               map: map,
               position: place.geometry.location,
               icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+                url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
               }          
             });
         }
