@@ -247,7 +247,7 @@
               map: map,
               position: place.geometry.location,
               icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00a65a,ff000000&scale=1.0"
               }          
             });
         }
@@ -256,7 +256,7 @@
               map: map,
               position: place.geometry.location,
               icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/orange-dot.png"
+                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=F9A825,ff000000&scale=1.0"
               }          
             });
         }
@@ -265,7 +265,7 @@
               map: map,
               position: place.geometry.location,
               icon: {
-                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=F9A825,ff000000&scale=2.0"
+                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00c0ef,ff000000&scale=1.0"
               }          
             });
         }
