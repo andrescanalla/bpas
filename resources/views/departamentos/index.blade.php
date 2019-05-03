@@ -225,7 +225,7 @@
                       };
                       service = new google.maps.places.PlacesService(map);
                       service.findPlaceFromQuery(request, function(results, status) {
-                        console.log('status', status,  results.length);
+                        console.log('status', status);
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                           for (var i = 0; i < results.length; i++) {
                             createMarker(results[i],filtro);
