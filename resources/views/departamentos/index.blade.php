@@ -211,8 +211,7 @@
             $.ajax({
                     url: url,
                     type: 'GET',
-                    dataType: 'json',
-                    async: false, 
+                    dataType: 'json',                    
                     data: {departamento:departamento,filtro:filtro}
                   })
                   .done(function(data) {
@@ -242,7 +241,7 @@
               map: map,
               position: place.geometry.location,
               icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
               }          
             });
         }
@@ -251,7 +250,7 @@
               map: map,
               position: place.geometry.location,
               icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
+                url: "https://maps.google.com/mapfiles/ms/icons/orange-dot.png"
               }          
             });
         }
@@ -260,7 +259,7 @@
               map: map,
               position: place.geometry.location,
               icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
               }          
             });
         }
