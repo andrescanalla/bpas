@@ -265,7 +265,7 @@
               map: map,
               position: place.geometry.location,
               icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=F9A825,ff000000&scale=2.0"
               }          
             });
         }
