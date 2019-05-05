@@ -25,7 +25,7 @@
     <div class="table-responsive">
       <table class="table table-condensed table-hover" id="table" style="margin-bottom:0px">
         <thead style="background-color:#f5f5f5">
-          <th>id</th>  
+          <th></th>  
           <th>Departamento</th>
           <th>Implementador</th>  
           <th>Localidades</th>         
@@ -37,7 +37,7 @@
         @php $nx++;@endphp
         
         <tr id="{{$departamento->nombreDepartamento}}" name="no">
-          <td>{{$departamento->id}}</td>                
+          <td></td>                
           <td>{{$departamento->nombreDepartamento}}</td>
           <td>{{$departamento->nombreImplementador}} {{$departamento->apellido}}</td>
           <td>{{$departamento->cantidad_localidades}}</td>

@@ -95,12 +95,14 @@
             <li class="treeview">
               <a href="/departamentos">
                 <i class="fa fa-globe" aria-hidden="true"></i>
-                <span>Departamentos</span>   </a>             
+                <span>Departamentos</span>               
                 <i class="fa fa-angle-left pull-right"></i>
+                </a> 
                 
                 
               
               <ul class="treeview-menu">
+                <li><a href="/departamentos"><i class="fa fa-circle-o"></i> Resumen</a></li>
                  <li><a href="/departamentos/3"><i class="fa fa-circle-o"></i> Belgrano</a></li>
                  <li><a href="/departamentos/2"><i class="fa fa-circle-o"></i> Caseros</a></li>
                  <li><a href="/departamentos/8"><i class="fa fa-circle-o"></i> Constitucion</a></li>
