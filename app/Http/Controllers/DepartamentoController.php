@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Departamento;
 use App\Dashboard;
 use App\Localidad;
+use App\Visita;
+use App\TipoVisita;
+use App\Implementador;
 
 class DepartamentoController extends Controller
 {
@@ -15,7 +18,7 @@ class DepartamentoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $departamentos=Departamento::FindDepartamentos()->get(); 
         $chartjs = app()->chartjs
             ->name('barChartTest')
@@ -102,9 +105,14 @@ class DepartamentoController extends Controller
      */
     public function show($id)
     {   
-        $departamento=Departamento::findOrFail($id);        
-        $localidades=Localidad::SearchText($departamento->nombre)->get();       
-        return view('departamentos.show', compact('localidades','departamento'));
+        $numeros=Departamento::FindDepartamentos()->where('departamentos.id',$id)->first();         
+        $departamento=Departamento::findOrFail($id); 
+        $searchText=$departamento->nombre;       
+        $localidades=Localidad::SearchText($departamento->nombre)->get();
+        $visitas=Visita::SearchText($departamento->nombre)->get();
+        $implementadores=Implementador::get();
+        $tipoVisitas=TipoVisita::get();            
+        return view('departamentos.show', compact('tipoVisitas','implementadores','localidades','departamento','numeros', 'visitas', 'searchText'));
     }
 
     /**

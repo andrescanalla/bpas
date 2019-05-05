@@ -20,97 +20,173 @@
 
 @section ('contenido')   
 <div class="row">
-  <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
     <div class="row">
       <div class="col-lg-12 col-md-3 col-sm-5 col-xs-5" >     
         <div class="panel panel-default">
-          <div class="panel-heading">Visitas por Departamento<i class="fa fa-bar-chart pull-right" style="padding-top:4px"></i></div>
+          <div class="panel-heading">Implementador: <b>{{$numeros->nombreImplementador}} {{$numeros->apellido}}</b> <span class="badge pull-right" style="padding-top:4px">{{$numeros->cantidad_localidades}} Localidades</span></div>
           <div class="panel-body"> 
+          <div class="row">
+          <div class="col-lg-4 col-md-3 col-sm-5 col-xs-5" > 
+          <label>Presentaciones ({{round($numeros->pre/$numeros->cantidad_localidades*100)}}%)</label>
+          </div>
+          <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$numeros->pre}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->pre/$numeros->cantidad_localidades*100}}%">
+              {{$numeros->pre}} Presentaciones 
+              </div>             
+            </div>              
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-lg-4 col-md-3 col-sm-5 col-xs-5" > 
+          <label>Entrevistas ({{round($numeros->entre/$numeros->cantidad_localidades*100)}}%)</label>
+          </div>
+          <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{$numeros->entre}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->entre/$numeros->cantidad_localidades*100}}%">
+              {{$numeros->entre}} Entrevistas 
+              </div>             
+            </div> 
+            </div> 
+            </div>
+            <div class="row">
+            <div class="col-lg-4 col-md-3 col-sm-5 col-xs-5" > 
+          <label>Informes ({{round($numeros->info/$numeros->cantidad_localidades*100)}}%)</label>
+          </div>
+          <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{$numeros->info}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->info/$numeros->cantidad_localidades*100}}%">
+              {{$numeros->info}} Informes 
+              </div>             
+            </div>
+            </div>
+            </div>
             
           </div>
         </div>
       </div>
     </div>
 
-  <div class="panel with-nav-tabs panel-default" style="padding:0; margin-bottom:0">
-    <div class="panel-heading" style="min-height:42px">
-      <div class="pull-left">
-        <ul class="nav nav-tabs">           
-            <li class="active"><a href="#tab1default" data-toggle="tab">Localidades</a></li>
-            <li><a href="#tab2default" data-toggle="tab" id="tab-pedido">Visitas</a></li>                         
-        </ul>
-      </div>   
-    </div> 
+    <div class="panel with-nav-tabs panel-default" style="padding:0; margin-bottom:0">
+      <div class="panel-heading" style="min-height:42px">
+        <div class="pull-left">
+          <ul class="nav nav-tabs">          
+             
+              <li class="active"><a href="#tab2default" data-toggle="tab" >Visitas</a></li>  
+              <li ><a href="#tab1default" data-toggle="tab">Localidades</a></li>                       
+          </ul>
+        </div>   
+      </div> 
 
-    <div class="panel-body" style="padding-top:0; min-height:620px">
-        <div class="tab-content"> 
-          <div class="tab-pane fade in active" id="tab1default">  
-            <div class="table-responsive">
-              <table class="table table-condensed table-hover" id="table" style="margin-bottom:0px">
-                <thead >                   
-                  <th>Localidad</th>
-                  <th>Presentacion</th>  
-                  <th>Entrevista</th>         
-                  <th>Informe</th>          
-                  <th style="text-align: center;">Detalle</th>
-                </thead>
-                @php $nx=0;@endphp                
-                @foreach ($localidades as $localidad)
-                @php $nx++;@endphp
-                
-                <tr>                                
-                  <td>{{$localidad->nombreLocalidad}}</td>
-                  <td style="text-align: center;">
-                  @if($localidad->presentacion==1)
-                  <span style=" color: Green;">
-                  <i class="fa fa-check" aria-hidden="true"></i>
-                  <input type="hidden" val="1">
-                  </span>
-                  @else
-                  <span style=" color: Tomato;">
-                  <i class="fa fa-times" aria-hidden="true"></i>
-                  </span>
-                  @endif
-                  </td>
-                  <td style="text-align: center;">
-                  @if($localidad->entrevista==1)
-                  <span style=" color: Green;">
-                  <i class="fa fa-check" aria-hidden="true"></i>
-                  <input type="hidden" val="1">
-                  </span>
-                  @else
-                  <span style=" color: Tomato;">
-                  <i class="fa fa-times" aria-hidden="true"></i>
-                  </span>
-                  @endif</td> 
-                  <td style="text-align: center;">
-                  @if($localidad->informe==1)
-                  <span style=" color: Green;">
-                  <i class="fa fa-check" aria-hidden="true"></i>
-                  <input type="hidden" val="1">
-                  </span>
-                  @else
-                  <span style=" color: Tomato;">
-                  <i class="fa fa-times" aria-hidden="true"></i>
-                  </span>
-                  @endif</td> 
+      <div class="panel-body" style="padding-top:0;">
+          <div class="tab-content"> 
+            <div class="tab-pane fade " id="tab1default">  
+              <div class="table-responsive">
+                <table class="table table-condensed table-hover" id="table" style="margin-bottom:0px">
+                  <thead >                   
+                    <th>Localidad</th>
+                    <th style="text-align: center;">Presentacion</th>  
+                    <th style="text-align: center;">Entrevista</th>         
+                    <th style="text-align: center;">Informe</th>          
+                    <th style="text-align: center;">+ Info</th>
+                  </thead>
+                  @php $nx=0;@endphp                
+                  @foreach ($localidades as $localidad)
+                  @php $nx++;@endphp
                   
-                  <td style="text-align: center;">            
-                  <a href="/localidades/{{$localidad->id}}"> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-right:30%;padding-bottom:0"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </button>   </a>        
+                  <tr>                                
+                    <td>{{$localidad->nombreLocalidad}}</td>
+                    <td style="text-align: center;">
+                    @if($localidad->presentacion==1)
+                    <span style=" color: Green;">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <input type="hidden" val="1">
+                    </span>
+                    @else
+                    <span style=" color: Tomato;">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                    @endif
+                    </td>
+                    <td style="text-align: center;">
+                    @if($localidad->entrevista==1)
+                    <span style=" color: Green;">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <input type="hidden" val="1">
+                    </span>
+                    @else
+                    <span style=" color: Tomato;">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                    @endif</td> 
+                    <td style="text-align: center;">
+                    @if($localidad->informe==1)
+                    <span style=" color: Green;">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <input type="hidden" val="1">
+                    </span>
+                    @else
+                    <span style=" color: Tomato;">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                    @endif</td> 
+                    
+                    <td style="text-align: center;">            
+                    <a href="/localidades/{{$localidad->id}}"> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-right:30%;padding-bottom:0"><i class="fa fa-info-circle" aria-hidden="true"></i> </button>   </a>        
+                    </td>
+                  </tr>
+                  
+                  @endforeach
+                  
+                </table>
+              </div>
+            </div> 
+
+            <div class="tab-pane fade in active" id="tab2default">  
+              <div class="table-responsive">
+              <table class="table table-borderless" id="table2">
+                <thead>              
+                  <th>Fecha</th>
+                  <th>Localidad</th>
+                  <th>Tipo de Visita</th>                              
+                  <th>Comentarios</th>                    
+                  <th>Opciones</th>
+                </thead>
+                @php $n=0;@endphp
+                @foreach ($visitas as $visita)
+                @php $n++;@endphp        
+                @if ($visita->idTipoVisita=="1")                
+                  <tr class="success">                  
+                @elseif ($visita->idTipoVisita=="2"||$visita->idTipoVisita=="3")                  
+                  <tr class="warning">                  
+                @elseif ($visita->idTipoVisita=="4")                   
+                  <tr class="info">                           
+                @else                 
+                  <tr>                 
+                @endif            
+                  <td>{{$visita->fecha->format('d/m/Y')}}</td>
+                  <td>{{$visita->nombreLocalidad}}</td>
+                  <td>{{$visita->nombreTipoVisita}}</td>                        
+                  <td>{{$visita->comentarios}}</td>         
+                  <td style="min-width: 91px;">
+                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-delete-{{$visita->id}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>          
+                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit-{{$visita->id}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
                   </td>
-                </tr>
-                
+                </tr>  
+                @include('departamentos.modal.delete')    
+                @include('departamentos.modal.edit')     
                 @endforeach
                 
               </table>
+              </div>
             </div>
-         </div>
-         </div>
-    </div>
+          </div>
+      </div>
 
+    </div>
   </div>
-  </div>
-  <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
   <div class="row" style="margin-right:0">
       <div class="panel panel-default" id="map" style="height: 40vh">
       </div>
@@ -131,7 +207,31 @@
 
 
 @push ('scripts')
+<script src="//cdn.datatables.net/plug-ins/1.10.19/sorting/date-uk.js"></script>
 <script>
+
+
+
+$(document).ready(function() {
+  $('#table2').DataTable( {
+    "paging":   false,
+     "info":   false,
+    "searching": false,
+    "columnDefs": [ 
+            
+            {
+                "targets": [ 4 ],
+                "orderable": false,
+            },
+            { type: 'date-uk', targets: 0 }
+        ],
+      "order": [[ 0, "desc" ]]
+    } );
+} );
+
+
+
+
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
@@ -219,7 +319,7 @@
         }
         
         setTimeout(function() {
-          map.setZoom(8);
+          map.setZoom(9);
           map.set;
           },
         300); 
@@ -336,6 +436,7 @@
         clearMarkers();
         markers = [];
       }
+
 
         
         
