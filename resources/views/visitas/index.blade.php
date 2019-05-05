@@ -53,7 +53,7 @@
     {{$visitas->appends(Request::only(['searchText']))->render()}}
   </div>
 </div>
-push ('script')
+@push ('script')
 
  <script>
 
