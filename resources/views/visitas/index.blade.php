@@ -20,9 +20,9 @@
       <table class="table table-borderless" id="table">
         <thead  style="background-color:#f5f5f5">         
           <th>Nº</th>
-          <th>Localidad</th>
-          <th>Tipo de Visita</th>
           <th>Fecha</th>
+          <th>Localidad</th>
+          <th>Tipo de Visita</th>          
           <th>Departamento</th>
           <th>Implementador</th>                    
           <th>Comentarios</th>                    
@@ -33,9 +33,9 @@
         @php $n++;@endphp        
         <tr>
           <td>{{$visita->id}}
-          <td>{{$visita->nombreLocalidad}}</td>
-          <td>{{$visita->nombreTipoVisita}}</td>
           <td>{{$visita->fecha->format('d/m/Y')}}</td>
+          <td>{{$visita->nombreLocalidad}}</td>
+          <td>{{$visita->nombreTipoVisita}}</td>          
           <td>{{$visita->nombreDepartamento}}</td>
           <td>{{$visita->nombreImplementador}}</td>          
           <td>{{$visita->comentarios}}</td>         
@@ -53,6 +53,29 @@
     {{$visitas->appends(Request::only(['searchText']))->render()}}
   </div>
 </div>
+push ('script')
 
+ <script>
+
+$(document).ready(function() {
+  $('#table').DataTable( {
+    "paging":   false,
+     "info":   false,
+    "searching": false,
+    "order": [[ 0, "asc" ]],
+    "columnDefs": [ 
+            
+            {
+                "targets": [ 7 ],
+                "orderable": false,
+            }    
+        ]
+    } );
+} );
+
+
+
+</script> 
+@endpush  
 
 @endsection
