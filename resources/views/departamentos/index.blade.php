@@ -210,8 +210,8 @@
               clearDepartamentos();
               zona.setMap(null);                      
               mark(string,'presentacion');
-              setTimeout(function() { mark(string,'entrevista'), consolo.log('entrevista')}, 500);    
-              setTimeout(function() { mark(string,'informe'), consolo.log('informe')}, 500);
+              setTimeout(function() { mark(string,'entrevista'), console.log('entrevista')}, 1000);    
+              setTimeout(function() { mark(string,'informe'), console.log('informe')}, 1000);
               depto.setMap(map);
                            
            
