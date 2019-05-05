@@ -40,7 +40,8 @@ class Departamento extends Model
             DB::raw('sum(localidades.entrevista) as entre'),
             DB::raw('sum(localidades.informe) as info')           
             )
-        ->groupBy('implementadores.apellido','nombreImplementador','departamentos.id','nombreDepartamento','departamentos.cantidad_localidades');
+        ->groupBy('implementadores.apellido','nombreImplementador','departamentos.id','nombreDepartamento','departamentos.cantidad_localidades')
+        ->orderBY('nombreDepartamento');
     }
 
 }

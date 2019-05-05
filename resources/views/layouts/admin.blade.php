@@ -101,9 +101,13 @@
                 
               
               <ul class="treeview-menu">
-                 <li><a href="/departamentos/belgrano"><i class="fa fa-circle-o"></i> Belgrano</a></li>
-                <li><a href="/departamentos/caseros"><i class="fa fa-circle-o"></i> Caseros</a></li>
-               
+                 <li><a href="/departamentos/3"><i class="fa fa-circle-o"></i> Belgrano</a></li>
+                 <li><a href="/departamentos/2"><i class="fa fa-circle-o"></i> Caseros</a></li>
+                 <li><a href="/departamentos/8"><i class="fa fa-circle-o"></i> Constitucion</a></li>
+                 <li><a href="/departamentos/7"><i class="fa fa-circle-o"></i> General Lopez</a></li>
+                 <li><a href="/departamentos/4"><i class="fa fa-circle-o"></i> Iriondo</a></li> 
+                 <li><a href="/departamentos/6"><i class="fa fa-circle-o"></i> Rosario</a></li> 
+                 <li><a href="/departamentos/5"><i class="fa fa-circle-o"></i> San Lorenzo</a></li>        
                
               </ul>              
             </li>
