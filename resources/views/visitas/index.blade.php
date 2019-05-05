@@ -32,7 +32,7 @@
         @foreach ($visitas as $visita)
         @php $n++;@endphp        
         <tr>
-          <td>{{$visita->id}}
+          <td>{{$n}} </td>{{--$visita->id--}}
           <td>{{$visita->fecha->format('d/m/Y')}}</td>
           <td>{{$visita->nombreLocalidad}}</td>
           <td>{{$visita->nombreTipoVisita}}</td>          
@@ -62,7 +62,7 @@ $(document).ready(function() {
     "paging":   false,
      "info":   false,
     "searching": false,
-    "order": [[ 0, "asc" ]],
+    "order": [[ 1, "asc" ]],
     "columnDefs": [ 
             
             {
