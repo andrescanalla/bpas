@@ -66,7 +66,7 @@
           </td>
           
           <td style="text-align: center;">            
-           <a href="departamentos/{{$departamento->id}}"> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-info-circle" aria-hidden="true"></i> </button>   </a>        
+           <a href="departamentos/{{$departamento->id}}"> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:35%;padding-right:30%,padding-bottom:0"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </button>   </a>        
           </td>
         </tr>
         
