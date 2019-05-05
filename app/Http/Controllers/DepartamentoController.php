@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Departamento;
 use App\Dashboard;
+use App\Localidad;
 
 class DepartamentoController extends Controller
 {
@@ -100,8 +101,10 @@ class DepartamentoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $departamento=Departamento::findOrFail($id);        
+        $localidades=Localidad::SearchText($departamento->nombre)->get();       
+        return view('departamentos.show', compact('localidades','departamento'));
     }
 
     /**
