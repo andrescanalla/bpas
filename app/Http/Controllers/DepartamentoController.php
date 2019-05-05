@@ -160,8 +160,7 @@ class DepartamentoController extends Controller
                         stacked: true
                     }]
                 },
-                legend: { position: 'bottom' },
-                title: { display: true, text: 'Mensual' }
+                legend: { position: 'bottom' }
                 
             }");
 
