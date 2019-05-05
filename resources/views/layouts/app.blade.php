@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="preload" as="image" href='/images/img.jpg'>
 </head>
 <body>
     <div id="app" style="background-image: url('/images/img.jpg');height: 100vh; background-size: cover">
