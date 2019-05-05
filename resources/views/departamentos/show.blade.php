@@ -196,7 +196,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">Visitas por Departamento<i class="fa fa-bar-chart pull-right" style="padding-top:4px"></i></div>
       <div class="panel-body"> 
-         
+      {!! $chartjs->render() !!}  
       </div>
       </div>
   

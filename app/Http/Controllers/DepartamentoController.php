@@ -111,8 +111,63 @@ class DepartamentoController extends Controller
         $localidades=Localidad::SearchText($departamento->nombre)->get();
         $visitas=Visita::SearchText($departamento->nombre)->get();
         $implementadores=Implementador::get();
-        $tipoVisitas=TipoVisita::get();            
-        return view('departamentos.show', compact('tipoVisitas','implementadores','localidades','departamento','numeros', 'visitas', 'searchText'));
+        $tipoVisitas=TipoVisita::get();    
+        
+        $chartjs = app()->chartjs
+            ->name('barChartTest')
+            ->type('bar')            
+            ->labels(Dashboard::mesLabel())
+            ->datasets([  
+                [
+                    "label" => "Pres.",
+                    'backgroundColor' => '#dff0d8',                 
+                    'data' => Dashboard::CountTipoVisitaDepto('presentacion programa',$id),
+                    'borderColor'=> '#2e8631',
+                    'borderWidth'=> 1
+                ], 
+                [
+                    "label" => "Entrev.",
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.3)',
+                    'data' => Dashboard::CountTipoVisitaDepto('entrevista',$id),
+                    'borderColor'=> '#ff8300',
+                    'borderWidth'=> 1
+
+                ],
+                [
+                    "label" => "Inf.",
+                    'backgroundColor' =>"#d9edf7",
+                    'data' => Dashboard::CountTipoVisitaDepto('informe',$id),
+                    'borderColor'=> '#31708f',
+                    'borderWidth'=> 1
+
+                ],        
+                [
+                    "label" => "Otro",
+                    'backgroundColor' => "#ddd",
+                    'data' => Dashboard::CountTipoVisitaDepto('otro',$id),
+                    'borderColor'=> '#777',
+                    'borderWidth'=> 1
+
+                ]             
+                
+            ])
+            ->optionsRaw("{
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                },
+                legend: { position: 'bottom' },
+                title: { display: true, text: 'Mensual' }
+                
+            }");
+
+            
+
+        return view('departamentos.show', compact('chartjs','tipoVisitas','implementadores','localidades','departamento','numeros', 'visitas', 'searchText'));
     }
 
     /**

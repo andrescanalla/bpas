@@ -97,12 +97,53 @@ class Dashboard extends Model
        
         return ($visita);
     }
+    public static function countTotalDepto($filtro, $desde, $hasta, $depto){ 
+        if($filtro=='presentacion programa' || $filtro=='entrevista' ){
+            $visita=DB::table('visitas as vi')
+                ->join('tipo_visitas as tipo','vi.tipo_visita_id','=','tipo.id')
+                ->join('localidades','vi.localidad_id','=','localidades.id')       
+                ->select('vi.id','fecha','tipo.nombre', 'tipo_visita_id','localidades.departamento_id')           
+                ->where('fecha','>=',$desde)
+                ->where('fecha','<=',$hasta) 
+                ->where('tipo.nombre', $filtro) 
+                ->where('localidades.departamento_id',$depto)                 
+                ->orwhere('tipo.nombre',"Presentacion y Entrevista")
+                ->where('fecha','>=',$desde)
+                ->where('fecha','<=',$hasta)
+                ->where('localidades.departamento_id',$depto)          
+                ->count();
+            
+        }
+        else{
+            $visita=DB::table('visitas as vi')
+            ->join('tipo_visitas as tipo','vi.tipo_visita_id','=','tipo.id') 
+            ->join('localidades','vi.localidad_id','=','localidades.id')        
+            ->select('vi.id','fecha','tipo.nombre','localidades.departamento_id')           
+            ->where('fecha','>=',$desde)
+            ->where('fecha','<=',$hasta) 
+            ->where('tipo.nombre',$filtro)  
+            ->where('localidades.departamento_id',$depto)               
+            ->count();   
+        }
+       
+       
+        return ($visita);
+    }
 
 	public static function CountTipoVisita($filtro){       
 		$meses=Dashboard::mesesData();        
         $visitas=[];
         foreach ($meses as $mes) {
             $visita=Dashboard::countTotal($filtro, $mes[0], $mes[1]);               
+            array_push($visitas, $visita);
+        }         
+        return ($visitas);           
+    }
+    public static function CountTipoVisitaDepto($filtro, $depto){       
+		$meses=Dashboard::mesesData();        
+        $visitas=[];
+        foreach ($meses as $mes) {
+            $visita=Dashboard::countTotalDepto($filtro, $mes[0], $mes[1],$depto);               
             array_push($visitas, $visita);
         }         
         return ($visitas);           
