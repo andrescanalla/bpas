@@ -62,7 +62,7 @@ $(document).ready(function() {
     "paging":   false,
      "info":   false,
     "searching": false,
-    "order": [[ 1, "asc" ]],
+    "order": [[ 0, "asc" ]],
     "columnDefs": [ 
             
             {
