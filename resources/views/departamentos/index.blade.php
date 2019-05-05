@@ -30,7 +30,7 @@
           <th>Implementador</th>  
           <th>Localidades</th>         
           <th>Actividades</th>          
-          <th>Detalle</th>
+          <th style="text-align: center;">Detalle</th>
         </thead>
         @php $nx=0;@endphp                
         @foreach ($departamentos as $departamento)
@@ -210,8 +210,8 @@
               clearDepartamentos();
               zona.setMap(null);                      
               mark(string,'presentacion');
-              mark(string,'entrevista');    
-              mark(string,'informe');
+              setTimeout(function() { mark(string,'entrevista'), consolo.log('entrevista')}, 500);    
+              setTimeout(function() { mark(string,'informe'), consolo.log('informe')}, 500);
               depto.setMap(map);
                            
            
