@@ -121,14 +121,14 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/informes/acumulado"><i class="fa fa-circle-o"></i>Acumulado</a></li>
-                <li><a href="/informes/mensual"><i class="fa fa-circle-o"></i>Mensual</a></li>               
+                <li><a href="/informe/resumen"><i class="fa fa-circle-o"></i>Resumen</a></li>
+                <li><a href="/informe/mensual"><i class="fa fa-circle-o"></i>Mensual</a></li>               
               </ul>
             </li>     
 
             
             <li class="treeview">
-              <a href="/ventas/cliente">
+              <a href="/contactos">
                 <i class="fa fa-address-book" aria-hidden="true"></i>
                 <span>Contactos</span>
                  <i class="fa fa-angle-left pull-right"></i>
