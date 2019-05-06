@@ -8,7 +8,7 @@
 @section ('titulo') 
 <div class="row">
   <div class="col-lg-9 col-md-8 col-sm-6 col-xs-6" name="nombre" id="{{$departamento->nombre}}">        
-  {{$departamento->nombre}}
+  Departamento {{$departamento->nombre}}
   </div>
   <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-top:5px">        
     
@@ -86,7 +86,8 @@
           <ul class="nav nav-tabs">          
              
               <li class="active"><a href="#tab2default" data-toggle="tab" >Visitas</a></li>  
-              <li ><a href="#tab1default" data-toggle="tab">Localidades</a></li>                       
+              <li ><a href="#tab1default" data-toggle="tab">Localidades</a></li>    
+              <li ><a href="#tab3default" data-toggle="tab">Contactos</a></li>                     
           </ul>
         </div>   
       </div> 
@@ -193,6 +194,44 @@
               </table>
               </div>
             </div>
+
+            <div class="tab-pane fade " id="tab3default">  
+              <div class="table-responsive">
+                <table class="table table-condensed table-hover" id="table" style="margin-bottom:0px">
+                  <thead >                   
+                    <th>Nombre</th>                    
+                    <th>Cargo</th>         
+                    <th>Celular</th>          
+                    <th>Email</th>
+                    <th>Comentarios</th>
+                    <th style="min-width: 91px;">
+                      <div class="btn-group pull-right">
+                        <button class="btn btn-link pull-right" data-toggle="modal" data-target="#btnModal" style="padding-top:0;padding-bottom:0"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                      </div>
+                    </th>
+                  </thead>
+                  @php $nx=0;@endphp                
+                
+                  @php $nx++;@endphp
+                  
+                  <tr>                                
+                    <td>Jose Veedorelli</td>                    
+                    <td>Veedor</td>
+                    <td>+54 9 341 6056865</td>
+                    <td>joseveedor@gmail.com</td>
+                    <td>Es el unico Veedor de la comuna</td>
+                    <td>
+                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-delete-{{$visita->id}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>          
+                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit-{{$visita->id}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>                  
+                    </td>
+                  </tr>
+                  
+                 
+                  
+                </table>
+              </div>
+            </div>
+
           </div>
       </div>
 
