@@ -96,7 +96,7 @@
           <div class="tab-content"> 
             <div class="tab-pane fade " id="tab1default">  
               <div class="table-responsive">
-                <table class="table table-condensed table-hover" id="table" style="margin-bottom:0px">
+                <table class="table table-condensed table-hover" id="table1" style="margin-bottom:0px">
                   <thead >                   
                     <th>Localidad</th>
                     <th style="text-align: center;">Presentacion</th>  
@@ -162,7 +162,7 @@
                 <thead>              
                   <th>Fecha</th>
                   <th>Localidad</th>
-                  <th>Tipo de Visita</th>                              
+                  <th>Visita</th>                              
                   <th>Comentarios</th>                    
                   <th>Opciones</th>
                 </thead>
@@ -178,7 +178,7 @@
                 @else                 
                   <tr>                 
                 @endif            
-                  <td>{{$visita->fecha->format('d/m/Y')}}</td>
+                  <td>{{$visita->fecha->format('d/m/y')}}</td>
                   <td>{{$visita->nombreLocalidad}}</td>
                   <td>{{$visita->nombreTipoVisita}}</td>                        
                   <td>{{$visita->comentarios}}</td>         
@@ -263,21 +263,30 @@
 
 
 $(document).ready(function() {
-  $('#table2').DataTable( {
+  $('#table2').DataTable({
     "paging":   false,
-     "info":   false,
+    "info":   false,
     "searching": false,
-    "columnDefs": [ 
-            
-            {
-                "targets": [ 4 ],
-                "orderable": false,
-            },
-            { type: 'date-uk', targets: 0 }
-        ],
-      "order": [[ 0, "desc" ]]
-    } );
-} );
+    "columnDefs": [    
+      {"targets": [ 4 ],
+       "orderable": false,
+      },
+      { type: 'date-uk', targets: 0 }
+    ],
+    "order": [[ 0, "desc" ]]
+    });
+$('#table1').DataTable({
+    "paging":   false,
+    "info":   false,
+    "searching": false,
+    "columnDefs": [    
+      {"targets": [ 4 ],
+       "orderable": false,
+     }     
+    ],
+    "order": [[ 0, "asc" ]]
+    });
+});
 
 
 

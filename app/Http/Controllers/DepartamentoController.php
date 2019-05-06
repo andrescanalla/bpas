@@ -109,7 +109,7 @@ class DepartamentoController extends Controller
         $numeros=Departamento::FindDepartamentos()->where('departamentos.id',$id)->first();         
         $departamento=Departamento::findOrFail($id); 
         $searchText=$departamento->nombre;       
-        $localidades=Localidad::SearchText($departamento->nombre)->get();
+        $localidades=Localidad::SearchText($departamento->nombre)->orderBy('nombreLocalidad', 'asc')->get();
         $visitas=Visita::SearchText($departamento->nombre)->get();
         $implementadores=Implementador::get();
         $tipoVisitas=TipoVisita::get(); 
