@@ -9,6 +9,7 @@ use App\Localidad;
 use App\Visita;
 use App\TipoVisita;
 use App\Implementador;
+use Carbon\Carbon;
 
 class DepartamentoController extends Controller
 {
@@ -111,7 +112,9 @@ class DepartamentoController extends Controller
         $localidades=Localidad::SearchText($departamento->nombre)->get();
         $visitas=Visita::SearchText($departamento->nombre)->get();
         $implementadores=Implementador::get();
-        $tipoVisitas=TipoVisita::get();    
+        $tipoVisitas=TipoVisita::get(); 
+        $timebar= Carbon::parse('2018-10-01')->diffInMonths(Carbon::now());  
+        
         
         $chartjs = app()->chartjs
             ->name('barChartTest')
@@ -166,7 +169,7 @@ class DepartamentoController extends Controller
 
             
 
-        return view('departamentos.show', compact('chartjs','tipoVisitas','implementadores','localidades','departamento','numeros', 'visitas', 'searchText'));
+        return view('departamentos.show', compact('timebar','chartjs','tipoVisitas','implementadores','localidades','departamento','numeros', 'visitas', 'searchText'));
     }
 
     /**

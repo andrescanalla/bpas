@@ -20,49 +20,61 @@
 
 @section ('contenido')   
 <div class="row">
-  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
     <div class="row">
       <div class="col-lg-12 col-md-3 col-sm-5 col-xs-5" >     
         <div class="panel panel-default">
           <div class="panel-heading">Implementador: <b>{{$numeros->nombreImplementador}} {{$numeros->apellido}}</b> <span class="badge pull-right" style="padding-top:4px">{{$numeros->cantidad_localidades}} Localidades</span></div>
           <div class="panel-body"> 
-          <div class="row">
-          <div class="col-lg-4 col-md-3 col-sm-5 col-xs-5" > 
-          <label>Presentaciones ({{round($numeros->pre/$numeros->cantidad_localidades*100)}}%)</label>
-          </div>
-          <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
-            <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$numeros->pre}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->pre/$numeros->cantidad_localidades*100}}%">
-              {{$numeros->pre}} Presentaciones 
-              </div>             
-            </div>              
-            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="padding-right:0"> 
+                  <label>Oct-18 / Nov-19<label>
+                </div>
+                <div class="col-lg-9 col-md-3 col-sm-5 col-xs-5" > 
+                  <div class="progress" style="margin-bottom:0">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{$timebar}}" aria-valuemin="0" aria-valuemax="14" style="width: 45%">
+                      <span >{{$timebar}} meses ({{$timebar/14*100}}%)</span>
+                    </div>
+                  </div>
+                </div>                
             </div>
             <div class="row">
-            <div class="col-lg-4 col-md-3 col-sm-5 col-xs-5" > 
-          <label>Entrevistas ({{round($numeros->entre/$numeros->cantidad_localidades*100)}}%)</label>
-          </div>
-          <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
-            <div class="progress">
-              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{$numeros->entre}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->entre/$numeros->cantidad_localidades*100}}%">
-              {{$numeros->entre}} Entrevistas 
-              </div>             
-            </div> 
-            </div> 
+              <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" > 
+              <label>Presentaciones ({{round($numeros->pre/$numeros->cantidad_localidades*100)}}%)</label>
+              </div>
+              <div class="col-lg-9 col-md-3 col-sm-5 col-xs-5" > 
+                <div class="progress" style="margin-bottom:0">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$numeros->pre}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->pre/$numeros->cantidad_localidades*100}}%">
+                  {{$numeros->pre}} Presentaciones 
+                  </div>             
+                </div>              
+              </div>
             </div>
             <div class="row">
-            <div class="col-lg-4 col-md-3 col-sm-5 col-xs-5" > 
-          <label>Informes ({{round($numeros->info/$numeros->cantidad_localidades*100)}}%)</label>
-          </div>
-          <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
-            <div class="progress">
-              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{$numeros->info}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->info/$numeros->cantidad_localidades*100}}%">
-              {{$numeros->info}} Informes 
-              </div>             
+              <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" > 
+                <label>Entrevistas ({{round($numeros->entre/$numeros->cantidad_localidades*100)}}%)</label>
+              </div>
+              <div class="col-lg-9 col-md-3 col-sm-5 col-xs-5" > 
+                <div class="progress" style="margin-bottom:0">
+                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{$numeros->entre}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->entre/$numeros->cantidad_localidades*100}}%">
+                  {{$numeros->entre}} Entrevistas 
+                  </div>             
+                </div> 
+              </div> 
             </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" > 
+                <label>Informes ({{round($numeros->info/$numeros->cantidad_localidades*100)}}%)</label>
+              </div>
+              <div class="col-lg-9 col-md-3 col-sm-5 col-xs-5" > 
+                <div class="progress" style="margin-bottom:0">
+                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{$numeros->info}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->info/$numeros->cantidad_localidades*100}}%">
+                    {{$numeros->info}} Informes 
+                  </div>             
+                </div>
+              </div>
             </div>
-            </div>
-            
+                        
           </div>
         </div>
       </div>
@@ -186,22 +198,21 @@
 
     </div>
   </div>
-  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-  <div class="row" style="margin-right:0">
-      <div class="panel panel-default" id="map" style="height: 40vh">
-      </div>
-  </div>
-  <div class="row" style="margin-right:0">
-     
-    <div class="panel panel-default">
-      <div class="panel-heading">Visitas por Mes<i class="fa fa-bar-chart pull-right" style="padding-top:4px"></i></div>
-      <div class="panel-body"> 
-      {!! $chartjs->render() !!}  
-      </div>
-      </div>
-  
-</div>
-
+  <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+    <div class="row" style="margin-right:0">
+        <div class="panel panel-default" id="map" style="height: 40vh">
+        </div>
+    </div>
+    <div class="row" style="margin-right:0">
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">Visitas por Mes<i class="fa fa-bar-chart pull-right" style="padding-top:4px"></i></div>
+        <div class="panel-body"> 
+        {!! $chartjs->render() !!}  
+        </div>
+        </div>
+    
+    </div>
   </div>
 </div>
 
