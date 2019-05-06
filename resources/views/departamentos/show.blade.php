@@ -244,7 +244,7 @@
     </div>
     <div class="row" style="margin-right:0">
       
-      <div class="panel panel-default">
+      <div class="panel panel-default" style="margin-bottom: 0;">
         <div class="panel-heading">Visitas por Mes<i class="fa fa-bar-chart pull-right" style="padding-top:4px"></i></div>
         <div class="panel-body"> 
         {!! $chartjs->render() !!}  

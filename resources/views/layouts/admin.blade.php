@@ -117,12 +117,12 @@
             <li class="treeview">
               <a href="#">
                   <i class="fa fa-folder-open" aria-hidden="true"></i>
-                <span>Resumen</span>
+                <span>Informe</span>
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/compra/pedidos"><i class="fa fa-circle-o"></i>Evolucion</a></li>
-                <li><a href="/compra/orden"><i class="fa fa-circle-o"></i>Mes</a></li>               
+                <li><a href="/informes/acumulado"><i class="fa fa-circle-o"></i>Acumulado</a></li>
+                <li><a href="/informes/mensual"><i class="fa fa-circle-o"></i>Mensual</a></li>               
               </ul>
             </li>     
 
