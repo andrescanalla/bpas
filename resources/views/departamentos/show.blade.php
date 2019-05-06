@@ -284,7 +284,7 @@ $('#table1').DataTable({
        "orderable": false,
      }     
     ],
-    "order": [[ 0, "asc" ]]
+    "order": [[ 1, "asc" ],[ 2, "asc" ],[ 3, "asc" ]]
     });
 });
 
