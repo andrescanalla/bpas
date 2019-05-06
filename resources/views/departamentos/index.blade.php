@@ -30,7 +30,7 @@
           <th>Implementador</th>  
           <th>Localidades</th>         
           <th>Actividades</th>          
-          <th style="text-align: center;">Detalle</th>
+          <th style="text-align: center;">+ Info</th>
         </thead>
         @php $nx=0;@endphp                
         @foreach ($departamentos as $departamento)
@@ -66,7 +66,7 @@
           </td>
           
           <td style="text-align: center;">            
-           <a href="departamentos/{{$departamento->id}}"> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:30%;padding-right:30%;padding-bottom:0"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </button>   </a>        
+           <a href="departamentos/{{$departamento->id}}"> <span class="pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:30%;padding-right:30%;padding-bottom:0"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>  </span> </a>        
           </td>
         </tr>
         
@@ -76,7 +76,7 @@
     </div>
   </div>
   </div>
-  <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="padding-left:0">
   <div class="panel panel-default" id="map" style="height: 80vh">
   </div>
 
