@@ -122,31 +122,31 @@ class DepartamentoController extends Controller
             ->labels(Dashboard::mesLabel())
             ->datasets([  
                 [
-                    "label" => "Pres.",
-                    'backgroundColor' => '#dff0d8',                 
+                    "label" => "Presentaciones",
+                    'backgroundColor' => '#00a65a',                 
                     'data' => Dashboard::CountTipoVisitaDepto('presentacion programa',$id),
-                    'borderColor'=> '#2e8631',
+                    'borderColor'=> '#00a65a',
                     'borderWidth'=> 1
                 ], 
                 [
-                    "label" => "Entrev.",
-                    'backgroundColor' => 'rgba(255, 206, 86, 0.3)',
+                    "label" => "Entrevistas",
+                    'backgroundColor' => '#f39c12',
                     'data' => Dashboard::CountTipoVisitaDepto('entrevista',$id),
-                    'borderColor'=> '#ff8300',
+                    'borderColor'=> '#f39c12',
                     'borderWidth'=> 1
 
                 ],
                 [
-                    "label" => "Inf.",
-                    'backgroundColor' =>"#d9edf7",
+                    "label" => "Informes",
+                    'backgroundColor' =>"#00c0ef",
                     'data' => Dashboard::CountTipoVisitaDepto('informe',$id),
-                    'borderColor'=> '#31708f',
+                    'borderColor'=> '#00c0ef',
                     'borderWidth'=> 1
 
                 ],        
                 [
                     "label" => "Otro",
-                    'backgroundColor' => "#ddd",
+                    'backgroundColor' => "#777",
                     'data' => Dashboard::CountTipoVisitaDepto('otro',$id),
                     'borderColor'=> '#777',
                     'borderWidth'=> 1
