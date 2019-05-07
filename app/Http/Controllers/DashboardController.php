@@ -82,32 +82,32 @@ class DashboardController extends Controller
             ->datasets([  
                 [
                     "label" => "Pres.",
-                    'backgroundColor' => '#dff0d8',                 
+                    'backgroundColor' => '#2dc37f',                  
                     'data' => Dashboard::CountTipoVisita('presentacion programa'),
-                    'borderColor'=> '#2e8631',
+                    'borderColor'=> '#656565',
                     'borderWidth'=> 1
                 ], 
                 [
                     "label" => "Entrev.",
-                    'backgroundColor' => 'rgba(255, 206, 86, 0.3)',
+                    'backgroundColor' => '#ffc66a',
                     'data' => Dashboard::CountTipoVisita('entrevista'),
-                    'borderColor'=> '#ff8300',
+                    'borderColor'=> '#656565',
                     'borderWidth'=> 1
 
                 ],
                 [
                     "label" => "Inf.",
-                    'backgroundColor' =>"#d9edf7",
+                    'backgroundColor' => "#7ee6ff",
                     'data' => Dashboard::CountTipoVisita('informe'),
-                    'borderColor'=> '#31708f',
+                    'borderColor'=> '#656565',
                     'borderWidth'=> 1
 
                 ],        
                 [
                     "label" => "Otro",
-                    'backgroundColor' => "#ddd",
+                    'backgroundColor' => "#ccc",
                     'data' => Dashboard::CountTipoVisita('otro'),
-                    'borderColor'=> '#777',
+                    'borderColor'=>'#656565',
                     'borderWidth'=> 1
 
                 ]             

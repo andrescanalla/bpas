@@ -146,7 +146,7 @@ class DepartamentoController extends Controller
                 ],        
                 [
                     "label" => "Otro",
-                    'backgroundColor' => "#f5f5f5",
+                    'backgroundColor' => "#ccc",
                     'data' => Dashboard::CountTipoVisitaDepto('otro',$id),
                     'borderColor'=> '#656565',
                     'borderWidth'=> 1
