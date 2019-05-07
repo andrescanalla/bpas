@@ -158,7 +158,7 @@
 
             <div class="tab-pane fade in active" id="tab2default">  
               <div class="table-responsive">
-              <table class="table table-borderless" id="table2">
+              <table class="table table-condensed table-hover" id="table2">
                 <thead>              
                   <th>Fecha</th>
                   <th>Localidad</th>

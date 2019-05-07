@@ -123,14 +123,14 @@ class DepartamentoController extends Controller
             ->datasets([  
                 [
                     "label" => "Presentaciones",
-                    'backgroundColor' => '#00a65ab3',                 
+                    'backgroundColor' => '#2dc37f',                 
                     'data' => Dashboard::CountTipoVisitaDepto('presentacion programa',$id),
                     'borderColor'=> '#656565',
                     'borderWidth'=> 1
                 ], 
                 [
                     "label" => "Entrevistas",
-                    'backgroundColor' => '#f39c12a8',
+                    'backgroundColor' => '#ffc66a',
                     'data' => Dashboard::CountTipoVisitaDepto('entrevista',$id),
                     'borderColor'=> '#656565',
                     'borderWidth'=> 1
@@ -138,7 +138,7 @@ class DepartamentoController extends Controller
                 ],
                 [
                     "label" => "Informes",
-                    'backgroundColor' =>"#00c0efa8",
+                    'backgroundColor' =>"#7ee6ff",
                     'data' => Dashboard::CountTipoVisitaDepto('informe',$id),
                     'borderColor'=> '#656565',
                     'borderWidth'=> 1
@@ -163,7 +163,8 @@ class DepartamentoController extends Controller
                         stacked: true
                     }]
                 },
-                legend: { position: 'bottom' }
+                legend: { position: 'bottom' },
+                title: { display: true, text: 'Mensual' }
                 
             }");
 
