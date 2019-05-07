@@ -50,15 +50,16 @@ class Visita extends Model
 
     public function scopeSearchText($query, $nombre){
       
-      return $query->leftjoin('implementadores','visitas.implementador_id','=','implementadores.id')
-        ->leftjoin('departamentos','implementadores.departamento_id','=','departamentos.id')
+      return $query->leftjoin('implementadores','visitas.implementador_id','=','implementadores.id')        
         ->leftjoin('localidades','visitas.localidad_id','=','localidades.id')
+        ->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
         ->leftjoin('tipo_visitas','visitas.tipo_visita_id','=','tipo_visitas.id')
         ->select('visitas.id','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'implementadores.id as idImplementador', 'implementadores.nombre as nombreImplementador', 'tipo_visitas.id as idTipoVisita' , 'tipo_visitas.nombre as nombreTipoVisita' , 'fecha', 'comentarios')        
         ->where('implementadores.nombre','LIKE','%'.$nombre.'%')
         ->orwhere('localidades.nombre','LIKE','%'.$nombre.'%')
         ->orwhere('departamentos.nombre','LIKE','%'.$nombre.'%')
         ->orwhere('tipo_visitas.nombre','LIKE','%'.$nombre.'%')
+        ->orwhere('implementadores.nombre','LIKE','%'.$nombre.'%')
         ->orderBy('fecha','desc');
         
 
@@ -66,9 +67,9 @@ class Visita extends Model
 
     public function scopeFindByIdLocalidad($query, $id){
       
-      return $query->leftjoin('implementadores','visitas.implementador_id','=','implementadores.id')
-        ->leftjoin('departamentos','implementadores.departamento_id','=','departamentos.id')
+      return $query->leftjoin('implementadores','visitas.implementador_id','=','implementadores.id')       
         ->leftjoin('localidades','visitas.localidad_id','=','localidades.id')
+        ->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
         ->leftjoin('tipo_visitas','visitas.tipo_visita_id','=','tipo_visitas.id')
         ->select('visitas.id','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'implementadores.id as idImplementador', 'implementadores.nombre as nombreImplementador', 'tipo_visitas.id as idTipoVisita' , 'tipo_visitas.nombre as nombreTipoVisita' , 'fecha', 'comentarios')        
         ->where('localidad_id',$id)        
@@ -79,9 +80,9 @@ class Visita extends Model
 
     public function scopeTodo($query, $desde, $hasta){
       
-      return $query->leftjoin('implementadores','visitas.implementador_id','=','implementadores.id')
-        ->leftjoin('departamentos','implementadores.departamento_id','=','departamentos.id')
+      return $query->leftjoin('implementadores','visitas.implementador_id','=','implementadores.id')        
         ->leftjoin('localidades','visitas.localidad_id','=','localidades.id')
+        ->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
         ->leftjoin('tipo_visitas','visitas.tipo_visita_id','=','tipo_visitas.id')
         ->select('visitas.id','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'implementadores.id as idImplementador', 'implementadores.nombre as nombreImplementador', 'tipo_visitas.id as idTipoVisita' , 'tipo_visitas.nombre as nombreTipoVisita' , 'fecha', 'comentarios')        
         ->where('fecha','>',Carbon::now()->subDays($desde))
