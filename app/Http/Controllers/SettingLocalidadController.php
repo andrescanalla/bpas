@@ -25,7 +25,7 @@ class SettingLocalidadController extends Controller
         if ($request)
        {
            $query=trim($request->get('searchText'));
-           $localidades=Localidad::SearchText($query)->select('localidades.id','localidades.lat', 'localidades.lng', 'localidades.nombre as nombreLocalidad', 'departamentos.nombre as nombreDepartamento')->get();   
+           $localidades=Localidad::FindbyDepartamento($query)->select('localidades.id','localidades.lat', 'localidades.lng', 'localidades.nombre as nombreLocalidad', 'departamentos.nombre as nombreDepartamento')->get();   
            
             
             return view('setting.localidades.index',["localidades"=>$localidades,"searchText"=>$query]);

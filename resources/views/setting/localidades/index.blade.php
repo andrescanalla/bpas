@@ -52,6 +52,29 @@
   </div>
 </div>
   
+@push ('script')
 
+ <script>
+
+$(document).ready(function() {
+  $('#table').DataTable( {
+    "paging":   false,
+     "info":   false,
+    "searching": false,
+    "order": [[ 0, "asc" ]],
+    "columnDefs": [ 
+            
+            {
+                "targets": [ 6 ],
+                "orderable": false,
+            }    
+        ]
+    } );
+} );
+
+
+
+</script> 
+@endpush  
 
 @endsection
