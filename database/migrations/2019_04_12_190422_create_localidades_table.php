@@ -22,6 +22,8 @@ class CreateLocalidadesTable extends Migration
             $table->boolean('presentacion')->default(false);
             $table->boolean('entrevista')->default(false);
             $table->boolean('informe')->default(false);
+            $table->decimal('lng',8,6);
+            $table->decimal('lat',8,6);
             $table->timestamps();
         });
     }

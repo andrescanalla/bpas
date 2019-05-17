@@ -136,6 +136,19 @@
             </li>
 
             <li class="treeview">
+              <a href="/setting">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+                <span>Setting</span>
+                <i class="fa fa-angle-left pull-right"></i>                
+              </a> 
+              <ul class="treeview-menu">
+                <li><a href="/setting/localidades"><i class="fa fa-circle-o"></i>Localidades</a></li> 
+                <li><a href="/setting/implementadores"><i class="fa fa-circle-o"></i>Implementadores</a></li>                              
+              </ul>                           
+            </li>
+            
+
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-users"></i> <span>Acceso</span>
                 <i class="fa fa-angle-left pull-right"></i>
