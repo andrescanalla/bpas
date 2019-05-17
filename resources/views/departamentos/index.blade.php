@@ -233,20 +233,11 @@
                   .done(function(data) {
                     console.log('data:',data.length, filtro);
                     data.forEach( function(valor, indice, array) {                     
-                      var request = {
-                        query: valor.nombreLocalidad+', santa fe, argentina',
-                        fields: ['name', 'geometry'],
-                      };
-                      service = new google.maps.places.PlacesService(map);
-                      service.findPlaceFromQuery(request, function(results, status) {
-                        console.log('status', status);
-                        if (status === google.maps.places.PlacesServiceStatus.OK) {
-                          for (var i = 0; i < results.length; i++) {
-                            createMarker(results[i],filtro);
-                            console.log(results[i].name, filtro)
-                          }
+                      var coord = { lat: valor.lat, lng: valor.lng};
+                     
+                            createMarker(coord,filtro);
+                            console.log(coord, filtro)                            
                           
-                        }
                         
                       });
                     });                           
@@ -259,7 +250,7 @@
         if(filtro=='presentacion'){
             var marker = new google.maps.Marker({
               map: map,
-              position: place.geometry.location,
+              position: place,
               icon: {
                 url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00a65a,ff000000&scale=1.0"
               }          
@@ -268,7 +259,7 @@
         if(filtro=='entrevista'){
             var marker = new google.maps.Marker({
               map: map,
-              position: place.geometry.location,
+              position: place,
               icon: {
                 url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=F9A825,ff000000&scale=1.0"
               }          
@@ -277,7 +268,7 @@
         if(filtro=='informe'){
             var marker = new google.maps.Marker({
               map: map,
-              position: place.geometry.location,
+              position: place,
               icon: {
                 url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00c0ef,ff000000&scale=1.0"
               }          
