@@ -111,7 +111,7 @@ class Localidad extends Model
       public function scopeFiltroDepartamento($query, $departamento, $filtro){
           if($filtro=='presentacion'){
             return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
-            ->select('localidades.nombre as nombreLocalidad','departamentos.nombre as nombreDepartamento', 'municipio', 'presentacion','entrevista','informe')
+            ->select('localidades.lng','localidades.lat','localidades.nombre as nombreLocalidad','departamentos.nombre as nombreDepartamento', 'municipio', 'presentacion','entrevista','informe')
             ->where("departamentos.nombre", $departamento)
             ->where("localidades.$filtro",1)
             ->where("localidades.entrevista",0)
@@ -119,14 +119,14 @@ class Localidad extends Model
           }
           if($filtro=='entrevista'){
             return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
-            ->select('localidades.nombre as nombreLocalidad','departamentos.nombre as nombreDepartamento', 'municipio', 'presentacion','entrevista','informe')
+            ->select('localidades.lng','localidades.lat','localidades.nombre as nombreLocalidad','departamentos.nombre as nombreDepartamento', 'municipio', 'presentacion','entrevista','informe')
             ->where("departamentos.nombre", $departamento)           
             ->where("localidades.$filtro",1)
             ->where("localidades.informe",0);
           }
           else{          
             return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')
-                ->select('localidades.nombre as nombreLocalidad','departamentos.nombre as nombreDepartamento', 'municipio', 'presentacion','entrevista','informe')
+                ->select('localidades.lng','localidades.lat','localidades.nombre as nombreLocalidad','departamentos.nombre as nombreDepartamento', 'municipio', 'presentacion','entrevista','informe')
                 ->where("departamentos.nombre", $departamento)
                 ->where("localidades.$filtro",1);
                
