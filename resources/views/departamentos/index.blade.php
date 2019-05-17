@@ -233,10 +233,10 @@
                   .done(function(data) {
                     console.log('data:',data.length, filtro);
                     data.forEach( function(valor, indice, array) {                     
-                      var res = { name: valor.nombreLocalidad, coord:{lat: valor.lat, lng: valor.lng}};
+                      var res = { name: valor.nombreLocalidad, coord:{lat: parseFloat(valor.lat), lng: parseFloat(valor.lng)}};
                      
                             createMarker(res,filtro);
-                            console.log(res, filtro)                            
+                            console.log(res.coord, filtro)                            
                           
                         
                       });
