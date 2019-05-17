@@ -233,10 +233,10 @@
                   .done(function(data) {
                     console.log('data:',data.length, filtro);
                     data.forEach( function(valor, indice, array) {                     
-                      var coord = { lat: valor.lat, lng: valor.lng};
+                      var res = { name: valor.nombreLocalidad, coord:{lat: valor.lat, lng: valor.lng}};
                      
-                            createMarker(coord,filtro);
-                            console.log(coord, filtro)                            
+                            createMarker(res,filtro);
+                            console.log(res, filtro)                            
                           
                         
                       });
@@ -250,7 +250,7 @@
         if(filtro=='presentacion'){
             var marker = new google.maps.Marker({
               map: map,
-              position: place,
+              position: place.coord,
               icon: {
                 url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00a65a,ff000000&scale=1.0"
               }          
@@ -259,7 +259,7 @@
         if(filtro=='entrevista'){
             var marker = new google.maps.Marker({
               map: map,
-              position: place,
+              position: place.coord,
               icon: {
                 url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=F9A825,ff000000&scale=1.0"
               }          
@@ -268,7 +268,7 @@
         if(filtro=='informe'){
             var marker = new google.maps.Marker({
               map: map,
-              position: place,
+              position: place.coord,
               icon: {
                 url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00c0ef,ff000000&scale=1.0"
               }          
