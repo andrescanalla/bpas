@@ -20,7 +20,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('localidades','LocalidadController');
     Route::resource('departamentos','DepartamentoController');
     Route::resource('comentarios','ComentarioController');
-    Route::resource('setting/localidades','SettingLocalidadController');
+    Route::resource('setting/localidad','SettingLocalidadController');
     
 });
 
