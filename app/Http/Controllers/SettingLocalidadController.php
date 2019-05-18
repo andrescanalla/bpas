@@ -54,7 +54,14 @@ class SettingLocalidadController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $query=trim($request->get('searchText'));
+        
+        $url="setting/localidad?searchText=$query";
+        toaster()->add('Add message here');
+        
+        return redirect($url); 
+        
+
     }
 
     /**

@@ -11,6 +11,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label">Localidad</label>
                   <input id="nombre" name="nombre" class="form-control" placeholder="Localiad..." onchange="localidad()">
+                  <input type="hidden" name="searchText" value="{{$searchText}}" class="form-control">
                 </div>
                 
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">  
@@ -97,6 +98,7 @@
         geocoder.geocode({'address': localidad+' ,santa fe, Argentina'}, function(results, status) {
           if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
+            console.log('resultado',results[0]);
             var marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location,
@@ -104,6 +106,10 @@
             document.getElementById('lat').value=results[0].geometry.location.lat().toFixed(6) ; 
             document.getElementById('lng').value=results[0].geometry.location.lng().toFixed(6) ; 
             depto=document.getElementById(results[0].address_components[1].long_name);
+            if(!depto){
+              depto=document.getElementById('Departamento '+results[0].address_components[1].long_name);
+            }
+            console.log('depto', depto);
             depto.selected=true;
             document.getElementById("nombre").value=results[0].address_components[0].long_name;
             console.log(results[0].address_components[1].long_name);
