@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Localidad;
 use App\Departamento;
@@ -25,10 +26,13 @@ class SettingLocalidadController extends Controller
         if ($request)
        {
            $query=trim($request->get('searchText'));
-           $localidades=Localidad::FindbyDepartamento($query)->select('localidades.id','localidades.lat', 'localidades.lng', 'localidades.nombre as nombreLocalidad', 'departamentos.nombre as nombreDepartamento')->get();   
-           
+           $localidades=Localidad::FindbyDepartamento($query)
+                ->select('localidades.id','localidades.lat', 'localidades.lng', 'localidades.nombre as nombreLocalidad', 'departamentos.nombre as nombreDepartamento')
+                ->orderBY('localidades.id','desc')
+                ->get();
+            $departamentos=Departamento::get();                   
             
-            return view('setting.localidad.index',["localidades"=>$localidades,"searchText"=>$query]);
+            return view('setting.localidad.index',["localidades"=>$localidades,"searchText"=>$query, "departamentos"=>$departamentos]);
         }
     }
 

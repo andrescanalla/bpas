@@ -3,18 +3,25 @@
 
 @section ('titulo') 
 <div class="row">
-  <div class="col-lg-9 col-md-8 col-sm-6 col-xs-6" id="nombre">        
+  <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6" >        
   Localidades
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-top:5px">        
+  <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-top:5px; margin-left:50px">        
     @include('setting.localidad.search')      
+  </div>
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 " style="margin-top:5px; margin-left:-50px">
+    <a href="#" data-target="#modal-create" data-toggle="modal"><button class="btn btn-default btn-sm pull-right"><i class="fa fa-plus" aria-hidden="true"></i></button></a>
   </div>
   
   </div>
+    
 
 @endsection
 
-@section ('contenido')   
+
+@section ('contenido')  
+@include('setting.localidad.modal.create') 
+
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="table-responsive">
@@ -61,7 +68,7 @@ $(document).ready(function() {
     "paging":   false,
      "info":   false,
     "searching": false,
-    "order": [[ 0, "asc" ]],
+    "order": [[ 1, "desc" ]],
     "columnDefs": [ 
             
             {

@@ -4,11 +4,11 @@
   <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">        
   Visitas      
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-top:5px">        
+  <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-top:5px; margin-left:50px">        
     @include('visitas.search')      
   </div>
-  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 " style="margin-top:5px">
-    <a href="pedidos/create"><button class="btn btn-default btn-sm pull-right"><i class="fa fa-plus" aria-hidden="true"></i></button></a>
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 " style="margin-top:5px;margin-left:-50px">
+    <a href="#"><button class="btn btn-default btn-sm pull-right"><i class="fa fa-plus" aria-hidden="true"></i></button></a>
   </div>
   </div>
 

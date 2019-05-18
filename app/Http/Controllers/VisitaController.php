@@ -25,7 +25,7 @@ class VisitaController extends Controller
         if ($request)
        {
            $query=trim($request->get('searchText'));
-           $visitas=Visita::SearchText($query)->paginate(12);
+           $visitas=Visita::SearchText($query)->paginate(10);
            $implementadores=Implementador::get();
            $tipoVisitas=TipoVisita::get();
            
