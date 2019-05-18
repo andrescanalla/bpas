@@ -35,6 +35,7 @@ class Departamento extends Model
         return $this->join('implementadores','departamentos.id','=','implementadores.departamento_id')
         ->join('localidades','departamentos.id','=','localidades.departamento_id')
         ->whereNotIn('departamentos.id', [1])
+        ->whereNotIn('implementadores.id', [10,12])        
         ->select('implementadores.apellido','implementadores.nombre as nombreImplementador','departamentos.id','departamentos.nombre as nombreDepartamento','departamentos.cantidad_localidades',
             DB::raw('sum(localidades.presentacion) as pre'),
             DB::raw('sum(localidades.entrevista) as entre'),

@@ -20,7 +20,7 @@ class DepartamentoController extends Controller
      */
     public function index()
     {   
-        $departamentos=Departamento::FindDepartamentos()->get(); 
+        $departamentos=Departamento::FindDepartamentos()->get();         
         $chartjs = app()->chartjs
             ->name('barChartTest')
             ->type('bar')            
