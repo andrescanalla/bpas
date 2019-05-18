@@ -138,11 +138,17 @@
                                   <tr>
                                   <td >{{$comentario->fecha_comentario->format('d/m/y')}}</td>                                  
                                   <td> {{$comentario->comentarios}} </td>                                                  
+                                  @if ($comentario->id)
                                   <td style="min-width: 85px;">
                                     <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-delete{{$ne}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>
-                                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit{{$ne}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
-                                    
+                                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit{{$ne}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>                                    
                                   </td>
+                                  @else
+                                  <td style="min-width: 85px;">
+                                                                    
+                                  </td>
+                                  @endif
+
                                 </tr>
                                 <!-- Start modal Edit comentarios-->
                                 @include('comentarios.modal.edit') 

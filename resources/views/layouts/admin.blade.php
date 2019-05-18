@@ -142,8 +142,8 @@
                 <i class="fa fa-angle-left pull-right"></i>                
               </a> 
               <ul class="treeview-menu">
-                <li><a href="/setting/localidades"><i class="fa fa-circle-o"></i>Localidades</a></li> 
-                <li><a href="/setting/implementadores"><i class="fa fa-circle-o"></i>Implementadores</a></li>                              
+                <li><a href="/setting/localidad"><i class="fa fa-circle-o"></i>Localidades</a></li> 
+                <li><a href="/setting/departamento"><i class="fa fa-circle-o"></i>Departamentos</a></li>                              
               </ul>                           
             </li>
             

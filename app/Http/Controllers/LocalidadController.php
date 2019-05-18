@@ -89,12 +89,12 @@ class LocalidadController extends Controller
                 $comentario->comentarios='Sin Comentarios';
                 $comentario->fecha_comentario=Carbon::now();
                 $comentarios=collect([$comentario]);
-            }
+            }            
                
             $today=Carbon::now();
               
           
-            
+           
              
              return view('localidades.show',["comentarios"=>$comentarios,"localidad"=>$localidad,"visitas"=>$visitas,"searchText"=>$query,'today'=>$today]);
          }

@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col-lg-12 col-md-3 col-sm-5 col-xs-5" >     
         <div class="panel panel-default">
-          <div class="panel-heading">Implementador: <b>{{$numeros->nombreImplementador}} {{$numeros->apellido}}</b> <span class="badge pull-right" style="padding-top:4px">{{$numeros->cantidad_localidades}} Localidades</span></div>
+          <div class="panel-heading">Implementador: <b>{{$numeros->nombreImplementador}}</b> <span class="badge pull-right" style="padding-top:4px">{{$numeros->cantidad_localidades}} Localidades</span></div>
           <div class="panel-body"> 
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="padding-right:0"> 

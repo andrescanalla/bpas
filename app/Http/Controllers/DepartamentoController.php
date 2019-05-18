@@ -111,7 +111,7 @@ class DepartamentoController extends Controller
         $searchText=$departamento->nombre;       
         $localidades=Localidad::FindByDepartamento($departamento->nombre)->orderBy('nombreLocalidad', 'asc')->get();        
         $visitas=Visita::SearchText($departamento->nombre)->get();
-        $implementadores=Implementador::get();
+        $implementadores=Implementador::get();       
         $tipoVisitas=TipoVisita::get(); 
         $timebar= Carbon::parse('2018-10-01')->diffInMonths(Carbon::now());  
         
