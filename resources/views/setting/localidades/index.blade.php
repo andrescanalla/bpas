@@ -7,7 +7,7 @@
   Localidades
   </div>
   <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-top:5px">        
-    @include('localidades.search')      
+    @include('setting.localidades.search')      
   </div>
   
   </div>
