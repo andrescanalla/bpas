@@ -13,23 +13,22 @@ use Carbon\Carbon;
 use App\Comentario;
 
 
-class SettingLocalidadController extends Controller
+class SettingDepartamentoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request)
-       {
-           $query=trim($request->get('searchText'));
-           $localidades=Localidad::FindbyDepartamento($query)->select('localidades.id','localidades.lat', 'localidades.lng', 'localidades.nombre as nombreLocalidad', 'departamentos.nombre as nombreDepartamento')->get();   
+       
+          
+           $departamentos=Departamento::all();   
            
             
-            return view('setting.localidad.index',["localidades"=>$localidades,"searchText"=>$query]);
-        }
+            return view('setting.departamento.index',["departamentos"=>$departamentos,]);
+        
     }
 
     /**
@@ -72,9 +71,9 @@ class SettingLocalidadController extends Controller
      */
     public function edit($id)
     {
-        $localidad=Localidad::FindById($id)->select('localidades.departamento_id','localidades.lat','localidades.lng','localidades.id','implementadores.nombre as nombreImplementador','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'departamentos.id as idDepartamento',  'municipio', 'presentacion','entrevista','informe', 'ordenanza','fecha_info','veedor','problema','sin_aplicacion','aplicacion_controlada')->first();
-        $departamentos=Departamento::get();            
-        return view('setting.localidad.edit',["localidad"=>$localidad,"departamentos"=>$departamentos,]);
+        $departamento=Departamento::findOrFail($id);
+                   
+        return view('setting.departamento.edit',["departamento"=>$departamento,]);
     }
 
     /**
@@ -86,14 +85,12 @@ class SettingLocalidadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $localidad=Localidad::findOrfail($id);
-        $localidad->lat=$request->get('lat');
-        $localidad->lng=$request->get('lng');
-        $localidad->departamento_id=$request->get('departamento');
-        
-        
-        $localidad->save();
-        $url="setting/localidad";
+        $departamento=Departamento::findOrfail($id);
+        $departamento->nombre=$request->get('nombre');
+        $departamento->cantidad_localidades=$request->get('cantidad_localidades');
+        $departamento->implementador=$request->get('implementador');       
+        $departamento->save();
+        $url="setting/departamento";
         
     	return Redirect::to($url);
     }

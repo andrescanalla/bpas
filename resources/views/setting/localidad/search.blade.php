@@ -1,4 +1,4 @@
-{!! Form::open(['route'=>'setting.localidades.index','method'=>'GET','autocomplete'=>'off','role'=>'search'])!!}
+{!! Form::open(['route'=>'localidad.index','method'=>'GET','autocomplete'=>'off','role'=>'search'])!!}
 <div class="form-group">
   <div class="input-group">
     <input type="text" class="form-control input-sm" name="searchText" placeholder="Buscar . . ." value="{{$searchText}}">
