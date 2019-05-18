@@ -276,7 +276,7 @@
         }
         
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name+' - '+filtro);
+          infowindow.setContent(place.name+' - '+filtro.charAt(0).toUpperCase() + filtro.slice(1));
           infowindow.open(map, this);
         });
         markers.push(marker);
