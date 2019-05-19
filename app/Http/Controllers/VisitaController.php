@@ -127,7 +127,7 @@ class VisitaController extends Controller
         $visita->comentarios=$request->get('comentarios');       
         $visita->save();
         $url="visitas?searchText=$searchText&page=$page";
-        
+        toast('Visita editada con exito!!','success','top-left');
     	return Redirect::to($url);
     }
 

@@ -74,7 +74,7 @@ class DashboardController extends Controller
                     'data' => Dashboard::CountTipoVisitaTotal('presentacion programa'),
                 ],            
             ])
-            ->options(["title"=>["display"=>true,"text"=>"Acumulado"],"legend"=>["position"=>"bottom"]]);       
+            ->options(["title"=>["display"=>false,"text"=>"Acumulado"],"legend"=>["position"=>"bottom"]]);       
 
         $chartjs2 = app()->chartjs
             ->name('barChartTest')
@@ -125,7 +125,7 @@ class DashboardController extends Controller
                     }]
                 },
                 legend: { position: 'bottom' },
-                title: { display: true, text: 'Mensual' }
+                title: { display: false, text: 'Mensual' }
                 
             }");
 
@@ -133,6 +133,7 @@ class DashboardController extends Controller
         $today=Carbon::now();    
         $todo=Visita::Todo(20, 20)->get();     
 
+        toast('La Localidad se agrego con exito!!','success','top-left');
         
         return view("dashboard.index", compact('chartjs1','chartjs2'), [
             "presentacion"=>$presentacion, 

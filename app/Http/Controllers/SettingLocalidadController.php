@@ -59,7 +59,7 @@ class SettingLocalidadController extends Controller
         $query=Localidad::where('nombre', 'LIKE','%'.$nombre.'%')->first();   
           
         if($query){
-            alert()->error('No se pudo crear la Localiad',"$nombre ya existe");
+            alert()->error('No se pudo crear la Localiad',"$nombre ya existe")->position('top');
         }
         else{
             $localidad=new Localidad;  
