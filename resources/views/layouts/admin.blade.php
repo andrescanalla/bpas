@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  @toaster
+  <head> 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Bpas</title>
@@ -28,7 +27,7 @@
     
     <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
-        
+      
      <!-- jQuery 2.1.4 -->
      <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
      @stack('script')
@@ -41,7 +40,7 @@
 
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>   
-
+    
   </head>
 
   <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
@@ -214,6 +213,6 @@
     
     
     @stack('scripts')
-    
+    @include('sweetalert::alert')
   </body>
 </html>

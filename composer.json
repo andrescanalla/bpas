@@ -8,12 +8,14 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
         "fx3costa/laravelchartjs": "^2.5",
+        "laralabs/toaster": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.3",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
+        "realrashid/sweet-alert": "^1.1",
         "spatie/laravel-google-calendar": "^2.2",
-        "laralabs/toaster": "~3.0.0"
+        "tjgazel/laravel-toastr": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

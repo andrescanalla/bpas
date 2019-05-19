@@ -19,6 +19,8 @@ use App\Comentario;
 
 
 
+
+
 class DashboardController extends Controller
 {
     public function index(Request $request){
@@ -130,6 +132,7 @@ class DashboardController extends Controller
         
         $today=Carbon::now();    
         $todo=Visita::Todo(20, 20)->get();     
+
         
         return view("dashboard.index", compact('chartjs1','chartjs2'), [
             "presentacion"=>$presentacion, 
@@ -332,7 +335,7 @@ class DashboardController extends Controller
         
             
         }
-        return Response::json($count);
+        return Response::json(['cant'=>$count,'set'=>$set,'act'=>$ac]);
         }
 
         public function settingLocalidades(){

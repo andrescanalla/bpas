@@ -55,29 +55,7 @@ Dashboard
 
 
 <script>
-$(document).ready(function() {
-  
-  $.ajax({
-              url: 'https://graph.facebook.com/1470907659896279?access_token=EAAUJuPkcQtkBAAaM9R5q2YZAmSFXeJDh5NMZBskyZBdXiahvOmj54j6ryDWybVJlBUb75avyM4aJ4x2vUiCtZAF4vAOV9OclIK6ZACPOKTbcUMNMdkGrc7s8av8g6VoHCebU3ArjUlYtyfZCZBEm3eRjZBDcUpKvfd86qh7nj0N3UgZDZD&fields=fan_count,unread_message_count',
-              type: 'GET',
-              dataType: 'json',
-              success: function(data){               
-                  $('#likes').html(data.fan_count);
-                  $('#mensajes').html(data.unread_message_count);
-                  }
-  });
-  setInterval(function() {
-            $.ajax({
-              url: 'https://graph.facebook.com/1470907659896279?access_token=EAAUJuPkcQtkBAAaM9R5q2YZAmSFXeJDh5NMZBskyZBdXiahvOmj54j6ryDWybVJlBUb75avyM4aJ4x2vUiCtZAF4vAOV9OclIK6ZACPOKTbcUMNMdkGrc7s8av8g6VoHCebU3ArjUlYtyfZCZBEm3eRjZBDcUpKvfd86qh7nj0N3UgZDZD&fields=fan_count,unread_message_count',
-              type: 'GET',
-              dataType: 'json',
-              success: function(data){      
-                  $('#likes').html(data.fan_count);
-                  $('#mensajes').html(data.unread_message_count);
-              }
-            })
-  }, 5000); 
-          
+$(document).ready(function() {          
   $('.createpedido').click(function(e){      
     var form = $(this).parents('form:first');
     var method = 'Aa';
