@@ -120,17 +120,29 @@ class LocalidadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $localidad=Localidad::findOrfail($id);
         $searchText=$request->get('searchText');
-        $localidad->fecha_info=Carbon::createFromFormat('d/m/Y', $request->get('fecha_info'));
-        $localidad->ordenanza=$request->get('ordenanza');
-        $localidad->veedor=$request->get('veedor');
-        $localidad->problema=$request->get('problema');
-        $localidad->sin_aplicacion=$request->get('sin_aplicacion');
-        $localidad->aplicacion_controlada=$request->get('aplicacion_controlada');
-        $localidad->save();
+        if($request->get('tipo')){
+            $localidad=Localidad::findOrfail($id);
+            $localidad->presentacion=$request->get('presentacion');
+            $localidad->entrevista=$request->get('entrevista');
+            $localidad->informe=$request->get('informe');
+            $localidad->save();
+
+            toast("Informacion de visita a Localidad editada con exito!!",'success','top-left');
+        }
+        else{
+            $localidad=Localidad::findOrfail($id);
+            
+            $localidad->fecha_info=Carbon::createFromFormat('d/m/Y', $request->get('fecha_info'));
+            $localidad->ordenanza=$request->get('ordenanza');
+            $localidad->veedor=$request->get('veedor');
+            $localidad->problema=$request->get('problema');
+            $localidad->sin_aplicacion=$request->get('sin_aplicacion');
+            $localidad->aplicacion_controlada=$request->get('aplicacion_controlada');
+            $localidad->save();
+            
+        }
         $url="localidades/$id?searchText=$searchText";
-        
     	return Redirect::to($url);
     }
 

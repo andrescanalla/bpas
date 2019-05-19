@@ -115,6 +115,7 @@ class SettingLocalidadController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $localidad=Localidad::findOrfail($id);
         $localidad->lat=$request->get('lat');
         $localidad->lng=$request->get('lng');
@@ -123,8 +124,10 @@ class SettingLocalidadController extends Controller
         
         $localidad->save();
         $url="setting/localidad";
-        toast("Localidad editada con exito!!",'success','bottom-right');
-    	return Redirect::to($url);
+        toast("Informacion Localidad editada con exito!!",'success','top-left');
+        
+        
+        return Redirect::to($url);
     }
 
     /**

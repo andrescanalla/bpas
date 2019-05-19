@@ -19,6 +19,10 @@
 @include('localidades.modal.edit') 
 <!-- End modal Edit localidad-->
 
+<!-- Start modal Edit localidad visitas --> 
+@include('localidades.modal.editVisita') 
+<!-- End modal Edit localidad-->
+
 <!-- Start modal Create comentarios-->
 @include('comentarios.modal.create') 
 <!-- End modal create comentarios-->
@@ -172,7 +176,7 @@
                     <div class="panel-heading">
                     Informacion Visitas
                     <div class="btn-group pull-right">
-                                        <button class="btn btn-link pull-right" data-toggle="modal" data-target="#btnModal" style="padding-top:0;padding-bottom:0"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                        <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit-visita" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                     </div>
                     </div>
                     <div class="panel-body">
@@ -218,7 +222,11 @@
                           </div>
                           <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                             <label>Cantidad de Visitas: </label>
+                            @if(count($visitas)==1 && $visitas[0]->nombreTipoVisita=="Sin Visitas")
+                            0
+                            @else
                             {{count($visitas)}}
+                            @endif
                           </div>
                       </div>                
                       <div class="row">
@@ -226,11 +234,10 @@
                           <div class="table-responsive">
                               <table class="table table-condensed table-hover" id="ex" style="margin-bottom:0px">
                                 <thead>
-                                  <th>Fecha</th>
-                                
+                                  <th>Fecha</th>                                
                                   <th>Tipo de visita</th>
                                   <th>detalle</th>
-                                  <th></th>
+                                  <th><button class="btn btn-link pull-right" data-toggle="modal" data-target="#btnModal" style="padding-top:0;padding-bottom:0"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
                                 </thead>
                                 @php $nx=0;@endphp                
                                 @foreach ($visitas as $to)
