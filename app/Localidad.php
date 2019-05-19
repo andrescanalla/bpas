@@ -78,12 +78,12 @@ class Localidad extends Model
       
         return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')                        
           ->select('localidades.id','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'departamentos.id as idDepartamento',  'municipio', 'presentacion','entrevista','informe', 'ordenanza','fecha_info','veedor','problema','sin_aplicacion','aplicacion_controlada')        
-          ->where('departamentos.nombre','LIKE','%'.$nombre.'%')
-          ->orwhere('localidades.nombre','LIKE','%'.$nombre.'%');
+          ->where('departamentos.nombre','LIKE','%'.$nombre.'%');
           
           
   
       }
+
       public function scopeFindByNombreLocalidad($query, $nombre){
       
         return $query->leftjoin('departamentos','localidades.departamento_id','=','departamentos.id')

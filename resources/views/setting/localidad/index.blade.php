@@ -47,8 +47,8 @@
           <td>{{$localidad->lng}}</td>
           <td>{{$localidad->lat}}</td>          
           </td>         
-          <td style="text-align: center;">            
-           <a href="localidad/{{$localidad->id}}/edit"> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-info-circle" aria-hidden="true"></i> </button>   </a>        
+          <td style="text-align: center;">                          
+           <a href="localidad/{{$localidad->id}}/edit"><button class="btn btn-info btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button></a>        
           </td>
         </tr>
         

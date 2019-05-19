@@ -97,7 +97,8 @@
             <div class="tab-pane fade " id="tab1default">  
               <div class="table-responsive">
                 <table class="table table-condensed table-hover" id="table1" style="margin-bottom:0px">
-                  <thead >                   
+                  <thead >  
+                    <th>Nº</th>                 
                     <th>Localidad</th>
                     <th style="text-align: center;">Presentacion</th>  
                     <th style="text-align: center;">Entrevista</th>         
@@ -108,7 +109,8 @@
                   @foreach ($localidades as $localidad)
                   @php $nx++;@endphp
                   
-                  <tr>                                
+                  <tr>      
+                    <td>{{$nx}}</td>                          
                     <td>{{$localidad->nombreLocalidad}}</td>
                     <td style="text-align: center;">
                     @if($localidad->presentacion==1)
@@ -275,17 +277,22 @@ $(document).ready(function() {
     ],
     "order": [[ 0, "desc" ]]
     });
-$('#table1').DataTable({
+var t= $('#table1').DataTable({
     "paging":   false,
     "info":   false,
     "searching": false,
     "columnDefs": [    
-      {"targets": [ 4 ],
+      {"targets": [ 5,0 ],
        "orderable": false,
      }     
     ],
-    "order": [[ 1, "asc" ],[ 2, "asc" ],[ 3, "asc" ]]
+    "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ]]
     });
+t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
 });
 
 

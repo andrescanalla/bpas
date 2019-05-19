@@ -102,8 +102,7 @@ class SettingLocalidadController extends Controller
     public function edit($id)
     {
         $localidad=Localidad::FindById($id)->select('localidades.departamento_id','localidades.lat','localidades.lng','localidades.id','departamentos.implementador as nombreImplementador','departamentos.nombre as nombreDepartamento', 'localidades.nombre as nombreLocalidad', 'departamentos.id as idDepartamento',  'municipio', 'presentacion','entrevista','informe', 'ordenanza','fecha_info','veedor','problema','sin_aplicacion','aplicacion_controlada')->first();
-        $departamentos=Departamento::get();    
-        toaster()->add('Add message here');        
+        $departamentos=Departamento::get();                 
         return view('setting.localidad.edit',["localidad"=>$localidad,"departamentos"=>$departamentos,]);
     }
 
@@ -119,12 +118,12 @@ class SettingLocalidadController extends Controller
         $localidad=Localidad::findOrfail($id);
         $localidad->lat=$request->get('lat');
         $localidad->lng=$request->get('lng');
-        $localidad->departamento_id=$request->get('departamento');
-        
+        $localidad->nombre=$request->get('nombre');
+        $localidad->departamento_id=$request->get('departamento');        
         
         $localidad->save();
         $url="setting/localidad";
-        toaster()->add('Add message here');
+        toast("Localidad editada con exito!!",'success','bottom-right');
     	return Redirect::to($url);
     }
 

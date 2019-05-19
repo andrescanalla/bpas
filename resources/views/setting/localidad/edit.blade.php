@@ -3,8 +3,8 @@
 
 @section ('titulo') 
 <div class="row">
-  <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6" id="nombre">        
-  {{$localidad->nombreLocalidad}}    
+  <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">        
+   Editar {{$localidad->nombreLocalidad}}    
   </div>
   <div class="col-lg-4 col-md-3 col-sm-5 col-xs-5" style="margin-top:5px">        
       
@@ -23,20 +23,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                 Informacion Localidad
-                <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
-                <button class="btn btn-link pull-right" data-toggle="modal" data-target="#Modal" style="padding-top:0;padding-bottom:0"><i class="fa fa-address-book" aria-hidden="true"></i>
-                </div>
+               </div>
                 {!!Form::open(['method'=>'PATCH','action'=>['SettingLocalidadController@update', $localidad->id],'autocomplete'=>'off'])!!}
                 <div class="panel-body">
                 <div class="row" style="margin-bottom:10px">
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                      <label>Departamento:</label>
-                      {{$localidad->nombreDepartamento}}
+                      <label>Nombre:</label>
+                      <input name="nombre" id="nombre" value="{{$localidad->nombreLocalidad}}" class="form-control">
                     </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                    <label>Implementador:</label>
-                      {{$localidad->nombreImplementador}}
-                    </div>
+                    
                 </div>
                 <div class="row" style="margin-bottom:10px">
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -45,7 +40,7 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">  
                         <div class="form-group">
-                          <label class="control-label">Visita</label>
+                          <label class="control-label">Departamento</label>
                           <select type="text" name="departamento" class="form-control">
                             @foreach ($departamentos as $departamento)                           
                             @if($localidad->departamento_id==$departamento->id)
@@ -110,7 +105,7 @@
 
       function initMap() {
         var sydney = new google.maps.LatLng(-32.962671, -61.058544);
-        var localidad = document.getElementById("nombre").textContent;
+        var localidad = document.getElementById("nombre").value;
         console.log("loc:", localidad);
         
         
