@@ -56,7 +56,7 @@ class SettingLocalidadController extends Controller
     {
         $searchText=trim($request->get('searchText'));
         $nombre=$request->get('nombre');
-        $query=Localidad::where('nombre', $nombre)->first();           
+        $query=Localidad::where('nombre', $nombre)->first();                
           
         if($query){
             alert()->error("La localidad de $nombre ya existe", 'No se pudo crear la Localiad',)->position('top');

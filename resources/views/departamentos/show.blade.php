@@ -40,38 +40,47 @@
             </div>
             <div class="row">
               <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" > 
-              <label>Presentaciones ({{round($numeros->pre/$numeros->cantidad_localidades*100)}}%)</label>
+              <label>Presentaciones </label>
               </div>
-              <div class="col-lg-9 col-md-3 col-sm-5 col-xs-5" > 
+              <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
                 <div class="progress" style="margin-bottom:0">
                   <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$numeros->pre}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->pre/$numeros->cantidad_localidades*100}}%">
                   {{$numeros->pre}} Presentaciones 
                   </div>             
                 </div>              
               </div>
+              <div class="col-lg-1 col-md-3 col-sm-5 col-xs-5" >
+              <span class="badge pull-right" style="padding-top:4px;background-color: #00a65a;"> {{round($numeros->pre/$numeros->cantidad_localidades*100)}}% <i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+              </div>
             </div>
             <div class="row">
               <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" > 
-                <label>Entrevistas ({{round($numeros->entre/$numeros->cantidad_localidades*100)}}%)</label>
+                <label>Entrevistas </label>
               </div>
-              <div class="col-lg-9 col-md-3 col-sm-5 col-xs-5" > 
+              <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
                 <div class="progress" style="margin-bottom:0">
                   <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{$numeros->entre}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->entre/$numeros->cantidad_localidades*100}}%">
                   {{$numeros->entre}} Entrevistas 
                   </div>             
                 </div> 
               </div> 
+              <div class="col-lg-1 col-md-3 col-sm-5 col-xs-5" >
+              <span class="badge pull-right" style="padding-top:4px;background-color: #f39c12;"> {{round($numeros->entre/$numeros->cantidad_localidades*100)}}% <i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+              </div>
             </div>
             <div class="row">
               <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5" > 
-                <label>Informes ({{round($numeros->info/$numeros->cantidad_localidades*100)}}%)</label>
+                <label>Informes</label>
               </div>
-              <div class="col-lg-9 col-md-3 col-sm-5 col-xs-5" > 
+              <div class="col-lg-8 col-md-3 col-sm-5 col-xs-5" > 
                 <div class="progress" style="margin-bottom:0">
                   <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{$numeros->info}}" aria-valuemin="0" aria-valuemax="{{$numeros->cantidad_localidades}}" style="width: {{$numeros->info/$numeros->cantidad_localidades*100}}%">
                     {{$numeros->info}} Informes 
                   </div>             
                 </div>
+              </div>
+              <div class="col-lg-1 col-md-3 col-sm-5 col-xs-5" >
+              <span class="badge pull-right" style="padding-top:4px;background-color: #00c0ef;"> {{round($numeros->info/$numeros->cantidad_localidades*100)}}%  <i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
               </div>
             </div>
                         
