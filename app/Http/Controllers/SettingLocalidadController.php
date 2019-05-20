@@ -56,11 +56,10 @@ class SettingLocalidadController extends Controller
     {
         $searchText=trim($request->get('searchText'));
         $nombre=$request->get('nombre');
-        $query=Localidad::where('nombre', '%'.$nombre.'%')->first();   
-        
+        $query=Localidad::where('nombre', $nombre)->first();           
           
         if($query){
-            alert()->error('No se pudo crear la Localiad',"$nombre ya existe")->position('top');
+            alert()->error("La localidad de $nombre ya existe", 'No se pudo crear la Localiad',)->position('top');
         }
         else{
             $localidad=new Localidad;  
@@ -69,7 +68,7 @@ class SettingLocalidadController extends Controller
             $localidad->lng=$request->get('lng');
             $localidad->departamento_id=$request->get('departamento');
             $localidad->save();
-            toast("La Localidad $localidad->nombre se agrego con exito!!",'success','top-left');
+            toast("La Localidad de $localidad->nombre se agrego con exito!!",'success','top-left');
 
         }
        
