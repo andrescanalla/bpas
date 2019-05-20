@@ -397,6 +397,7 @@ t.on( 'order.dt search.dt', function () {
               mark(string,'presentacion');
               mark(string,'entrevista');    
               mark(string,'informe');
+              mark(string,'restante');
               depto.setMap(map);         
         }
 
@@ -449,6 +450,15 @@ t.on( 'order.dt search.dt', function () {
               position: place.coord,
               icon: {
                 url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00c0ef,ff000000&scale=1.0"
+              }          
+            });
+        }
+        if(filtro=='restante'){
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.coord,
+              icon: {
+                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=f53e3e,ff000000&scale=1.0"
               }          
             });
         }
