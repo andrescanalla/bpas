@@ -56,7 +56,8 @@ class SettingLocalidadController extends Controller
     {
         $searchText=trim($request->get('searchText'));
         $nombre=$request->get('nombre');
-        $query=Localidad::where('nombre', 'LIKE','%'.$nombre.'%')->first();   
+        $query=Localidad::where('nombre', '%'.$nombre.'%')->first();   
+        
           
         if($query){
             alert()->error('No se pudo crear la Localiad',"$nombre ya existe")->position('top');
@@ -124,7 +125,7 @@ class SettingLocalidadController extends Controller
         
         $localidad->save();
         $url="setting/localidad";
-        toast("Informacion Localidad editada con exito!!",'success','top-left');
+        toast("Localidad editada con exito!!",'success','top-left');
         
         
         return Redirect::to($url);

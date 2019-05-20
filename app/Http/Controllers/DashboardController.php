@@ -133,7 +133,7 @@ class DashboardController extends Controller
         $today=Carbon::now();    
         $todo=Visita::Todo(20, 20)->get();     
 
-        toast('La Localidad se agrego con exito!!','success','top-left');
+        toast('Visitas Actualizadas de Google Calendar!!','success','top-left');
         
         return view("dashboard.index", compact('chartjs1','chartjs2'), [
             "presentacion"=>$presentacion, 

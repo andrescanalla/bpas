@@ -186,7 +186,7 @@
         ir.addEventListener("click", function() {myFunction(iriondo, ir.id.toLowerCase())}); 
         console.log('ir', ir.id.toLowerCase());
 
-        con=document.getElementById("Constitucion")
+        con=document.getElementById("Constitución")
         con.addEventListener("click", function() {myFunction(constitucion, con.id.toLowerCase())}); 
         console.log('con', con.id.toLowerCase());
         
