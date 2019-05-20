@@ -380,7 +380,7 @@ t.on( 'order.dt search.dt', function () {
         if(departamento.id=="Iriondo"){
           myFunction(iriondo, departamento.id.toLowerCase());
         }
-        if(departamento.id=="Constitucion"){
+        if(departamento.id=="Constitución"){
           myFunction(constitucion, departamento.id.toLowerCase());
         }
         
