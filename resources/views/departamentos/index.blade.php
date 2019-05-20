@@ -212,6 +212,7 @@
               mark(string,'presentacion');
               mark(string,'entrevista');    
               mark(string,'informe');
+              mark(string,'restante');
               depto.setMap(map);
                            
            
@@ -262,6 +263,15 @@
               position: place.coord,
               icon: {
                 url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=F9A825,ff000000&scale=1.0"
+              }          
+            });
+        }
+        if(filtro=='restante'){
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.coord,
+              icon: {
+                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=f90303,ff000000&scale=1.0"
               }          
             });
         }
