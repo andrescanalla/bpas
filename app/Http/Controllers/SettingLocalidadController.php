@@ -69,7 +69,7 @@ class SettingLocalidadController extends Controller
             $localidad->lng=$request->get('lng');
             $localidad->departamento_id=$request->get('departamento');
             $localidad->save();
-            toast('La Localidad se agrego con exito!!','success','bottom-right');
+            toast("La Localidad $localidad->nombre se agrego con exito!!",'success','top-left');
 
         }
        
