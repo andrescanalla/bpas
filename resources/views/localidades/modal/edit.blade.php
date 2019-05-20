@@ -13,9 +13,9 @@
               <div class="form-group">
                 <label>Fecha Informacion: </label>
                 @if(is_null($localidad->fecha_info))
-                <input type="text" name="fecha_info" required value="{{$localidad->fecha_info}}" class="form-control" placeholder="Fecha ...">
+                <input type="text" name="fecha_info" required value="{{$localidad->fecha_info}}" class="form-control" placeholder="13/09/2018 ...">
                 @else
-                <input type="text" name="fecha_info" required value="{{$localidad->fecha_info->format('d/m/Y')}}" class="form-control" placeholder="Fecha ...">
+                <input type="text" name="fecha_info" required value="{{$localidad->fecha_info->format('d/m/Y')}}" class="form-control" placeholder="13/09/2018 ...">
                 @endif
                 <input type="hidden" name="searchText" value="{{$searchText}}" class="form-control">                                     
               </div>
@@ -25,16 +25,16 @@
                   <label class="control-label">Posee Ordenanza</label>
                   <select type="text" name="ordenanza" class="form-control">
                 
-                  @if(is_null($localidad->ordenanza))
-                  <option value=null selected>S/D</option>
+                  @if(is_null($localidad->ordenanza)||$localidad->ordenanza==3)
+                  <option value="3" selected>S/D</option>
                   <option value="0" >No</option>
                   <option value="1">Si</option>
                   @elseif($localidad->ordenanza==1)
-                  <option value=null >S/D</option>
+                  <option value="3" >S/D</option>
                   <option value="0">No</option>
                   <option value="1" selected>Si</option>
                   @else
-                  <option value=null >S/D</option>
+                  <option value="3" >S/D</option>
                   <option value="0" selected>No</option>
                   <option value="1" >Si</option>               
                   @endif
@@ -47,16 +47,16 @@
                   <label class="control-label">Problema</label>
                   <select type="text" name="problema" class="form-control">
                 
-                  @if(is_null($localidad->problema))
-                  <option value=null selected>S/D</option>
+                  @if(is_null($localidad->problema)||$localidad->problema==3)
+                  <option value="3" selected>S/D</option>
                   <option value="0" >No</option>
                   <option value="1">Si</option>
                   @elseif($localidad->problema==1)
-                  <option value=null >S/D</option>
+                  <option value="3" >S/D</option>
                   <option value="0">No</option>
                   <option value="1" selected>Si</option>
                   @else
-                  <option value=null >S/D</option>
+                  <option value="3" >S/D</option>
                   <option value="0" selected>No</option>
                   <option value="1" >Si</option>               
                   @endif
@@ -69,16 +69,16 @@
                   <label class="control-label">Posee Veedor</label>
                   <select type="text" name="veedor" class="form-control">
                 
-                  @if(is_null($localidad->veedor))
-                  <option value=null selected>S/D</option>
+                  @if(is_null($localidad->veedor)||$localidad->veedor==3)
+                  <option value="3" selected>S/D</option>
                   <option value="0" >No</option>
                   <option value="1">Si</option>
                   @elseif($localidad->veedor==1)
-                  <option value=null >S/D</option>
+                  <option value="3" >S/D</option>
                   <option value="0">No</option>
                   <option value="1" selected>Si</option>
                   @else
-                  <option value=null >S/D</option>
+                  <option value="3" >S/D</option>
                   <option value="0" selected>No</option>
                   <option value="1" >Si</option>               
                   @endif

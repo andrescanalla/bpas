@@ -62,8 +62,10 @@
                         <span style=" color: Green;">
                         <i class="fa fa-check" aria-hidden="true"></i>                        
                         </span>
-                        @elseif(is_null($localidad->ordenanza))
-                      
+                        @elseif(is_null($localidad->ordenanza)||$localidad->ordenanza==3)
+                        <span style=" color: DodgerBlue;">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>                           
+                        </span>
                         @else
                         <span style=" color: Tomato;">
                         <i class="fa fa-times" aria-hidden="true"></i>                        
@@ -77,7 +79,9 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <label>Sin Aplicacion:</label>
                       @if(is_null($localidad->sin_aplicacion))
-                      S/D  
+                      <span style=" color: DodgerBlue;">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>                           
+                      </span> 
                       @else                     
                       {{$localidad->sin_aplicacion}} metros
                       @endif                   
@@ -88,8 +92,10 @@
                       <span style=" color: Tomato;">
                       <i class="fa fa-check" aria-hidden="true"></i>                      
                       </span>                    
-                      @elseif(is_null($localidad->problema))
-                      
+                      @elseif(is_null($localidad->problema)||$localidad->problema==3)
+                      <span style=" color: DodgerBlue;">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>                           
+                      </span>
                       @else
                       <span style=" color: Green;">
                       <i class="fa fa-times" aria-hidden="true"></i>                     
@@ -101,9 +107,11 @@
                 </div>
                 <div class="row" style="margin-bottom:10px">
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                        <label>Aplicacion Controlada:</label>
+                        <label>Aplicacion Controlada &nbsp</label>
                           @if(is_null($localidad->aplicacion_controlada))
-                          S/D
+                          <span style=" color: DodgerBlue;">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>                           
+                            </span>
                           @else                         
                           {{$localidad->aplicacion_controlada}} metros  
                           @endif
@@ -115,8 +123,10 @@
                           <span style=" color: Green;">
                           <i class="fa fa-check" aria-hidden="true"></i>
                           </span>
-                          @elseif(is_null($localidad->veedor))
-                        
+                          @elseif(is_null($localidad->veedor)||$localidad->veedor==3)
+                          <span style=" color: DodgerBlue;">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>                           
+                            </span>
                           @else
                           <span style=" color: Tomato;">
                           <i class="fa fa-times" aria-hidden="true"></i>
