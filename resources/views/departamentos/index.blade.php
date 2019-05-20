@@ -271,7 +271,7 @@
               map: map,
               position: place.coord,
               icon: {
-                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=f90303,ff000000&scale=1.0"
+                url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=f53e3e,ff000000&scale=1.0"
               }          
             });
         }
