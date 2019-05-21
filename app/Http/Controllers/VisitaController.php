@@ -98,27 +98,38 @@ class VisitaController extends Controller
         if($queryLocalidad){
             $visita->localidad_id=$queryLocalidad->id; 
             if($visita->tipo_visita_id==1){
-                $queryLocalidad->presentacion=1;
-                $queryLocalidad->entrevista=0;
-                $queryLocalidad->informe=0;
+                $queryLocalidad->presentacion=1;                
                 $queryLocalidad->save();
                       
             }
-            if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+            if($visita->tipo_visita_id==2){
+                // $queryLocalidad->presentacion=1;
+                $queryLocalidad->entrevista=1;               
+                $queryLocalidad->save();
+                
+            }
+            if($visita->tipo_visita_id==3){
                 $queryLocalidad->presentacion=1;
-                $queryLocalidad->entrevista=1;
-                $queryLocalidad->informe=0;
+                $queryLocalidad->entrevista=1;               
                 $queryLocalidad->save();
                 
             } 
+            // if($visita->tipo_visita_id==2||$visita->tipo_visita_id==3){
+            //    $queryLocalidad->presentacion=1;
+            //    $queryLocalidad->entrevista=1;               
+            //    $queryLocalidad->save();                
+            // } 
             if($visita->tipo_visita_id==4){
-                $queryLocalidad->presentacion=1;
-                $queryLocalidad->entrevista=1;
+                // $queryLocalidad->presentacion=1;
+                // $queryLocalidad->entrevista=1;
                 $queryLocalidad->informe=1;
                 $queryLocalidad->save();
             }              
         }
         else{
+            // definir como hacemor: 
+            // **opcion 1: toast con error no exite esa localida. debe crearla en setting.
+            // **opcion 2: crear nueva localidad.- Mmmmm
             $localidad=new Localidad;
             $localidad->nombre = $request->get('localidad');
             $localidad->departamento_id = Implementador::findOrFail($visita->implementador_id)->departamento_id;           

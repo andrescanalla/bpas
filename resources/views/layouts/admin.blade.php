@@ -65,7 +65,7 @@
             <span class="sr-only">Navegación</span>
           </a> 
             
-         <div class="col-lg-11 col-md-11 col-xs-11" Style="height:50px; padding-right:0;width:95.5%">
+         <div class="col-lg-11 col-md-11 col-xs-11" Style="height:50px;padding-right:0;width:95.5%;padding-left: 0;">
           <div class="form-group" style="margin-bottom:-4px ; margin-top:5px ;font-size:25px;">
             @yield('titulo') 
           </div>
