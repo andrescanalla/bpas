@@ -10,6 +10,7 @@ use App\TipoVisita;
 use App\Localidad;
 use Spatie\GoogleCalendar\Event;
 use App\Comentario;
+use Carbon\Carbon;
 
 
 
@@ -89,7 +90,7 @@ class VisitaController extends Controller
         $visita=Visita::findOrFail($id);
         $page=$request->get('page');
         $searchText=$request->get('searchText');
-    	$visita->fecha=$request->get('fecha');
+    	$visita->fecha=Carbon::createFromFormat('d/m/Y', $request->get('fecha'));;
         $visita->implementador_id=$request->get('implementador_id');
         $visita->tipo_visita_id=$request->get('tipo_visita_id');
         $queryLocalidad=Localidad::FindByNombreLikeId($request->get('localidad'))->first();  
@@ -126,7 +127,18 @@ class VisitaController extends Controller
         }         
         $visita->comentarios=$request->get('comentarios');       
         $visita->save();
-        $url="visitas?searchText=$searchText&page=$page";
+        if($request->get('tipo')){
+            $departamento_id=$request->get('tipo');
+            $url="departamentos/$departamento_id";
+        }
+        elseif($request->get('localidadShow')){
+            $localidad_id=$request->get('localidadShow');
+            $url="localidades/$localidad_id";
+        }
+        else{
+            $url="visitas?searchText=$searchText&page=$page";
+        }
+        
         toast('Visita editada con exito!!','success','top-left');
     	return Redirect::to($url);
     }

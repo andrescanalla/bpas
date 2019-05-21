@@ -12,7 +12,7 @@
             <div class="col-lg-5 col-sm-6 col-md-6 col-xs-12">
               <div class="form-group">
                 <label>Fecha: </label>
-                <input type="text" name="fecha" required value="{{$visita->fecha}}" class="form-control" placeholder="Fecha ...">
+                <input type="text" name="fecha" required value="{{$visita->fecha->format('d/m/Y')}}" class="form-control" placeholder="Fecha ...">
                 <input type="hidden" name="searchText" value="{{$searchText}}" class="form-control"> 
                 <input type="hidden" name="page" value="{{$visitas->currentPage()}}" class="form-control">                    
               </div>

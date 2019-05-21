@@ -19,8 +19,8 @@
 @include('localidades.modal.edit') 
 <!-- End modal Edit localidad-->
 
-<!-- Start modal Edit localidad visitas --> 
-@include('localidades.modal.editVisita') 
+<!-- Start modal Edit localidad Info visitas --> 
+@include('localidades.modal.editInfoVisita') 
 <!-- End modal Edit localidad-->
 
 <!-- Start modal Create comentarios-->
@@ -250,53 +250,56 @@
                                   <th><button class="btn btn-link pull-right" data-toggle="modal" data-target="#btnModal" style="padding-top:0;padding-bottom:0"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
                                 </thead>
                                 @php $nx=0;@endphp                
-                                @foreach ($visitas as $to)
+                                @foreach ($visitas as $visita)
                                 @php $nx++;@endphp
                                 
-                                @if ($to->idTipoVisita=="1")                 
-                                  @if($to->fecha < $today) 
+                                @if ($visita->idTipoVisita=="1")                 
+                                  @if($visita->fecha < $today) 
                                   <tr class="success text-muted">
                                   @else
                                   <tr class="success">
                                   @endif 
                                   
-                                @elseif ($to->idTipoVisita=="2"||$to->idTipoVisita=="3") 
-                                  @if($to->fecha < $today)
+                                @elseif ($visita->idTipoVisita=="2"||$visita->idTipoVisita=="3") 
+                                  @if($visita->fecha < $today)
                                     <tr class="warning text-muted">
                                   @else
                                   <tr class="warning">
                                   @endif
-                                @elseif ($to->idTipoVisita=="4") 
-                                  @if($to->fecha < $today)
+                                @elseif ($visita->idTipoVisita=="4") 
+                                  @if($visita->fecha < $today)
                                     <tr class="info text-muted">
                                   @else
                                   <tr class="info">
                                   @endif
                                               
                                 @else
-                                  @if($to->fecha < $today)
+                                  @if($visita->fecha < $today)
                                     <tr class="text-muted">
                                   @else
                                   <tr>
                                   @endif
                                   
                                 @endif            
-                                  <td class="container-fluid">{{$to->fecha->format('d/m/y')}}</td>
+                                  <td class="container-fluid">{{$visita->fecha->format('d/m/y')}}</td>
                                   
-                                  <td> {{$to->nombreTipoVisita}} </td> 
+                                  <td> {{$visita->nombreTipoVisita}} </td> 
                                   <td>
-                                  @if($to->fecha > $today)
-                                  <span class="label label-info">Visita programada</span> {{$to->comentarios}} 
+                                  @if($visita->fecha > $today)
+                                  <span class="label label-info">Visita programada</span> {{$visita->comentarios}} 
                                   @else
-                                  {{$to->comentarios}}
+                                  {{$visita->comentarios}}
                                   @endif
                                    </td>                  
                                   <td style="min-width: 85px;">
                                     <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>
-                                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                    <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-editvisita-{{$visita->id}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
                                     
                                   </td>
                                 </tr>
+                                <!-- Start modal Edit localidad Info visitas --> 
+                                    @include('localidades.modal.editVisita') 
+                                <!-- End modal Edit localidad-->
                                 
                                 @endforeach
                                 

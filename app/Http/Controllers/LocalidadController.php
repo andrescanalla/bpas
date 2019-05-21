@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use App\Localidad;
 use App\Departamento;
 use App\Visita;
+use App\Implementador;
 use Carbon\Carbon;
 use App\Comentario;
+use App\TipoVisita;
 
 
 class LocalidadController extends Controller
@@ -92,11 +94,13 @@ class LocalidadController extends Controller
             }            
                
             $today=Carbon::now();
+            $implementadores=Implementador::get();
+            $tipoVisitas=TipoVisita::get();
               
           
            
              
-             return view('localidades.show',["comentarios"=>$comentarios,"localidad"=>$localidad,"visitas"=>$visitas,"searchText"=>$query,'today'=>$today]);
+             return view('localidades.show',["tipoVisitas"=>$tipoVisitas, "implementadores"=>$implementadores,"comentarios"=>$comentarios,"localidad"=>$localidad,"visitas"=>$visitas,"searchText"=>$query,'today'=>$today]);
          }
     }
 

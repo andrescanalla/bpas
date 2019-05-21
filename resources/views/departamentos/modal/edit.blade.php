@@ -12,8 +12,9 @@
             <div class="col-lg-5 col-sm-6 col-md-6 col-xs-12">
               <div class="form-group">
                 <label>Fecha: </label>
-                <input type="text" name="fecha" required value="{{$visita->fecha}}" class="form-control" placeholder="Fecha ...">
-                <input type="hidden" name="searchText" value="{{$searchText}}" class="form-control">                                  
+                <input type="text" name="fecha" required value="{{$visita->fecha->format('d/m/Y')}}" class="form-control" placeholder="Fecha ...">
+                <input type="hidden" name="searchText" value="{{$searchText}}" class="form-control">
+                <input type="hidden" name="tipo" value="{{$departamento->id}}" class="form-control">                                  
               </div>
             </div>
             <div class="col-lg-7 col-sm-6 col-md-6 col-xs-12">
@@ -58,7 +59,7 @@
             </div>              
           </div>
         </div>
-        <div class="modal-footer" style="background-color:#F3EA5D">                                
+        <div class="modal-footer">                                
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </div>               

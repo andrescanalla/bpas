@@ -20,7 +20,7 @@
     <div class="table-responsive">
       <table class="table table-condensed table-hover" id="table" style="margin-bottom:0px">
         <thead style="background-color:#A9D0F5">
-          <th>id</th>        
+          <th>nº</th>        
           <th>Localidad</th>
           <th>Departamento</th>
           <th>Implementador</th>
@@ -32,14 +32,14 @@
           <th>Problema</th>
           <th>S/Apl</th>
           <th>Apl/Cont</th>
-          <th>Detalle</th>
+          <th>+ Info</th>
         </thead>
         @php $nx=0;@endphp                
         @foreach ($localidades as $localidad)
         @php $nx++;@endphp
         
         <tr>
-          <td>{{$localidad->id}}</td>
+          <td>{{$nx}}</td>
           <td>{{$localidad->nombreLocalidad}}</td>          
           <td>{{$localidad->nombreDepartamento}}</td>
           <td>{{$localidad->nombreImplementador}}</td>
@@ -151,22 +151,22 @@
  <script>
 
 $(document).ready(function() {
-  $('#table').DataTable( {
-    "paging":   false,
-     "info":   false,
-    "searching": false,
-    "order": [[ 0, "asc" ]],
-    "columnDefs": [ 
-            
-            {
-                "targets": [ 12 ],
-                "orderable": false,
-            }    
-        ]
-    } );
-} );
-
-
+    t=$('#table').DataTable({
+      "paging":   false,
+      "info":   false,
+      "searching": false,
+      "order": [[ 0, "asc" ]],
+      "columnDefs": [{
+           "targets": [ 12 ],
+           "orderable": false,
+      }]
+    });
+    t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+    }).draw();    
+});
 
 </script> 
 @endpush  
