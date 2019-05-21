@@ -46,7 +46,7 @@ class ComentarioController extends Controller
         $comentario->localidad_id=$localidad_id;
         $comentario->save();
         $url="localidades/$localidad_id?searchText=$searchText";
-        
+        toast('Comentario creado con exito!!','success','top-left');
     	return Redirect::to($url);
     }
 
@@ -90,6 +90,7 @@ class ComentarioController extends Controller
         $comentario->localidad_id=$localidad_id;
         $comentario->save();
         $url="localidades/$localidad_id?searchText=$searchText";
+        toast('Comentario editado con exito!!','success','top-left');
         return Redirect::to($url);
     }
 

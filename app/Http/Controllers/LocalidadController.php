@@ -144,7 +144,7 @@ class LocalidadController extends Controller
             $localidad->sin_aplicacion=$request->get('sin_aplicacion');
             $localidad->aplicacion_controlada=$request->get('aplicacion_controlada');
             $localidad->save();
-            
+            toast("Informacion de Localidad editada con exito!!",'success','top-left');
         }
         $url="localidades/$id?searchText=$searchText";
     	return Redirect::to($url);
