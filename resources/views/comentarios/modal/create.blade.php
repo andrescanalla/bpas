@@ -10,7 +10,7 @@
             <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
               <div class="form-group">
                 <label>Fecha:</label>
-                <input type="text" name="fecha_comentario" required  class="form-control" placeholder="Fecha ...">
+                <input type="text" name="fecha_comentario" required  class="form-control" placeholder="29/01/2014 ...">
                 <input type="hidden" name="searchText" value="{{$searchText}}" class="form-control">
                 <input type="hidden" name="id" value="{{$localidad->id}}" class="form-control">                                     
               </div>
@@ -23,7 +23,7 @@
             <div class="row">
             <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
             <label>Comentarios</label>
-                <textarea type="text" name="comentarios" class="form-control" placeholder="cometarios ..."> </textarea>                                                        
+                <textarea type="text" rows="4" name="comentarios" class="form-control" placeholder="cometarios ..."> </textarea>                                                        
             </div>
             </div>
         </div>
