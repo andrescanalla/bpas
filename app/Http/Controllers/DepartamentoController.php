@@ -110,10 +110,11 @@ class DepartamentoController extends Controller
         $departamento=Departamento::findOrFail($id); 
         $searchText=$departamento->nombre;       
         $localidades=Localidad::FindByDepartamento($departamento->nombre)->orderBy('nombreLocalidad', 'asc')->get();        
-        $visitas=Visita::SearchText($departamento->nombre)->get();
+        $visitas=Visita::SearchText($departamento->nombre)->addselect('localidad_id')->get();
         $implementadores=Implementador::get();       
         $tipoVisitas=TipoVisita::get(); 
-        $timebar= Carbon::parse('2018-10-01')->diffInMonths(Carbon::now());  
+        $today=Carbon::now();
+        $timebar= Carbon::parse('2018-10-01')->diffInMonths($today);  
         
         
         $chartjs = app()->chartjs
@@ -170,7 +171,7 @@ class DepartamentoController extends Controller
 
             
 
-        return view('departamentos.show', compact('timebar','chartjs','tipoVisitas','implementadores','localidades','departamento','numeros', 'visitas', 'searchText'));
+        return view('departamentos.show', compact('today','timebar','chartjs','tipoVisitas','implementadores','localidades','departamento','numeros', 'visitas', 'searchText'));
     }
 
     /**

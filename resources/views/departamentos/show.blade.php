@@ -191,11 +191,16 @@
                 @endif            
                   <td>{{$visita->fecha->format('d/m/y')}}</td>
                   <td>{{$visita->nombreLocalidad}}</td>
-                  <td>{{$visita->nombreTipoVisita}}</td>                        
-                  <td>{{$visita->comentarios}}</td>         
-                  <td style="min-width: 91px;">
+                  <td>{{$visita->nombreTipoVisita}}</td>
+                  @if($visita->fecha > $today)                        
+                  <td> <span class="label label-info">Visita programada</span> {{$visita->comentarios}}</td> 
+                  @else        
+                  <td>{{$visita->comentarios}}</td>
+                  @endif
+                  <td style="min-width: 113px;">                    
                     <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-delete-{{$visita->id}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-trash" aria-hidden="true"></i>          
                     <button class="btn btn-link pull-right" data-toggle="modal" data-target="#modal-edit-{{$visita->id}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-pencil" aria-hidden="true"></i>
+                    <a href="/localidades/{{$visita->localidad_id}}"> <button class="btn btn-link pull-right" data-toggle="modal" data-target="#eModal{{$nx}}" style="padding-top:0;padding-bottom:0"><i class="fa fa-info-circle" aria-hidden="true"></i></button></a>
                   </td>
                 </tr>  
                 @include('departamentos.modal.delete')    
