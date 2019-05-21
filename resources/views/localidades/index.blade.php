@@ -20,7 +20,7 @@
     <div class="table-responsive">
       <table class="table table-condensed table-hover" id="table" style="margin-bottom:0px">
         <thead style="background-color:#A9D0F5">
-          <th>nº</th>        
+          <th>Nº</th>        
           <th>Localidad</th>
           <th>Departamento</th>
           <th>Implementador</th>
