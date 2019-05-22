@@ -94,6 +94,18 @@ class VisitaController extends Controller
         $visita->implementador_id=$request->get('implementador_id');
         $visita->tipo_visita_id=$request->get('tipo_visita_id');
         $queryLocalidad=Localidad::FindByNombreLikeId($request->get('localidad'))->first();  
+
+        if($request->get('tipo')){
+            $departamento_id=$request->get('tipo');
+            $url="departamentos/$departamento_id";
+        }
+        elseif($request->get('localidadShow')){
+            $localidad_id=$request->get('localidadShow');
+            $url="localidades/$localidad_id";
+        }
+        else{
+            $url="visitas?searchText=$searchText&page=$page";
+        }
         
         if($queryLocalidad){
             $visita->localidad_id=$queryLocalidad->id; 
@@ -127,28 +139,22 @@ class VisitaController extends Controller
             }              
         }
         else{
-            // definir como hacemor: 
-            // **opcion 1: toast con error no exite esa localida. debe crearla en setting.
-            // **opcion 2: crear nueva localidad.- Mmmmm
-            $localidad=new Localidad;
-            $localidad->nombre = $request->get('localidad');
-            $localidad->departamento_id = Implementador::findOrFail($visita->implementador_id)->departamento_id;           
-            $localidad->save();
-            $visita->localidad_id = $localidad->id;
+            // definir como hacer: 
+            /**opcion 1: toast con error no exite esa localida. debe crearla en setting. */
+                $localidad=$request->get('localidad');
+                alert()->error("La Localidad $localidad no existe",'Si lo desea puede agregarla en Setting->Localidades');
+                return Redirect::to($url);           
+            /** opcion 2: crear nueva localidad.- Mmmmm
+             * $localidad=new Localidad;
+             * $localidad->nombre = $request->get('localidad');
+             * $localidad->departamento_id = Implementador::findOrFail($visita->implementador_id)->departamento_id;           
+             * $localidad->save();
+             * $visita->localidad_id = $localidad->id;
+            */
         }         
         $visita->comentarios=$request->get('comentarios');       
         $visita->save();
-        if($request->get('tipo')){
-            $departamento_id=$request->get('tipo');
-            $url="departamentos/$departamento_id";
-        }
-        elseif($request->get('localidadShow')){
-            $localidad_id=$request->get('localidadShow');
-            $url="localidades/$localidad_id";
-        }
-        else{
-            $url="visitas?searchText=$searchText&page=$page";
-        }
+        
         
         toast('Visita editada con exito!!','success','top-left');
     	return Redirect::to($url);

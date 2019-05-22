@@ -133,7 +133,7 @@ class DashboardController extends Controller
         $today=Carbon::now();    
         $todo=Visita::Todo(20, 20)->get();     
 
-        toast('Visitas Actualizadas de Google Calendar!!','success','top-left');
+        
         
         return view("dashboard.index", compact('chartjs1','chartjs2'), [
             "presentacion"=>$presentacion, 
@@ -164,7 +164,7 @@ class DashboardController extends Controller
                 $localidad->entrevista=1;
                 $localidad->informe=1;
             }           
-            $n=0;
+            $n=++$n;
         }
         $localidad->save();
         return $n;
@@ -174,10 +174,13 @@ class DashboardController extends Controller
         $end=new Carbon($hasta);
         $events=Event::get($start, $end, ['showDeleted'=>true]);       
         /***contadores*** */
-        $count=0;
-        $set=0;
-        $ac=0;  //catidad de visitas creadas actualizadas
-        $new=0; //catidad de visitas creadas      
+        $err=0;
+        $set=0; //cantidad de localidades que se actualizaron las visitas
+        $unset=0; // cantidad de visitas sin cambios
+        $del=0; //catidad de visitas eliminadas
+        $ac=0;  //catidad de visitas actualizadas
+        $new=0; //catidad de visitas creadas
+        $count=$del+$ac+$new+$set; //total de visitas revisadas para actualizacion      
        
         foreach ($events as $event) {
             /***Evento de eliminado***=>Busca si el vento fue borrado del Calender y lo elimina en la BD  */
@@ -215,6 +218,7 @@ class DashboardController extends Controller
                         $localidad->save();
                     }        
                     $visita->delete();
+                    $del=++$del;
                 }
             }
             /***Evento***=>El evento no tiene status de  eliminado */
@@ -222,7 +226,8 @@ class DashboardController extends Controller
                 $queryEvent=Visita::FindByCalendarId($event->id)->first();   // busca la visita en la BD         
                 $eventUpdate=new Carbon($event->updated);
                 $eventUpdate=$eventUpdate->toDateTimeString(); // fecha de update del evento
-                $queryUpdate=Visita::FindByCalendarId($event->id)->where('calendar_update', $eventUpdate)->first(); // busca si el evento no fue actualizdo
+                $queryUpdate=Visita::FindByCalendarId($event->id)->where('calendar_update', $eventUpdate)->first(); // busca si el evento no fue actualizdo => devuelve null si fue actualizado
+                
                 /******* */
                 $calendarSummary=explode('-',trim($event->summary));                
                 $calendarImplementadorSummary=trim($calendarSummary[0]);
@@ -233,98 +238,110 @@ class DashboardController extends Controller
                     $calendarTipoSummary='nada';             
                 }                
                 if(count($calendarSummary)>2){
-                $calendarLocalidadSummary=trim($calendarSummary[2]);
+                //$calendarLocalidadSummary=trim($calendarSummary[2]);
+                $calendarComentarioSummary=trim($calendarSummary[2]);
                 }
                 else{
-                    $calendarLocalidadSummary='nada';
+                   // $calendarLocalidadSummary='nada';
+                   $calendarComentarioSummary=null;
                 }   
                 
                 /****** */  
 
                 /***no Existe la visita***=>Crea una visita en BD*/
                 if(!$queryEvent){                          
-                    $visita=new Visita;
-                    $visita->fecha=$event->start->date;
-                    $visita->comentarios = $event->description;
-                    $visita->calendar_update = $eventUpdate;
+                    $visita=new Visita;                    
                     $visita->calendar_id= $event->id;                 
                     $new=++$new;                    
                 }
                 // ***Existe la visita***
                 else{                
                     /***Evento actualizado***=>Busca si el evento esta actulizado */
-                    if (!$queryUpdate) {
-                    
-                        $visita=$queryEvent;    // busca la visita en bd              
-                        $visita->fecha=$event->start->date; //actuliza fecha
-                        $visita->comentarios = $event->description; //actualiza comentarios
-                        $visita->calendar_update = $eventUpdate;  //actualiza update  
-                                
-                        
-                    
+                    if (!$queryUpdate) {                    
+                        $visita=$queryEvent;    // busca la visita en bd                 
                         $ac=++$ac;
+                        
                     }
                     else{
-
+                       
+                        $visita=$queryEvent;    // busca la visita en bd  
+                        if($visita->fecha > Carbon::now()->subDays(5)){
+                            
+                            $calendarLocalidad=explode(',' , $event->location)[0];                          
+                            $queryLocalidad=Localidad::FindByNombre($calendarLocalidad)->first();
+                            $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $queryLocalidad);
+                            //dd('evento SIN modificar del Calendar, visitas en localidades ACTUALIZADAS', $unset , $set);
+                        }
+                        $unset=++$unset;
+                        //dd('evento SIN modificar del Calendar', $event, $unset);
                     }
-                }
+                }                   
             
                 if(!$queryUpdate||!$queryEvent){
+                    $visita->fecha=$event->start->date; //actuliza fecha
+                    $visita->comentarios=$this->setComentarios($calendarComentarioSummary,$event->description ); //actualiza comentarios
+                    $visita->calendar_update = $eventUpdate;  //actualiza update 
                     $queryTipoVisita=TipoVisita::FindByNombre($calendarTipoSummary)->first();                
                     if(!$queryTipoVisita) {
                         $visita->tipo_visita_id=5;
                     }
-                    else{
-                    
+                    else{                    
                         $visita->tipo_visita_id=$queryTipoVisita->id;
                     } 
-
+                   
                     $queryImplementador=Implementador::FindByNombre($calendarImplementadorSummary)->first();
                     /*Existe el Implementador */                
-                    if($queryImplementador){
+                    if($queryImplementador&& $queryImplementador->nombre!='Equipo'){
+                       
                         $visita->implementador_id=$queryImplementador->id;
-                        $queryLocalidadSummary=Localidad::FindByNombre($calendarLocalidadSummary)->first();                    
-                        /* No Existe resultado de Localidad en la busqueda de la BD por summary ni hay localidad en Location*/
-                        if(!$queryLocalidadSummary && !$event->location){                        
-                            $localidad=new Localidad;                      
-                            $localidad->departamento_id=$queryImplementador->departamento_id;
-                            $localidad->nombre=$calendarLocalidadSummary;
-                            $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $localidad);
-                            $visita->localidad_id=$localidad->id;                       
-                        }
-                        /* No Existe resultado de  Localidad en la busqueda de la BD por summary y hay localidad Location */
-                        if(!$queryLocalidadSummary && $event->location){  
-                            $calendarLocalidad=explode(',' , $event->location)[0];                          
-                            $queryLocalidad=Localidad::FindByNombre($calendarLocalidad)->first();
-                            /* No existe la localidad en la BD*/
-                            if(!$queryLocalidad){
-                                $localidad=new Localidad;
-                                $localidad->departamento_id=$queryImplementador->departamento_id;
-                                $localidad->nombre=$calendarLocalidad;
-                                $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $localidad);
-                                $visita->localidad_id=$localidad->id;
-                            } 
-                            /* Existe la localidad en la BD*/                   
-                            else{
-                                $visita->localidad_id=$queryLocalidad->id;
-                                $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $queryLocalidad);                            
+                        //$queryLocalidadSummary=Localidad::FindByNombre($calendarLocalidadSummary)->first();  
+                        $calendarLocalidad=explode(',' , $event->location)[0];                          
+                        $queryLocalidad=Localidad::FindByNombre($calendarLocalidad)->first();
+                        
+                        /* Existe Localidad en el evento */
+                        if($calendarLocalidad){
+                            /* No Existe resultado de Localidad en la busqueda de la BD */
+                            if(!$queryLocalidad){                        
+                                //$localidad=new Localidad;                      
+                                //$localidad->departamento_id=$queryImplementador->departamento_id;
+                                //$localidad->nombre=$calendarLocalidadSummary;
+                                //$set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $localidad);
+                                //$visita->localidad_id=$localidad->id;  
+                                $err=++$err; 
+                                $fecha=$visita->fecha->format('d/m/y');
+                                                                                
+                                alert()->error("Error de Sinc  - Visita del $fecha, Localidad $event->location inexistente" ,"La localidad no se encuentra creada en el sistema. - Error:$err");
+                            }
+                            /* Existe resultado de  Localidad en la BD*/
+                            else{                   
+                                
+                                    $visita->localidad_id=$queryLocalidad->id;                                
+                                    $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $queryLocalidad);
+                                    $visita->save();                            
+                                
                             }
                         }
-                        /* Existe resultado de  Localidad en la busqueda de la BD por summary */
-                        if($queryLocalidadSummary){
-                            $visita->localidad_id=$queryLocalidadSummary->id;
-                            $set= $set + $this->setLocalidad( $visita->fecha, $visita->tipo_visita_id, $queryLocalidadSummary);                          
+                        /* No Existe Localidad en el evento */
+                        else{
+                            $queryLocalidadDpto=Localidad::where('departamento_id',$queryImplementador->departamento_id)->where('nombre','LIKE', '%'.'Dpto'.'%')->first();
+                            $visita->localidad_id=$queryLocalidadDpto->id;
+                            $visita->save();                         
+
                         }
+                        
 
                     }
                     /*No Existe el Implementador (es una visita de todo el equipo) */ 
                     else{
+                        
                         $visita->implementador_id=1; 
                         $visita->localidad_id=1;
                         $visita->tipo_visita_id=5;
+                        //dd('evento Modificado del Calendar; No existe implementador', $visita);
+                        $visita->save();
                     }
                                                                     
-                $visita->save();
+                
                 }
 
             
@@ -332,10 +349,20 @@ class DashboardController extends Controller
         
             
         }
-        return Response::json(['new'=>$new,'cant'=>$count,'set'=>$set,'act'=>$ac]);
+        if($err==0){
+            alert()->success("          
+            <div>
+            <h4 style='color:#48964a;margin-bottom: 0;'>Sync Google Calender Exitosa!!</h4>
+            <ul style='list-style-type:none;text-align: left;'>           
+            <li>$ac Visitas Actualizadas</li>
+            <li>$new Visitas Creadas</li>            
+            <li>$del Visitas Eliminadas</li>            
+          </ul></div>")->toHtml()->toToast('top-left');
+        }
+        return Response::json(['new'=>$new,'cant'=>$count,'set'=>$set,'ac'=>$ac,'unset'=>$unset,'del'=>$del]);
     }
 
-        public function settingLocalidades(){
+    public function settingLocalidades(){
             $visitas= Visita::get();
             $count=0;
             foreach ($visitas as $visita) {
@@ -380,6 +407,19 @@ class DashboardController extends Controller
         if ($cred !== false && Storage::exists('service-account-credentials.json')==false) {
             Storage::put('service-account-credentials.json', $cred);            
         }
+    }
+    public function setComentarios($comentario1, $comentario2){
+        $comentario=null;
+        if($comentario1 && $comentario2){
+            $comentario = "$comentario1 - $comentario2";
+        }
+        if($comentario1 && !$comentario2){
+            $comentario = $comentario1;
+        }
+        if(!$comentario1 && $comentario2){
+            $comentario = $comentario2;
+        } 
+        return $comentario;
     }
 
     public function todo(Request $request)

@@ -59,7 +59,7 @@
             </div>              
           </div>
         </div>
-        <div class="modal-footer" style="background-color:#F3EA5D">                                
+        <div class="modal-footer" >                                
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </div>               
