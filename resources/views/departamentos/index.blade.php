@@ -162,6 +162,9 @@
           map.set;
           },
         300); 
+        setAllMarkers(); 
+
+
         ros=document.getElementById("Rosario")
         ros.addEventListener("click", function() {myFunction(rosario, ros.id.toLowerCase())}); 
         console.log('ros', ros.id.toLowerCase());
@@ -200,10 +203,11 @@
               clearDepartamentos();
               zona.setMap(map);
               setTimeout(function() {
-          map.setZoom(8);
-          map.set;
-          },
-        300); 
+                map.setZoom(8);
+                map.set;
+                },
+              300);
+              setAllMarkers(); 
             }
             else{  
               clearMarkers();            
@@ -220,8 +224,24 @@
            
           }
         }
+        function setAllMarkers(){
+          markDepto('rosario');         
+          markDepto('constitucion');
+          markDepto('san_lorenzo');
+          markDepto('caseros'); 
+          markDepto('belgrano');
+          markDepto('iriondo');
+          markDepto('general_lopez');
+         
+        }
 
         
+        function markDepto(string){
+          mark(string,'presentacion');
+          mark(string,'entrevista');    
+          mark(string,'informe');
+          mark(string,'restante');
+        }
 
         function mark(departamento, filtro){
             url='https://bpas.herokuapp.com/api/localidades'
