@@ -227,11 +227,11 @@
         function setAllMarkers(){
           markDepto('rosario');         
           markDepto('constitucion');
-          markDepto('san_lorenzo');
+          markDepto('san lorenzo');
           markDepto('caseros'); 
           markDepto('belgrano');
           markDepto('iriondo');
-          markDepto('general_lopez');
+          markDepto('general lopez');
          
         }
 
