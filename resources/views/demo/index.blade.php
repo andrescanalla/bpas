@@ -23,7 +23,8 @@
       // Creates the map, loads in the SHP and DBF files.
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,                   
+          zoom: 4,
+          mapTypeId: 'satellite',                   
           mapTypeControl: true
         });
 		
