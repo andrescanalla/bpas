@@ -1,6 +1,15 @@
 <!doctype html>
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147630851-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-147630851-1');
+    </script>
+
     <meta charset="utf-8">
     <title>Demo Shapefile in Google Maps </title>
 	<style type="text/css">
