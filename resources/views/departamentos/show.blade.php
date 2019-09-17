@@ -32,8 +32,8 @@
                 </div>
                 <div class="col-lg-9 col-md-3 col-sm-5 col-xs-5" > 
                   <div class="progress" style="margin-bottom:0">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{$timebar}}" aria-valuemin="0" aria-valuemax="14" style="width: 45%">
-                      <span >{{$timebar}} meses ({{$timebar/14*100}}%)</span>
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{$timebar}}" aria-valuemin="0" aria-valuemax="14" style="width: {{round($timebar/14*100),0}}%">
+                      <span >{{$timebar}} meses ({{round($timebar/14*100),0}}%)</span>
                     </div>
                   </div>
                 </div>                
