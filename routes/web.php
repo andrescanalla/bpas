@@ -20,6 +20,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('localidades','LocalidadController');
     Route::resource('departamentos','DepartamentoController');
     Route::resource('comentarios','ComentarioController');
+    Route::resource('demo','DemoController');
+    Route::resource('demo/map/shapefile','ShapeFileController');
     Route::prefix('setting')->group(function () {
         Route::resource('localidad','SettingLocalidadController');
         Route::resource('departamento','SettingDepartamentoController');
@@ -33,4 +35,3 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('demo','DemoController');

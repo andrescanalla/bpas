@@ -529,7 +529,7 @@ t.on( 'order.dt search.dt', function () {
 @endpush
 @push ('script')
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5yelEdpNJh8mu-yZYfeBXWpVlVPckLEs&libraries=places&callback=initMap" sync defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap" sync defer></script>
     
 
 @endpush
