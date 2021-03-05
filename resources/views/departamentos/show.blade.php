@@ -415,7 +415,7 @@
           imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
         });
       },
-      300);
+      600);
 
 
     function myFunction(depto, string) {
