@@ -2,7 +2,7 @@
 @push ('script')
 
 <script src="{{asset('js/Chart.bundle.min.js')}}"></script>
-
+<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 @endpush
 
 @section ('titulo')
@@ -251,11 +251,6 @@
       markDepto('belgrano');
       markDepto('iriondo');
       markDepto('general lopez');
-      // Add a marker clusterer to manage the markers.
-      new MarkerClusterer(map, markers, {
-        imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-      });
-
     }
 
 
@@ -302,7 +297,6 @@
     function createMarker(place, filtro) {
       if (filtro == 'presentacion') {
         var marker = new google.maps.Marker({
-          map: map,
           position: place.coord,
           icon: {
             url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00a65a,ff000000&scale=1.0"
@@ -311,7 +305,6 @@
       }
       if (filtro == 'entrevista') {
         var marker = new google.maps.Marker({
-          map: map,
           position: place.coord,
           icon: {
             url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=F9A825,ff000000&scale=1.0"
@@ -320,7 +313,6 @@
       }
       if (filtro == 'restante') {
         var marker = new google.maps.Marker({
-          map: map,
           position: place.coord,
           icon: {
             url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container-bg_4x.png,icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1590-hardware-wrench_4x.png&highlight=ff000000,BDBDBD,ff000000&scale=1.0"
@@ -329,7 +321,6 @@
       }
       if (filtro == 'informe') {
         var marker = new google.maps.Marker({
-          map: map,
           position: place.coord,
           icon: {
             url: "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1502-shape_star_4x.png&highlight=00c0ef,ff000000&scale=1.0"
@@ -384,7 +375,6 @@
 @push ('script')
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap" sync defer></script>
-<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
 @endpush
 
