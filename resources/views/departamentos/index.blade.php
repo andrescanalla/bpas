@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 @push ('script')
-<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+
 <script src="{{asset('js/Chart.bundle.min.js')}}"></script>
 
 @endpush
@@ -160,13 +160,14 @@
     setTimeout(function() {
         map.setZoom(8);
         map.set;
+        // Add a marker clusterer to manage the markers.
+        new MarkerClusterer(map, markers, {
+          imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+        });
+
       },
       300);
     setAllMarkers();
-    // Add a marker clusterer to manage the markers.
-    new MarkerClusterer(map, markers, {
-      imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-    });
 
 
     ros = document.getElementById("Rosario")
@@ -250,6 +251,10 @@
       markDepto('belgrano');
       markDepto('iriondo');
       markDepto('general lopez');
+      // Add a marker clusterer to manage the markers.
+      new MarkerClusterer(map, markers, {
+        imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+      });
 
     }
 
@@ -379,7 +384,7 @@
 @push ('script')
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap" sync defer></script>
-
+<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
 @endpush
 
