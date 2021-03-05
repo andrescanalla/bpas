@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 @push ('script')
-
+<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 <script src="{{asset('js/Chart.bundle.min.js')}}"></script>
 
 @endpush
@@ -377,7 +377,7 @@
 </script>
 @endpush
 @push ('script')
-<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMap" sync defer></script>
 
 
